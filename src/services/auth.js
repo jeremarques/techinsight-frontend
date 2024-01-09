@@ -3,7 +3,7 @@ import getTokenObjectPayload from '../utils/auth'
 
 export default httpClient => ({
     register: async ({ full_name, email, username, password, confirm_password }) => {
-        const response = await httpClient.post('/register/', {
+        const response = await httpClient.post('/users/register/', {
             full_name,
             email,
             username,

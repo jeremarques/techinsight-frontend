@@ -9,14 +9,17 @@
                     v-for="post in posts" 
                     :key="post.id" 
                     :id="post.id"
-                    :author="post.author"
+                    :public_id="post.public_id"
+                    :author="post.profile"
                     :title="post.title"
-                    :content="post.content"
-                    :tag="post.tags"
                     :postSlug="post.slug"
-                    :createdAt="post.created_at"
+                    :content="post.content"
+                    :tag="post.tag"
                     :likesCounter="post.likes"
                     :commentsCounter="post.comments"
+                    :isLiked="post.is_liked"
+                    :createdAt="post.created_at"
+                    :updatedAt="post.updated_at"
                 />
             </div>
         </div>

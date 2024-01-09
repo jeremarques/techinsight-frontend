@@ -27,16 +27,12 @@ const router = createRouter({
         {
             path: '/',
             component: BlogLayout,
-            meta: {
-                hasAuth: true,
-            },
             children: [
                 {
                     path: '',
                     name: 'Home-blog',
                     component: HomeBlog,
                     meta:{
-                        hasAuth: true,
                         layout: 'BlogLayout',
                     }
                 },
@@ -45,7 +41,6 @@ const router = createRouter({
                     name: 'posts',
                     component: Login,
                     meta:{
-                        hasAuth: true,
                         layout: 'BlogLayout',
                     }
                 },

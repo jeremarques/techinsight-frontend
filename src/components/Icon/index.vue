@@ -8,6 +8,7 @@ import User from './User.vue'
 import Mail from './Mail.vue'
 import Send from './Send.vue'
 import Like from './Like.vue'
+import LikeSolid from './LikeSolid.vue'
 import Chat from './Chat.vue'
 
 export default {
@@ -17,6 +18,7 @@ export default {
         Mail,
         Send,
         Like,
+        LikeSolid,
         Chat
     },
     props: {

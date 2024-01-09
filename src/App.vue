@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import services from './services'
 import consoleWelcomeMessage from './utils/console'
+import { handleThemePage } from './utils/theme'
 
 export default {
     setup () {
@@ -14,8 +15,11 @@ export default {
         const router = useRouter()
 
         router.beforeEach(async (to, from, next) => {
-            if (!import.meta.env.VITE_DEBUG)
+            if (!import.meta.env.VITE_DEBUG) {
                 consoleWelcomeMessage()
+            }
+
+            handleThemePage()
 
             if (to.meta.hasAuth) {
                 const token = window.localStorage.getItem('access_token')
