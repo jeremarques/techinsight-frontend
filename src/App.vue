@@ -46,7 +46,7 @@ export default {
                     next()
 
                 } else {
-                    next({ name: 'Login' })
+                    next({ name: 'login' })
                 }
             } else {
                 next()

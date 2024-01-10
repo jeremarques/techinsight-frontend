@@ -29,7 +29,7 @@
             text="Entrar"
         />
         <div class="mt-4 text-center">
-            <router-link :to="{ name: 'Register' }" class="font-regular text-blue-500 hover:underline text-sm">
+            <router-link :to="{ name: 'register' }" class="font-regular text-blue-500 hover:underline text-sm">
                 Não possui uma conta? Criar conta
             </router-link>
         </div>
@@ -109,7 +109,7 @@ export default {
                         console.error('Erro ao obter o tempo de expiração do token:', err)
                     }
 
-                    router.push({ name: 'Home-blog' })
+                    router.push({ name: 'home-blog' })
                     state.isLoading = false
                     return
                 }

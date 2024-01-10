@@ -53,7 +53,7 @@ export default httpClient => ({
         window.localStorage.removeItem('refresh_token')
         window.localStorage.removeItem('access_token_exp')
 
-        router.push({ name: 'Login' })
+        router.push({ name: 'login' })
     },
     checkAuth: async () => {
         const token = window.localStorage.getItem('access_token')

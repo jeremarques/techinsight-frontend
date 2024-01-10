@@ -26,7 +26,7 @@ httpClient.interceptors.response.use((response) => response, (error) => {
     }
 
     if (error.request.status === 401) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'login' })
     }
 
     return error

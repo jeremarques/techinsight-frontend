@@ -64,7 +64,7 @@
             text="Criar conta"
         />
         <div class="mt-4 text-center ">
-            <router-link :to="{ name: 'Login' }" class="text-sm font-regular text-blue-500 hover:underline">
+            <router-link :to="{ name: 'login' }" class="text-sm font-regular text-blue-500 hover:underline">
                 Já tem uma conta?
             </router-link>
         </div>
@@ -188,7 +188,7 @@ export default {
                     console.error('Erro ao obter o tempo de expiração do token:', err)
                 }
 
-                router.push({ name: 'Home-blog' })
+                router.push({ name: 'home-blog' })
                 return
             }
 

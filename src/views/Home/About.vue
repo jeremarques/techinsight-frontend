@@ -642,7 +642,7 @@
                             Acreditamos que, ao compartilhar experiências e insights, construímos
                             pontes para um futuro mais inteligente e colaborativo.
                         </p>
-                        <router-link :to="{ name: 'Register'}"
+                        <router-link :to="{ name: 'register'}"
                             class="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-brand-blue-400 via-brand-blue-500 to-brand-blue-600 px-7 py-3 text-center text-base font-medium text-white transition-all duration-300 hover:ml-2 hover:shadow-[0px_0px_3px_0px_#287acf]">
                             Junte-se a nós
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">

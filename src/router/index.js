@@ -11,17 +11,17 @@ const router = createRouter({
     routes: [
         {
             path: '/home',
-            name: 'Home',
+            name: 'home',
             component: Home
         },
         {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: Login
         },
         {
             path: '/register',
-            name: 'Register',
+            name: 'register',
             component: Register
         },
         {
@@ -30,15 +30,23 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    name: 'Home-blog',
+                    name: 'home-blog',
                     component: HomeBlog,
                     meta:{
                         layout: 'BlogLayout',
                     }
                 },
                 {
-                    path: '/posts',
-                    name: 'posts',
+                    path: '/:username/:slugAndId',
+                    name: 'post',
+                    component: Login,
+                    meta:{
+                        layout: 'BlogLayout',
+                    }
+                },
+                {
+                    path: '/:slug/posts',
+                    name: 'tag-posts',
                     component: Login,
                     meta:{
                         layout: 'BlogLayout',
@@ -48,7 +56,7 @@ const router = createRouter({
         },
         {
             path: '/:pathMatch(.*)*',
-            redirect: { name: 'Home' }
+            redirect: { name: 'home' }
         }
     ]
 })
