@@ -1,7 +1,7 @@
 import axios from 'axios'
 import AuthService from './auth'
 import UsersServices from './users'
-import PostsServices from './posts'
+import PostsServices from './post'
 import router from '../router'
 
 const httpClient = axios.create({
@@ -35,5 +35,5 @@ httpClient.interceptors.response.use((response) => response, (error) => {
 export default {
     auth: AuthService(httpClient),
     users: UsersServices(httpClient),
-    posts: PostsServices(httpClient)
+    post: PostsServices(httpClient)
 }

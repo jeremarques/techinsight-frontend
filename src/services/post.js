@@ -4,5 +4,11 @@ export default httpClient => ({
         return {
             data: response.data
         }
+    },
+    getPost: async (postId) => {
+        const response = await httpClient.get(`/posts/${postId}/`)
+        return {
+            data: response.data
+        }
     }
 })

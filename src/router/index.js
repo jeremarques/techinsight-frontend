@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const Home = () => import('../views/Home/index.vue')
-const BlogLayout = () => import('../views/Blog/BlogLayout.vue')
-const HomeBlog = () => import('../views/Blog/Home.vue')
-const Login = () => import('../views/Login/index.vue')
-const Register = () => import('../views/Register/index.vue')
+const Home = () => import('@/views/Home/index.vue')
+const Login = () => import('@/views/Login/index.vue')
+const Register = () => import('@/views/Register/index.vue')
+const BlogLayout = () => import('@/views/Blog/BlogLayout.vue')
+const HomeBlog = () => import('@/views/Blog/Home.vue')
+const Post = () => import('@/views/Blog/Post.vue')
 
 const router = createRouter({
     history: createWebHistory('/'),
@@ -39,7 +40,7 @@ const router = createRouter({
                 {
                     path: '/:username/:slugAndId',
                     name: 'post',
-                    component: Login,
+                    component: Post,
                     meta:{
                         layout: 'BlogLayout',
                     }
