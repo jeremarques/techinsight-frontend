@@ -3,7 +3,7 @@ export default httpClient => ({
         const response = await httpClient.get('/me/')
 
         return {
-            data: response.data[0],
+            data: response.data,
         }
     }
 })

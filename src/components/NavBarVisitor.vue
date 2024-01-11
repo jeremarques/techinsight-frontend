@@ -5,13 +5,13 @@
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="flex justify-between gap-6 md:gap-0 items-center">
                         <div class="flex items-center gap-4">
-                            <router-link :to="{ name: 'home-blog' }">
+                            <RouterLink :to="{ name: 'home-blog' }">
                               <img
                                 src="../assets/images/logo-icon.svg"
                                 alt="logo"
                                 class="w-auto h-8"
                               />
-                            </router-link>
+                            </RouterLink>
                             <div class=" md:block relative w-full md:w-3/4">
                                 <span class="absolute text-gray-400 inset-y-0 left-0 flex items-center pl-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -25,9 +25,6 @@
 
                         <!-- Mobile menu button -->
                         <div class="flex md:hidden lg:hidden">
-                            <div class="mr-4">
-                                <ThemeSwitcher />
-                            </div>
 
                             <button @click="navState.isActive = !navState.isActive" type="button" class="text-gray-500 dark:text-gray-100 focus:outline-none focus:text-gray-600 dark:focus:text-gray-200" aria-label="toggle menu">
                                 <svg v-if="!navState.isActive" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -44,7 +41,6 @@
                     <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
                     <div :class="[navState.isActive ? 'translate-x-0 opacity-100 shadow-sm md:shadow-none backdrop-blur-md bg-white/90 dark:bg-dark-mixed-100/80' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out md:flex-1 md:flex md:justify-end md:mt-0 mt-4 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:items-center">
                         <div class="md:flex md:items-center">
-                            <ThemeSwitcher />
 
                             <div class="flex gap-x-1 md:flex-row">
                                 <LoginButton />
@@ -62,10 +58,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                     </svg>
 
-                    <router-link :to="{ name: 'home-blog' }"
+                    <RouterLink :to="{ name: 'home-blog' }"
                         class="font-regular text-xs transition-colors duration-300 transform mx-1.5">
                         Início
-                    </router-link>
+                    </RouterLink>
                 </div>
             </div>
         </nav>

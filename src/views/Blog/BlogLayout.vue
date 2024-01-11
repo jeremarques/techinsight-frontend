@@ -14,6 +14,4 @@ import { useUserStore } from '@/stores/user';
 const userStore = useUserStore()
 const currentUser = userStore.currentUser
 const haveUser = !!Object.values(currentUser).length
-console.log(haveUser)
-
 </script>

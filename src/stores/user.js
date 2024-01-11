@@ -5,7 +5,7 @@ export const useUserStore = defineStore('user', {
         user: {},
     }),
     getters: {
-        currentUser: (state) => {
+        currentUser (state) {
             return state.user
         }
     },

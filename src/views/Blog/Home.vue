@@ -8,18 +8,7 @@
                 <PostCardItem 
                     v-for="post in state.posts" 
                     :key="post.id" 
-                    :id="post.id"
-                    :public_id="post.public_id"
-                    :author="post.profile"
-                    :title="post.title"
-                    :postSlug="post.slug"
-                    :content="post.content"
-                    :tag="post.tag"
-                    :likesCounter="post.likes"
-                    :commentsCounter="post.comments"
-                    :isLiked="post.is_liked"
-                    :createdAt="post.created_at"
-                    :updatedAt="post.updated_at"
+                    :post="post"
                 />
             </div>
         </div>

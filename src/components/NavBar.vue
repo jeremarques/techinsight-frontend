@@ -5,13 +5,13 @@
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="flex justify-between gap-6 md:gap-0 items-center">
                         <div class="flex items-center gap-4">
-                            <router-link :to="{ name: 'home-blog' }">
+                            <RouterLink :to="{ name: 'home-blog' }">
                               <img
                                 src="../assets/images/logo-icon.svg"
                                 alt="logo"
                                 class="w-auto h-8"
                               />
-                            </router-link>
+                            </RouterLink>
                             <div class=" md:block relative w-full md:w-3/4">
                                 <span class="absolute text-gray-400 inset-y-0 left-0 flex items-center pl-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -42,7 +42,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
 
-                                <router-link :to="{ name: 'home-blog' }" class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Início</router-link>
+                                <RouterLink :to="{ name: 'home-blog' }" class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Início</RouterLink>
                             </div>
 
                             <div class="flex flex-col items-center justify-center text-gray-800 dark:text-gray-200">
@@ -94,7 +94,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                     </svg>
 
-                    <router-link :to="{ name: 'home-blog' }" class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Início</router-link>
+                    <RouterLink :to="{ name: 'home-blog' }" class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Início</RouterLink>
                 </div>
 
                 <div class="flex flex-col items-center justify-center text-gray-800 dark:text-gray-200">

@@ -40,18 +40,7 @@ describe('PostCardItem.vue', () => {
 
         const wrapper = mount(PostCardItem, {
             props: {
-                id: payload.id,
-                public_id: payload.public_id,
-                author: payload.profile,
-                title: payload.title,
-                postSlug: payload.slug,
-                tag: payload.tag,
-                content: payload.content,
-                likesCounter: payload.likes,
-                commentsCounter: payload.comments,
-                isLiked: payload.is_liked,
-                createdAt: payload.created_at,
-                updatedAt: payload.updated_at
+                post: payload
             }
         })
 
