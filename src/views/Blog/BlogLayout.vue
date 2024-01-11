@@ -1,5 +1,5 @@
 <template>
-    <NavBar v-if="haveUser" />
+    <NavBar v-if="haveUserProfile" :userProfile="currentUserProfile" />
     <NavBarVisitor v-else />
     <main class="min-h-screen pt-16 dark:bg-gray-900">
         <router-view />
@@ -12,6 +12,6 @@ import NavBarVisitor from '@/components/NavBarVisitor.vue'
 import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore()
-const currentUser = userStore.currentUser
-const haveUser = !!Object.values(currentUser).length
+const currentUserProfile = userStore.currentUserProfile
+const haveUserProfile = !!Object.values(currentUserProfile).length
 </script>

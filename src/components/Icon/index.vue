@@ -10,6 +10,17 @@ import Send from './Send.vue'
 import Like from './Like.vue'
 import LikeSolid from './LikeSolid.vue'
 import Chat from './Chat.vue'
+import LogOut from './LogOut.vue'
+import Profile from './Profile.vue'
+import DocumentText from './Document.vue'
+import QuestionMarkCircle from './QuestionMarkCircle.vue'
+import Settings from './Settings.vue'
+import Glass from './Glass.vue'
+import Home from './Home.vue'
+import PlusCircle from './PlusCircle.vue'
+import ChatText from './ChatText.vue'
+import Bell from './Bell.vue'
+import ChevronDown from './ChevronDown.vue'
 
 export default {
     components: {
@@ -19,7 +30,18 @@ export default {
         Send,
         Like,
         LikeSolid,
-        Chat
+        Chat,
+        LogOut,
+        Profile,
+        DocumentText,
+        QuestionMarkCircle,
+        Settings,
+        Glass,
+        Home,
+        PlusCircle,
+        ChatText,
+        Bell,
+        ChevronDown
     },
     props: {
         name: {

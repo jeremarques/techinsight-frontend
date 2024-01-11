@@ -30,7 +30,6 @@ export default {
     },
     setup () {
         const userStore = useUserStore()
-        const currentUser = userStore.currentUser
         const state = reactive({
             posts: []
         })

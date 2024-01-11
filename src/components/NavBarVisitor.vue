@@ -14,9 +14,7 @@
                             </RouterLink>
                             <div class=" md:block relative w-full md:w-3/4">
                                 <span class="absolute text-gray-400 inset-y-0 left-0 flex items-center pl-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                    </svg>
+                                    <Icon name="Glass" size="5" color="text-gray-900" />
                                 </span>
 
                                 <input type="text" class="w-full py-2 pl-10 pr-4 text-sm font-regular text-gray-700 bg-white border rounded-full dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search">
@@ -72,6 +70,7 @@
 import { reactive } from 'vue';
 import LoginButton from '@/views/Home/LoginButton.vue'
 import RegisterButton from '@/views/Home/RegisterButton.vue'
+import Icon from '@/components/Icon/index.vue'
 
 const navState = reactive({
     isActive: false

@@ -39,8 +39,8 @@ export default {
                         next()
                     }
                 }
-                const { data: userData } = await services.users.getMe()
-                userStore.setCurrentUser(userData)
+                const { data: userProfileData } = await services.users.getMeProfile()
+                userStore.setCurrentUserProfile(userProfileData)
                 next()
 
             } else {

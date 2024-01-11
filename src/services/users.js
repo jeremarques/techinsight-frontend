@@ -5,5 +5,12 @@ export default httpClient => ({
         return {
             data: response.data,
         }
+    },
+    getMeProfile: async () => {
+        const response = await httpClient.get('/me/profile/')
+
+        return {
+            data: response.data,
+        }
     }
 })
