@@ -1,19 +1,21 @@
 <template>
-    <div class="publi-card drop-shadow-xs bg-[#fcfcfc] dark:bg-gray-800 flex flex-col px-6 py-6 lg:px-8 border rounded-xl dark:border-gray-600">
-        <div class="publi-details flex justify-between items-center w-full">
+    <Card class="bg-[#fcfcfc] dark:bg-gray-800 border rounded-lg dark:border-gray-600">
+        <CardHeader class="flex-row items-center justify-between pb-0">
             <div class="user flex items-center gap-2.5 cursor-pointer">
-                <div class="w-7 h-7 md:w-8 md:h-8 overflow-hidden rounded-full border border-gray-400 dark:border-gray-500">
-                    <img src="https://images.unsplash.com/photo-1615109398623-88346a601842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbnxlbnwwfHwwfHx8MA%3D%3D" class="avatar object-cover w-full h-full" alt="avatar">
-                </div>
+                <Avatar class="border border-gray-400 dark:border-gray-500 w-8 h-8 md:w-8 md:h-8">
+                    <AvatarImage v-if="!!post.profile.profile_photo" :src="post.profile.profile_photo" alt="imagem do usuário"/>
+                    <AvatarImage v-else src="../assets/images/user-profile.png" alt="imagem do usuário"/>
+                    <AvatarFallback>{{ post.profile.user.username }}</AvatarFallback>
+                </Avatar>
                 <span class="username font-medium text-sm text-gray-600 dark:text-gray-200">{{ post.profile.user.username }}</span>
             </div>
             <div class="publi-date font-regular text-xs text-gray-400">
                 {{ formatTimeDifference(post.created_at) }}
             </div>
-        </div>
-        <div class="publi-content">
-            <RouterLink 
-                class="pt-4 pb-5 flex flex-col"
+        </CardHeader>
+        <CardContent class="py-0">
+            <RouterLink
+                class="py-5 flex flex-col"
                 :to="{ 
                     name: 'post',
                     params: { 
@@ -21,24 +23,21 @@
                         slugAndId: `${post.slug}-${post.public_id}`
                     }
                 }">
-                <h2 class="title text-lg md:text-xl line-clamp-2 font-semibold text-gray-800 dark:text-gray-50">
+                <CardTitle class="title text-lg md:text-xl line-clamp-2 font-semibold">
                     {{ post.title }}
-                </h2>
-                <p class="content mt-1 line-clamp-2 font-regular text-xs text-gray-500 dark:text-gray-400">
+                </CardTitle>
+                <CardDescription class="content mt-1 line-clamp-2 font-regular text-xs text-gray-600 dark:text-gray-300">
                     {{ post.content }}
-                </p>
+                </CardDescription>
             </RouterLink>
-        </div>
-        <div class="publi-stats flex justify-between items-center w-full">
+        </CardContent>
+        <CardFooter class="flex items-center justify-between">
             <div class="left flex items-center gap-6">
                 <div class="likes flex items-center gap-2">
-                    <button type="button" v-if="!post.is_liked">
-                        <Icon name="Like" color="text-gray-800 dark:text-gray-200" size="5" />
+                    <button type="button">
+                        <Icon v-if="!post.is_liked" name="Like" color="text-gray-800 dark:text-gray-200" size="5" />
+                        <Icon v-else name="LikeSolid" fill="#4f97e1" size="5" />
                     </button>
-                    <button type="button" v-else>
-                        <Icon name="LikeSolid" fill="#4f97e1" size="5" />
-                    </button>
-                    
                     <span v-if="!!post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
                         {{ post.likes }}
                     </span>
@@ -54,24 +53,32 @@
             </div>
             <div class="right flex items-center">
                 <RouterLink 
-                    class="tag flex items-center justify-center py-1 px-2 rounded-full bg-gray-100 dark:bg-transparent dark:border dark:border-gray-500"
-                    v-if="post.tag"
                     :to="{
                         name: 'tag-posts',
                         params: {
                             slug: post.tag.slug
                         }
-                    }"
-                    >
-                    <span class="text-[10px] text-gray-600 dark:text-gray-300">{{ post.tag.name }}</span>
+                    }">
+                    <Badge class="tag font-medium text-[10px] dark:border-gray-600" variant="secondary">Software</Badge>
                 </RouterLink>
             </div>
-        </div>
-    </div>
+        </CardFooter>
+    </Card>
 </template>
 <script setup>
 import Icon from '@/components/Icon/index.vue'
 import { formatTimeDifference } from '@/utils/date'
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const props = defineProps({
     post: {
