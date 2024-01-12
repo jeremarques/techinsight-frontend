@@ -2,10 +2,10 @@
     <div class="bg-white dark:bg-gray-900">
         <div class="container md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
             <section class="pt-16 md:pt-28 pb-12 md:pb-16 px-6 xl:px-52 2xl:px-64 flex flex-col items-start justify-center">
-                <span class="text-gray-500 text-sm font-regular mb-2">
+                <span class="text-gray-500 text-sm font-regular mb-2 dark:text-gray-400">
                     {{ formatTimeDifference(state.post.created_at) }}
                 </span>
-                <h1 class="text-gray-900 font-bold text-4xl md:text-5xl">
+                <h1 class="text-gray-900 font-bold text-4xl md:text-5xl dark:text-gray-50">
                     {{ state.post.title }}    
                 </h1>
             </section>
@@ -18,7 +18,7 @@
                             </div>
                             <div class="flex flex-col items-start">
                                 <span class="username font-medium text-sm mb-1 text-gray-600 dark:text-gray-200">{{ state.postUser.username }}</span>
-                                <button class="font-medium text-sm">Seguir</button>
+                                <button class="font-medium text-sm text-gray-900 dark:text-white">Seguir</button>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </section>
-            <section class="px-6 xl:px-52 2xl:px-64 font-p-regular text-xl">
+            <section class="px-6 xl:px-52 2xl:px-64 font-p-regular text-xl text-gray-900 dark:text-gray-100">
                 {{ state.post.content }}
             </section>
         </div>
