@@ -7,5 +7,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <div :class="cn('animate-pulse rounded-md bg-secondary', props.class)" />
+  <div :class="cn('animate-pulse rounded-md bg-secondary dark:bg-dark-mixed-200', props.class)" />
 </template>

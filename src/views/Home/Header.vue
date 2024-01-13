@@ -16,22 +16,14 @@
                       />
 		            </a>
 
-    	            <!-- Mobile menu button -->
-    	            <div class="flex md:hidden lg:hidden">
-						<div class="mr-4">
-							<ThemeSwitcher />
-						</div>
-
-    	                <button @click="navState.isActive = !navState.isActive" type="button" class="text-gray-500 dark:text-gray-100 focus:outline-none focus:text-gray-600 dark:focus:text-gray-200" aria-label="toggle menu">
-    	                	<svg v-if="!navState.isActive" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    						  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-    						</svg>
-
-    	                    <svg v-if="navState.isActive" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    	                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    	                    </svg>
-    	                </button>
-    	            </div>
+					<!-- Mobile menu button -->
+					<div class="flex space-x-3 md:hidden lg:hidden">
+						<ThemeSwitcher />
+						<button @click="navState.isActive = !navState.isActive" type="button" class="text-gray-700 dark:text-gray-100 focus:outline-none focus:text-gray-700 dark:focus:text-gray-200" aria-label="toggle menu">
+							<Menu v-if="!navState.isActive" :stroke-width="1.70" />
+							<X v-else :stroke-width="1.70" />
+						</button>
+					</div>
 				</div>
 
 				<!-- Mobile Menu open: "block", Menu closed: "hidden" -->
@@ -66,13 +58,16 @@ import { reactive } from 'vue';
 import LoginButton from './LoginButton.vue'
 import RegisterButton from './RegisterButton.vue'
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue'
+import { Menu, X } from 'lucide-vue-next';
 
 export default {
 	components: {
-		LoginButton,
-		RegisterButton,
-		ThemeSwitcher
-	},
+    LoginButton,
+    RegisterButton,
+    ThemeSwitcher,
+    Menu,
+    X
+},
 	setup () {
 		const navState = reactive({
 			isActive: false

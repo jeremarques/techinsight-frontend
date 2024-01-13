@@ -1,7 +1,7 @@
 <template>
     <NavBar v-if="haveUserProfile" :userProfile="currentUserProfile" />
     <NavBarVisitor v-else />
-    <main class="min-h-screen pt-16 dark:bg-dark-mixed-100">
+    <main class="min-h-screen pt-16 bg-white dark:bg-dark-mixed-100">
         <router-view />
     </main>
 </template>

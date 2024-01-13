@@ -64,9 +64,9 @@
             text="Criar conta"
         />
         <div class="mt-4 text-center ">
-            <router-link :to="{ name: 'login' }" class="text-sm font-regular text-blue-500 hover:underline">
+            <RouterLink :to="{ name: 'login' }" class="text-sm font-regular text-blue-500 hover:underline">
                 Já tem uma conta?
-            </router-link>
+            </RouterLink>
         </div>
     </form>
 </template>
@@ -83,7 +83,6 @@ import {
 import getTokenObjectPayload from '@/utils/auth'
 import { useToast } from 'vue-toastification'
 import services from '@/services'
-import Icon from '@/components/Icon/index.vue'
 import BasePasswordInput from '@/components/BasePasswordInput.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
@@ -92,7 +91,6 @@ import BaseAuthButton from '@/components/BaseAuthButton.vue';
 
 export default {
     components: {
-        Icon,
         BasePasswordInput,
         BaseInput,
         BaseHiddenLabel,

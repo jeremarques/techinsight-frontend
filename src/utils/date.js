@@ -11,15 +11,15 @@ export function formatTimeDifference(date) {
     const weeks = Math.floor(dateDifference / (1000 * 60 * 60 * 24 * 7))
 
     if (seconds < 60) {
-        return `Há ${seconds} segundos`
+        return `Há ${seconds} segundo${seconds !== 1 ? 's' : ''}`
     } else if (minutes < 60) {
-        return `Há ${minutes} minutos`;
+        return `Há ${minutes} minuto${minutes !== 1 ? 's' : ''}`
     } else if (hours < 24) {
-        return `Há ${hours} horas`;
+        return `Há ${hours} hora${hours !== 1 ? 's' : ''}`
     } else if (days < 7) {
-        return `Há ${days} dias`;
+        return `Há ${days} dia${days !== 1 ? 's' : ''}`
     } else if (weeks < 3) {
-        return `Há ${weeks} semanas`;
+        return `Há ${weeks} semana${weeks !== 1 ? 's' : ''}`
     } else {
         const day = timestamp.getDate().toString().padStart(2,'0')
         const month = String(timestamp.getMonth() + 1).padStart(2,'0')

@@ -1,5 +1,5 @@
 <template>
-    <Card class="bg-[#fcfcfc] dark:bg-gray-800 border rounded-lg dark:border-gray-600">
+    <Card class="bg-[#fcfcfc] dark:bg-dark-mixed-150 border rounded-lg dark:border-dark-mixed-300">
         <CardHeader class="flex-row items-center justify-between pb-0">
             <div class="user flex items-center gap-2.5 cursor-pointer">
                 <Avatar class="border border-gray-400 dark:border-gray-500 w-8 h-8 md:w-8 md:h-8">
@@ -9,7 +9,7 @@
                 </Avatar>
                 <span class="username font-medium text-sm text-gray-600 dark:text-gray-200">{{ post.profile.user.username }}</span>
             </div>
-            <div class="publi-date font-regular text-xs text-gray-400">
+            <div class="publi-date font-regular text-xs text-gray-500">
                 {{ formatTimeDifference(post.created_at) }}
             </div>
         </CardHeader>
@@ -26,17 +26,17 @@
                 <CardTitle class="title text-lg md:text-xl line-clamp-2 font-semibold">
                     {{ post.title }}
                 </CardTitle>
-                <CardDescription class="content mt-1 line-clamp-2 font-regular text-xs text-gray-600 dark:text-gray-300">
+                <CardDescription class="content mt-1 line-clamp-2 font-regular text-xs text-gray-600 dark:text-gray-400">
                     {{ post.content }}
                 </CardDescription>
             </RouterLink>
         </CardContent>
         <CardFooter class="flex items-center justify-between">
-            <div class="left flex items-center gap-6">
+            <div class="left flex items-center gap-4">
                 <div class="likes flex items-center gap-2">
                     <button type="button">
-                        <Icon v-if="!post.is_liked" name="Like" color="text-gray-800 dark:text-gray-200" size="5" />
-                        <Icon v-else name="LikeSolid" fill="#4f97e1" size="5" />
+                        <ThumbsUp v-if="!post.is_liked" :stroke-width="1.50" size="20" />
+                        <ThumbsUp v-else size="22" class="fill-blue-500 " :stroke-width="0" />
                     </button>
                     <span v-if="!!post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
                         {{ post.likes }}
@@ -44,7 +44,7 @@
                 </div>
                 <div class="comments flex items-center gap-2">
                     <button type="button">
-                        <Icon name="Chat" color="text-gray-800 dark:text-gray-200" size="5" />
+                        <MessageSquare :stroke-width="1.50" size="20" />
                     </button>
                     <span v-if="!!post.comments" class="comments-counter font-regular text-sm text-gray-800 dark:text-gray-200">
                         {{ post.comments }}
@@ -66,7 +66,6 @@
     </Card>
 </template>
 <script setup>
-import Icon from '@/components/Icon/index.vue'
 import { formatTimeDifference } from '@/utils/date'
 import {
     Card,
@@ -79,6 +78,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
 
 const props = defineProps({
     post: {

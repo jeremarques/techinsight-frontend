@@ -1,17 +1,19 @@
 <template>
-    <button
+    <Button
         type="submit"
-        class="w-full flex gap-2 justify-center md:flex-none bg-brand-blue-500 font-medium rounded-lg text-white tracking-wide py-2.5 px-6 transition-all duration-300 disabled:opacity-70"
-        :class="{ 'hover:bg-brand-blue-700': !loading, extraClasses }"
+        class="w-full transition-color duration-200 bg-brand-blue-500 py-5 text-sm text-white disabled:text-white disabled:bg-blue-500"
+        :class="{ 'hover:bg-brand-blue-500 md:hover:bg-brand-blue-600': !loading, extraClasses }"
         :disabled="loading"
     >
+        <Loader2 v-if="loading" class="animate-spin mr-2" size="20" />
         {{ text }}
-        <Icon v-if="loading" name="Loading" class="animate-spin"/>
-    </button>
+    </Button>
 </template>
 
 <script setup>
-import Icon from '@/components/Icon/index.vue'
+import { Loader2 } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
+
 
 const props = defineProps({
     loading: {

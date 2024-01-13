@@ -46,24 +46,25 @@
                 <BaseErrorMessageInput :errorMessage="state.message.errorMessage" />
             </div>
             <div>
-                <button
+                <Button
                     type="submit"
-                    class="w-full flex items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-brand-blue-400 via-brand-blue-500 to-brand-blue-600 p-3 font-medium text-white transition-all duration-300 hover:bg-brand-blue-700">
+                    class="transition duration-200 w-full gap-x-2 items-center h-11 text-white bg-gradient-to-br from-brand-blue-400 via-brand-blue-500 to-brand-blue-600 hover:opacity-90">
                     Enviar mensagem
-                    <Icon name="Send" size="5" />
-                </button>
+                    <SendHorizonal :stroke-width="1.70" size="20" />
+                </Button>
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import Icon from '@/components/Icon/index.vue'
+import { reactive } from 'vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
 import BaseTextArea from '@/components/BaseTextArea.vue';
 import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
+import { SendHorizonal } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
 
 const state = reactive({
     name: {

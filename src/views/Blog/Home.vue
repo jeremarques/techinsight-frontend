@@ -1,6 +1,5 @@
 <template>
-
-<div class="bg-white dark:bg-dark-mixed-100">
+<div>
     <div class="container px-6 md:px-6 lg:px-20 xl:px-52 mx-auto pt-8 ">
 
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3">

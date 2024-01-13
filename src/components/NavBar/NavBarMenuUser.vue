@@ -22,42 +22,42 @@
                 <span class="text-base font-medium mt-4 mb-6">{{ userData.user.full_name }}</span>
             </div>
 
-            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-800/40">
+            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-mixed-200">
+                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-dark-mixed-200/70 dark:group-hover:bg-dark-mixed-300">
                     <CircleUserRound :stroke-width="1.35" />
                 </div>
                 <a href="#" class="text-gray-900 dark:text-white">
                     Perfil
                 </a>
             </div>
-            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-800/40">
+            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-mixed-200">
+                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-dark-mixed-200/70 dark:group-hover:bg-dark-mixed-300">
                     <FileText :stroke-width="1.35" />
                 </div>
                 <a href="#" class="text-gray-900 dark:text-white">
                     Seus insights
                 </a>
             </div>
-            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-800/40">
+            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-mixed-200">
+                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-dark-mixed-200/70 dark:group-hover:bg-dark-mixed-300">
                     <Settings :stroke-width="1.35" />
                 </div>
                 <a href="#" class="text-gray-900 dark:text-white">
                     Configurações
                 </a>
             </div>
-            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-gray-800 dark:group-hover:bg-gray-800/40">
+            <div class="group relative flex items-center p-1 gap-x-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-mixed-200">
+                <div class="p-2 rounded-lg flex items-center justify-center bg-gray-50 group-hover:bg-white dark:bg-dark-mixed-200/70 dark:group-hover:bg-dark-mixed-300">
                     <HelpCircle :stroke-width="1.35" />
                 </div>
                 <a href="#" class="font-regular text-gray-900 dark:text-white">
                     Ajuda
                 </a>
             </div>
-            <div class="group mt-6">
-                <Button variant="secondary" class="group-hover:bg-red-500 w-full">
-                    <span class="transition duration-200 group-hover:text-white mr-2">Sair</span>
-                    <LogOut :stroke-width="1.90" :size="16" class="transition duration-200 group-hover:text-white" />
+            <div class="mt-4">
+                <Button variant="outline" class="group transition-all duration-400 border-none font-regular dark:bg-transparent dark:border-dark-mixed-200 hover:border-none hover:bg-transparent p-2 hover:ml-1">
+                    <span class="transition-color duration-200 group-hover:text-red-500 mr-2">Sair</span>
+                    <LogOut :stroke-width="2" :size="14" class="transition-color duration-200 group-hover:text-red-500" />
                 </Button>
             </div>
         </div>

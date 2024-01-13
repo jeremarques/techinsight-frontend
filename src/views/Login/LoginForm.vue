@@ -29,9 +29,9 @@
             text="Entrar"
         />
         <div class="mt-4 text-center">
-            <router-link :to="{ name: 'register' }" class="font-regular text-blue-500 hover:underline text-sm">
+            <RouterLink :to="{ name: 'register' }" class="font-regular text-blue-500 h-11 hover:underline text-sm">
                 Não possui uma conta? Criar conta
-            </router-link>
+            </RouterLink>
         </div>
     </form>
 </template>
@@ -44,7 +44,6 @@ import { useToast } from 'vue-toastification'
 import { validateEmpty } from '@/utils/validators'
 import services from '@/services'
 import getTokenObjectPayload from '@/utils/auth'
-import Icon from '@/components/Icon/index.vue'
 import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
 import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
 import BasePasswordInput from '@/components/BasePasswordInput.vue'
@@ -53,7 +52,6 @@ import BaseAuthButton from '@/components/BaseAuthButton.vue';
 
 export default {
     components: {
-        Icon,
         BasePasswordInput,
         BaseInput,
         BaseHiddenLabel,

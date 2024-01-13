@@ -1,5 +1,5 @@
 <template>
-    <Card class="bg-transparent border-gray-50 dark:border-gray-800">
+    <Card class="bg-transparent border-gray-50 dark:border-dark-mixed-200">
         <CardHeader class="flex-row items-center justify-between">
             <div class="flex items-center gap-2.5">
                 <Skeleton class="w-8 h-8 rounded-full" />
@@ -7,12 +7,12 @@
             </div>
             <Skeleton class="h-3 w-20" />
         </CardHeader>
-        <CardContent class="space-y-2">
+        <CardContent class="space-y-4">
             <Skeleton class="h-6 w-52" />
             <Skeleton class="h-4 w-64" />
         </CardContent>
         <CardFooter class="flex items-center justify-between">
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4">
                 <div class="flex items-center gap-2">
                     <Skeleton class="h-4 w-10" />
                 </div>

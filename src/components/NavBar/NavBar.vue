@@ -14,7 +14,7 @@
                             </RouterLink>
                             <div class="md:block relative w-full md:w-3/4">
                                 <span class="absolute text-gray-400 inset-y-0 left-0 flex items-center pl-3">
-                                    <Icon name="Glass" size="5" color="text-gray-400" />
+                                    <Search :stroke-width="1.50" size="20" />
                                 </span>
 
                                 <input type="text" class="w-full py-2 pl-10 pr-4 text-sm font-regular text-gray-700 bg-white border rounded-full dark:bg-dark-mixed-200/50 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search">
@@ -43,7 +43,7 @@
                                     <a href="#" class="font-medium text-xs transition-colors duration-300 transform mx-1.5">Notificações</a>
                                 </div>
                             </div>
-
+                            
                             <NavBarMenuUser :userData="userProfile" />
                         </div>
                     </div>
@@ -78,8 +78,7 @@
 
 <script setup>
 import { reactive } from 'vue'
-import Icon from '@/components/Icon/index.vue'
-import { Bell, Home, MessageSquareText, PlusCircle } from 'lucide-vue-next'
+import { Bell, Home, MessageSquareText, PlusCircle, Search } from 'lucide-vue-next'
 import NavBarMenuUser from '@/components/NavBar/NavBarMenuUser.vue'
 
 const props = defineProps({
