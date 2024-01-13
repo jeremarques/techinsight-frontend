@@ -1,8 +1,8 @@
 <template>
-    <div class="">
+    <div>
         <div class="container md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
-            <div v-if="state.isLoaded" class="post">
-                <section class="pt-16 md:pt-28 pb-12 md:pb-16 px-6 xl:px-52 2xl:px-56 flex flex-col items-start justify-center">
+            <div v-if="state.isLoaded" class="post px-6 xl:px-52 2xl:px-56">
+                <section class="pt-16 md:pt-28 pb-12 md:pb-16 flex flex-col items-start justify-center">
                     <span class="text-gray-500 text-sm font-regular mb-2 dark:text-gray-400">
                         {{ formatTimeDifference(state.post.created_at) }}
                     </span>
@@ -10,7 +10,7 @@
                         {{ state.post.title }}    
                     </h1>
                 </section>
-                <section class="px-6 xl:px-52 2xl:px-56 mb-10">
+                <section class="mb-10">
                     <div class="flex items-center justify-between">
                         <div>
                             <div class="user flex items-center space-x-3 cursor-pointer">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="px-6 xl:px-52 2xl:px-56 font-p-regular text-xl text-gray-900 dark:text-gray-400">
+                <section class="font-p-regular text-xl text-gray-900 dark:text-gray-400">
                     {{ state.post.content }}
                 </section>
             </div>

@@ -4,8 +4,9 @@ const Home = () => import('@/views/Home/index.vue')
 const Login = () => import('@/views/Login/index.vue')
 const Register = () => import('@/views/Register/index.vue')
 const BlogLayout = () => import('@/views/Blog/BlogLayout.vue')
-const HomeBlog = () => import('@/views/Blog/Home.vue')
-const Post = () => import('@/views/Blog/Post.vue')
+const HomeBlog = () => import('@/views/Blog/Home/index.vue')
+const Post = () => import('@/views/Blog/Post/index.vue')
+const NewPost = () => import('@/views/Blog/NewPost/index.vue')
 
 const router = createRouter({
     history: createWebHistory('/'),
@@ -33,7 +34,7 @@ const router = createRouter({
                     path: '',
                     name: 'home-blog',
                     component: HomeBlog,
-                    meta:{
+                    meta: {
                         layout: 'BlogLayout',
                     }
                 },
@@ -41,7 +42,16 @@ const router = createRouter({
                     path: '/:username/:slugAndId',
                     name: 'post',
                     component: Post,
-                    meta:{
+                    meta: {
+                        layout: 'BlogLayout',
+                    }
+                },
+                {
+                    path: '/new-insight',
+                    name: 'new-insight',
+                    component: NewPost,
+                    meta: {
+                        hasAuth: true,
                         layout: 'BlogLayout',
                     }
                 },
@@ -49,7 +59,7 @@ const router = createRouter({
                     path: '/:slug/posts',
                     name: 'tag-posts',
                     component: Login,
-                    meta:{
+                    meta: {
                         layout: 'BlogLayout',
                     }
                 },

@@ -28,10 +28,10 @@
                                     <span class="font-medium text-xs transition-colors duration-300 transform mx-1.5">Início</span>
                                 </RouterLink>
 
-                                <div class="flex flex-col gap-0.5 items-center justify-center text-gray-900 dark:text-gray-200">
+                                <RouterLink :to="{ name: 'new-insight' }" class="flex flex-col gap-0.5 items-center justify-center text-gray-900 dark:text-gray-200">
                                     <PlusCircle :stroke-width="1.50" :size="20" />
                                     <a href="#" class="font-medium text-xs  transition-colors duration-300 transform mx-1.5">Publicar</a>
-                                </div>
+                                </RouterLink>
 
                                 <div class="flex flex-col gap-0.5 items-center justify-center text-gray-900 dark:text-gray-200">
                                     <MessageSquareText :stroke-width="1.50" :size="20" />
