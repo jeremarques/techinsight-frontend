@@ -5,15 +5,14 @@
         :should-show="(editor) => editor.state.selection.$from.nodeBefore?.textContent === '/'"
         v-if="editor"
         class="drop-shadow-md max-h-64 mt-24 flex items-center p-1 bg-background rounded-md overflow-scroll divide-slate-50"
-    >   
-    
-        <div class="flex flex-col">
+    >
+        <div class="flex flex-col mt-28">
 
             <FloatingMenuButton 
                 iconName="Text" 
                 title="Texto" 
                 description="Escrever textos sem formatação" 
-                class="mt-16"
+                class="mt-2"
                 @click="() => {
                     editor.chain().focus().setParagraph().run()
                 }"/>
@@ -49,7 +48,14 @@
                 @click="() => {
                     editor.chain().focus().toggleHeading({ level: 4 }).run()
                 }"/>
-            
+
+            <FloatingMenuButton 
+                iconName="Minus" 
+                title="Linha horizontal" 
+                description="Inserir uma linha horizontal" 
+                @click="() => {
+                    editor.chain().focus().setHorizontalRule().run()
+                }"/>
         </div>
 
     </FloatingMenu>
@@ -119,7 +125,7 @@
             <Tooltip>
                 <TooltipTrigger>
                     <Popover>
-                        <PopoverTrigger :disabled="!editor.can().chain().focus().toggleLink().run()">
+                        <PopoverTrigger @click="loadPreviousLink(editor)" :disabled="!editor.can().chain().focus().toggleLink().run()">
                             <BubbleButton :disabled="!editor.can().chain().focus().toggleLink().run()" :data-active="editor.isActive('link')">
                                 <Link2 class="w-4 h-4" />
                             </BubbleButton>
@@ -134,9 +140,26 @@
                                     :default-value="state.previousUrl"
                                     class="h-8 font-regular"
                                     />
-                                <Button class="h-8" variant="secondary" @click="setLink(editor)" type="submit">
-                                    {{ state.previousUrl ? 'Alterar' : 'Adicionar' }}
-                                </Button>
+                                <div class="flex space-x-1">
+                                    <Button class="h-8 flex-1" variant="secondary" @click="setLink(editor)" type="submit">
+                                        {{ state.previousUrl ? 'Alterar' : 'Adicionar' }}
+                                    </Button>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Button 
+                                                v-if="state.previousUrl && editor.isActive('link')" 
+                                                class="h-8 text-red-400 border-red-400 hover:text-white hover:bg-red-400" variant="outline" size="icon"
+                                                @click="editor.chain().focus().unsetLink().run()" 
+                                                :disabled="!editor.isActive('link')"
+                                            >
+                                                <Trash2 class="w-4 h-4" />
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p class="text-sm">Remover link</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
                             </form>
                         </PopoverContent>
                     </Popover>
@@ -158,9 +181,10 @@ import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import { common, createLowlight } from 'lowlight'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import { createLowlight } from 'lowlight'
 import { Toggle } from '@/components/ui/toggle'
-import { Bold, Code, FileText, Italic, Link2, Strikethrough, UnderlineIcon } from 'lucide-vue-next'
+import { Bold, Code, FileText, Italic, Link2, Strikethrough, Trash2, UnderlineIcon } from 'lucide-vue-next'
 import BubbleButton from './BubbleButton.vue'
 import {
     Tooltip,
@@ -203,30 +227,31 @@ import kotlin from 'highlight.js/lib/languages/kotlin'
 
 export default {
     components: {
-        EditorContent,
-        BubbleMenu,
-        FloatingMenu,
-        Toggle,
-        Italic,
-        Bold,
-        BubbleButton,
-        Code,
-        Strikethrough,
-        Tooltip,
-        TooltipContent,
-        TooltipProvider,
-        TooltipTrigger,
-        FileText,
-        FloatingMenuButton,
-        UnderlineIcon,
-        Popover,
-        PopoverContent,
-        PopoverTrigger,
-        Link2,
-        Input,
-        Label,
-        Button
-    },
+    EditorContent,
+    BubbleMenu,
+    FloatingMenu,
+    Toggle,
+    Italic,
+    Bold,
+    BubbleButton,
+    Code,
+    Strikethrough,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+    FileText,
+    FloatingMenuButton,
+    UnderlineIcon,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+    Link2,
+    Input,
+    Label,
+    Button,
+    Trash2
+},
 
     setup () {
         const lowlight = createLowlight({
@@ -253,9 +278,6 @@ export default {
 
         const editor = useEditor({
             editorProps: {
-                // attributes: {
-                //     class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:p-1.5 prose-code:bg-gray-100 prose-code:rounded-sm prose-code:text-gray-700 prose-code:font-code prose-code:text-xs prose-code:box-decoration-clone prose-code:after:hidden prose-code:before:hidden"
-                // }
                 attributes: {
                     class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code"
                 }
@@ -296,11 +318,13 @@ export default {
                 Link.configure({
                     HTMLAttributes: {
                         class: 'text-blue-600 cursor-pointer'
-                    }
+                    },
+                    openOnClick: false,
                 }),
                 CodeBlockLowlight.configure({
                     lowlight,
                 }),
+                HorizontalRule
             ]
         })
 

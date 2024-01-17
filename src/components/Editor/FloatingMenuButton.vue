@@ -12,7 +12,7 @@
     </button>
 </template>
 <script setup>
-import { Heading1, Heading2, Heading3, Heading4, Text, Code2, Link2 } from 'lucide-vue-next'
+import { Heading1, Heading2, Heading3, Heading4, Text, Code2, Link2, Minus } from 'lucide-vue-next'
 
 const props = defineProps({
     iconName: {
@@ -36,6 +36,7 @@ const icons = {
     Heading4,
     Text,
     Code2,
-    Link2
+    Link2,
+    Minus
 }
 </script>
