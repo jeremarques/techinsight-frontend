@@ -31,33 +31,73 @@
 }
 
 @font-face {
-  font-family: "CrimsonProRegular";
-  src: local("CrimsonPro Regular"), local("CrimsonPro-Regular"),
-    url("../fonts/CrimsonPro-Regular.ttf") format("truetype");
+  font-family: "DMSansRegular";
+  src: local("DMSans Regular"), local("DMSans-Regular"),
+    url("../fonts/DMSans-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "CrimsonProItalic";
-  src: local("CrimsonPro Italic"), local("CrimsonPro-Italic"),
-    url("../fonts/CrimsonPro-Italic.ttf") format("truetype");
+  font-family: "DMSansItalic";
+  src: local("DMSans Italic"), local("DMSans-Italic"),
+    url("../fonts/DMSans-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
-  font-family: "CrimsonProSemiBold";
-  src: local("CrimsonPro SemiBold"), local("CrimsonPro-SemiBold"),
-    url("../fonts/CrimsonPro-SemiBold.ttf") format("truetype");
+  font-family: "DMSansMedium";
+  src: local("DMSans Medium"), local("DMSans-Medium"),
+    url("../fonts/DMSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DMSansMediumItalic";
+  src: local("DMSans MediumItalic"), local("DMSans-MediumItalic"),
+    url("../fonts/DMSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DMSansSemiBold";
+  src: local("DMSans SemiBold"), local("DMSans-SemiBold"),
+    url("../fonts/DMSans-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "CrimsonProSemiBoldItalic";
-  src: local("CrimsonPro SemiBoldItalic"), local("CrimsonPro-SemiBoldItalic"),
-    url("../fonts/CrimsonPro-SemiBoldItalic.ttf") format("truetype");
+  font-family: "DMSansSemiBoldItalic";
+  src: local("DMSans SemiBoldItalic"), local("DMSans-SemiBoldItalic"),
+    url("../fonts/DMSans-SemiBoldItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
+}
+
+@font-face {
+  font-family: "DMSansBold";
+  src: local("DMSans Bold"), local("DMSans-Bold"),
+    url("../fonts/DMSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DMSansBoldItalic";
+  src: local("DMSans BoldItalic"), local("DMSans-BoldItalic"),
+    url("../fonts/DMSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "JetBrainsMonoRegular";
+  src: local("JetBrainsMono Regular"), local("JetBrainsMono-Regular"),
+    url("../fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; 
 }

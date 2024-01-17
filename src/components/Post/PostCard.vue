@@ -26,7 +26,7 @@
                 <CardTitle class="title text-lg md:text-xl line-clamp-2 font-semibold">
                     {{ post.title }}
                 </CardTitle>
-                <CardDescription class="content mt-1 line-clamp-2 font-regular text-xs text-gray-600 dark:text-gray-400">
+                <CardDescription class="content mt-1 line-clamp-2 font-body-regular text-sm leading-tight text-gray-600 dark:text-gray-400">
                     {{ post.content }}
                 </CardDescription>
             </RouterLink>

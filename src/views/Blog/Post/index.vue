@@ -3,7 +3,7 @@
         <div class="container md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
             <div v-if="state.isLoaded" class="post px-6 xl:px-52 2xl:px-56">
                 <section class="pt-16 md:pt-28 pb-12 md:pb-16 flex flex-col items-start justify-center">
-                    <span class="text-gray-500 text-sm font-regular mb-2 dark:text-gray-400">
+                    <span class="text-gray-500 text-base font-body-regular mb-2 dark:text-gray-400">
                         {{ formatTimeDifference(state.post.created_at) }}
                     </span>
                     <h1 class="text-gray-900 font-bold text-4xl md:text-5xl dark:text-gray-50 tracking-tighter">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="font-p-regular text-xl text-gray-900 dark:text-gray-400">
+                <section class="font-body-regular text-lg text-gray-800 dark:text-gray-400">
                     {{ state.post.content }}
                 </section>
             </div>
