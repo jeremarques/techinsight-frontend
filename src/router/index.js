@@ -27,6 +27,15 @@ const router = createRouter({
             component: Register
         },
         {
+            path: '/new-insight',
+            name: 'new-insight',
+            component: NewPost,
+            meta: {
+                hasAuth: true,
+                layout: 'BlogLayout',
+            }
+        },
+        {
             path: '/',
             component: BlogLayout,
             children: [
@@ -43,15 +52,6 @@ const router = createRouter({
                     name: 'post',
                     component: Post,
                     meta: {
-                        layout: 'BlogLayout',
-                    }
-                },
-                {
-                    path: '/new-insight',
-                    name: 'new-insight',
-                    component: NewPost,
-                    meta: {
-                        hasAuth: true,
                         layout: 'BlogLayout',
                     }
                 },

@@ -227,33 +227,35 @@ import kotlin from 'highlight.js/lib/languages/kotlin'
 
 export default {
     components: {
-    EditorContent,
-    BubbleMenu,
-    FloatingMenu,
-    Toggle,
-    Italic,
-    Bold,
-    BubbleButton,
-    Code,
-    Strikethrough,
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-    FileText,
-    FloatingMenuButton,
-    UnderlineIcon,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-    Link2,
-    Input,
-    Label,
-    Button,
-    Trash2
-},
+        EditorContent,
+        BubbleMenu,
+        FloatingMenu,
+        Toggle,
+        Italic,
+        Bold,
+        BubbleButton,
+        Code,
+        Strikethrough,
+        Tooltip,
+        TooltipContent,
+        TooltipProvider,
+        TooltipTrigger,
+        FileText,
+        FloatingMenuButton,
+        UnderlineIcon,
+        Popover,
+        PopoverContent,
+        PopoverTrigger,
+        Link2,
+        Input,
+        Label,
+        Button,
+        Trash2
+    },
 
-    setup () {
+    emits: ['updateTitle'],
+
+    setup (props, { emit }) {
         const lowlight = createLowlight({
             javascript,
             css,
@@ -279,25 +281,11 @@ export default {
         const editor = useEditor({
             editorProps: {
                 attributes: {
-                    class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code"
+                    class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter"
                 }
             },
             content: `
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lobortis mauris eget eleifend bibendum. Maecenas nec velit id lacus tempus ornare elementum a nibh. Phasellus dictum felis erat, sed maximus justo lacinia nec. Phasellus eu consequat mauris. Duis auctor tellus malesuada mi gravida tempus. Cras finibus at neque pulvinar auctor. Quisque faucibus, nulla sit amet facilisis iaculis, ipsum elit ullamcorper felis, in maximus risus tellus euismod lorem. Curabitur et metus a ipsum dictum viverra. Sed id nisi eu eros ornare ultricies vitae vitae tellus. Sed eget dictum tortor.</p>
-
-            <p>Nam nec metus nec nisl molestie dignissim id sit amet mi. In congue nisl nec varius lacinia. Donec efficitur magna turpis, quis lobortis urna fringilla id. Donec turpis orci, mattis id lacus a, convallis commodo erat. Aliquam consectetur, neque vel fermentum porta, nunc mi mollis quam, ut fermentum diam metus ut leo. Nam lobortis enim neque, vel vestibulum enim fermentum sollicitudin. Vivamus nec nisl in risus condimentum congue. Maecenas condimentum pharetra velit quis luctus. Ut in sollicitudin lacus. Phasellus at sodales nisl. Maecenas sapien orci, mollis vitae mi non, elementum pellentesque neque. Praesent maximus ante nibh, non condimentum dolor condimentum id. Nulla ligula elit, vulputate tempor fringilla sit amet, commodo non ex. Morbi euismod augue vel eros sagittis placerat. Praesent tincidunt auctor lorem, sed fermentum neque tempor quis.</p>
-
-            <pre>
-                <code class="language-javascript">
-                    function sayHello(message) {
-                        console.log(message)
-                    }
-
-                    sayHello('Hello')
-                </code>
-            </pre>
-
-            <p>Sed vulputate purus non magna gravida, nec tristique risus consectetur. Mauris a gravida magna. Sed non turpis velit. Nam faucibus mauris eu tellus ornare euismod. Vivamus et eros vel lorem elementum consectetur vel eu sem. In tempor consequat placerat. Ut justo velit, vestibulum non tellus non, fermentum maximus nisl. Nulla euismod eros eget leo dapibus bibendum. Aliquam mi sapien, ullamcorper at malesuada ac, posuere id nisl. Curabitur laoreet volutpat ultrices. Ut eu dui ac metus gravida tincidunt.</p>
+            <h1></h1>
             `,
             extensions: [
                 StarterKit,
@@ -310,7 +298,6 @@ export default {
                             return 'Código...'
                         }
                         
-
                         return 'Pressione "/" para mais opções...'
                     },
                     emptyNodeClass: 'before:content-[attr(data-placeholder)] before:text-gray-300 before:h-0 before:float-left before-pointer-events-none',
@@ -325,7 +312,18 @@ export default {
                     lowlight,
                 }),
                 HorizontalRule
-            ]
+            ],
+            onUpdate: ({ editor }) => {
+                const nodeType = editor.state.selection.$from.parent.type
+                const nodeName = nodeType.name
+                if (nodeName === 'heading') {
+                    const hasH1 = editor.getHTML().match(/<h1>(.*?)<\/h1>/)
+                    if (hasH1) {
+                        const textH1 = hasH1[1]
+                        emit('updateTitle', textH1)
+                    }
+                }
+            }
         })
 
         const state = reactive({
