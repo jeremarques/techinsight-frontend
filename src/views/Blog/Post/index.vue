@@ -46,8 +46,8 @@
                         </div>
                     </div>
                 </section>
-                <section class="font-body-regular text-lg text-gray-800 dark:text-gray-400">
-                    {{ state.post.content }}
+                <section class="insight-content">
+                    <ReadContent :content="state.post.content" />
                 </section>
             </div>
             <PostSkeleton v-else />
@@ -62,16 +62,18 @@ import { formatTimeDifference } from '@/utils/date'
 import PostSkeleton from '@/components/Skeletons/PostSkeleton.vue'
 import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import ReadContent from './ReadContent.vue'
 
 export default {
     components: {
-    PostSkeleton,
-    ThumbsUp,
-    MessageSquare,
-    Avatar,
-    AvatarImage,
-    AvatarFallback
-},
+        PostSkeleton,
+        ThumbsUp,
+        MessageSquare,
+        Avatar,
+        AvatarImage,
+        AvatarFallback,
+        ReadContent
+    },
 
     setup() {
         const route = useRoute()
@@ -93,7 +95,6 @@ export default {
                 state.postUser = data.profile.user
                 state.postUserPorfile = data.profile
                 state.isLoaded = true
-
             } catch (err) {
                 console.log(err)
             }

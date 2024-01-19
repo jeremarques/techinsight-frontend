@@ -1,7 +1,7 @@
 <template>
     <header class="fixed w-full top-0 z-50 dark:border-b dark:border-gray-800">
         <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-gray-950">
-            <div class="container px-6 md:px-6 lg:px-20 py-4 mx-auto">
+            <div class="container px-6 md:px-6 lg:px-8 py-4 mx-auto">
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="flex justify-between gap-4 md:gap-0 items-center">
                         <div class="flex items-center gap-4">

@@ -1,8 +1,8 @@
 <template>
-    <Card class="bg-[#fcfcfc] dark:bg-dark-mixed-150 border rounded-lg dark:border-dark-mixed-300">
-        <CardHeader class="flex-row items-center justify-between pb-0">
+    <div class="bg-transparent dark:bg-dark-mixed-150 border border-gray-200/80 rounded-lg dark:border-dark-mixed-300  shadow-none">
+        <div class="flex items-center justify-start px-5 pt-5  space-x-4 space-y-0">
             <div class="user flex items-center gap-2.5 cursor-pointer">
-                <Avatar class="border border-gray-400 dark:border-gray-500 w-8 h-8 md:w-8 md:h-8">
+                <Avatar class="border border-gray-400 dark:border-gray-500 w-7 h-7">
                     <AvatarImage v-if="!!post.profile.profile_photo" :src="post.profile.profile_photo" alt="imagem do usuário"/>
                     <AvatarImage v-else src="../assets/images/user-profile.png" alt="imagem do usuário"/>
                     <AvatarFallback>{{ post.profile.user.username }}</AvatarFallback>
@@ -12,10 +12,10 @@
             <div class="publi-date font-regular text-xs text-gray-500">
                 {{ formatTimeDifference(post.created_at) }}
             </div>
-        </CardHeader>
-        <CardContent class="py-0">
+        </div>
+        <div class="px-5 py-4">
             <RouterLink
-                class="py-5 flex flex-col"
+                class=" flex flex-col"
                 :to="{ 
                     name: 'post',
                     params: { 
@@ -23,15 +23,12 @@
                         slugAndId: `${post.slug}-${post.public_id}`
                     }
                 }">
-                <CardTitle class="title text-lg md:text-xl line-clamp-2 font-semibold">
+                <h3 class="title tracking-tighter text-lg md:text-xl line-clamp-2 font-semibold">
                     {{ post.title }}
-                </CardTitle>
-                <CardDescription class="content mt-1 line-clamp-2 font-body-regular text-sm leading-tight text-gray-600 dark:text-gray-400">
-                    {{ post.content }}
-                </CardDescription>
+                </h3>
             </RouterLink>
-        </CardContent>
-        <CardFooter class="flex items-center justify-between">
+        </div>
+        <div class="flex items-center justify-between px-5 pb-5 gap-8">
             <div class="left flex items-center gap-4">
                 <div class="likes flex items-center gap-2">
                     <button type="button">
@@ -59,22 +56,14 @@
                             slug: post.tag.slug
                         }
                     }">
-                    <Badge class="tag font-medium text-[10px] dark:border-gray-600" variant="secondary">Software</Badge>
+                    <Badge class="tag font-medium text-[10px] dark:border-gray-600" variant="secondary">{{ post.tag.name }}</Badge>
                 </RouterLink>
             </div>
-        </CardFooter>
-    </Card>
+        </div>
+    </div>
 </template>
 <script setup>
 import { formatTimeDifference } from '@/utils/date'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'

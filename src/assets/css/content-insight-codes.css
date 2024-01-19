@@ -1,0 +1,11 @@
+pre code.hljs {
+    display:block;
+    overflow-x:auto;
+    padding: 0;
+}
+code.hljs {
+    padding: 0;
+}
+.hljs {
+    background: transparent
+}

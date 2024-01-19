@@ -252,8 +252,22 @@ export default {
         Button,
         Trash2
     },
+    props: {
+        modelValue: {
+            type: String,
+            default: ''
+        },
+        editable: {
+            type: Boolean,
+            default: true
+        },
+        content: {
+            type: String,
+            default: ''
+        }
+    },
 
-    emits: ['updateTitle'],
+    emits: ['update:modelValue'],
 
     setup (props, { emit }) {
         const lowlight = createLowlight({
@@ -279,14 +293,13 @@ export default {
         })
 
         const editor = useEditor({
+            editable: props.editable,
             editorProps: {
                 attributes: {
                     class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter"
                 }
             },
-            content: `
-            <h1></h1>
-            `,
+            content: props.content,
             extensions: [
                 StarterKit,
                 Underline,
@@ -314,16 +327,9 @@ export default {
                 HorizontalRule
             ],
             onUpdate: ({ editor }) => {
-                const nodeType = editor.state.selection.$from.parent.type
-                const nodeName = nodeType.name
-                if (nodeName === 'heading') {
-                    const hasH1 = editor.getHTML().match(/<h1>(.*?)<\/h1>/)
-                    if (hasH1) {
-                        const textH1 = hasH1[1]
-                        emit('updateTitle', textH1)
-                    }
-                }
-            }
+                let content = editor.getHTML()
+                emit('update:modelValue', content)
+            },
         })
 
         const state = reactive({

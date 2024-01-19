@@ -58,7 +58,7 @@ export default {
         BaseErrorMessageInput,
         BaseAuthButton
     },
-
+    
     setup () {
         const router = useRouter()
         const toast = useToast()
