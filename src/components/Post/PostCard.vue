@@ -9,7 +9,7 @@
                 </Avatar>
                 <span class="username font-medium text-sm text-gray-600 dark:text-gray-200">{{ post.profile.user.username }}</span>
             </div>
-            <div class="publi-date font-regular text-xs text-gray-500">
+            <div class="publi-date font-regular text-xs text-gray-500 dark:text-gray-400">
                 {{ formatTimeDifference(post.created_at) }}
             </div>
         </div>
@@ -23,7 +23,7 @@
                         slugAndId: `${post.slug}-${post.public_id}`
                     }
                 }">
-                <h3 class="title tracking-tighter text-lg line-clamp-2 font-semibold text-gray-800">
+                <h3 class="title tracking-tighter text-lg line-clamp-2 font-semibold text-gray-800 dark:text-gray-200">
                     {{ post.title }}
                 </h3>
             </RouterLink>

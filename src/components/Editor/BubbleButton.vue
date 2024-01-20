@@ -1,5 +1,5 @@
 <template>
-    <Button variant="ghost" size="sm" aria-label="Button" class="data-[active=true]:bg-accent rounded-none">
+    <Button variant="ghost" size="sm" aria-label="Button" class="data-[active=true]:bg-accent rounded-none dark:bg-gray-700">
         <slot />
     </Button>    
 </template>

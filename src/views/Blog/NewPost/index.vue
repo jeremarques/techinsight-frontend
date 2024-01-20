@@ -1,6 +1,6 @@
 <template>
-    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-gray-800">
-        <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-gray-950">
+    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-dark-200">
+        <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-dark-mixed-100">
             <div class="container px-6 md:px-6 lg:px-8 py-4 mx-auto">
                 <div class="flex gap-4 md:gap-0 items-center">
                     <div class="flex items-center gap-4">
@@ -50,6 +50,7 @@
                                             <Label for="title-confirmation">Título</Label>
                                             <Input 
                                                 v-model="state.post.title.value"
+                                                class="dark:bg-dark-mixed-100"
                                                 id="title-confirmation"
                                                 type="text"
                                                 placeholder="Título..."
@@ -121,7 +122,7 @@
                         </Popover>
                         <Button variant="ghost" as-child>
                             <RouterLink class="px-2" :to="{ name: 'home-blog' }">
-                                <X class="text-gray-800" />
+                                <X class="text-gray-800 dark:text-gray-100" />
                             </RouterLink>
                         </Button>
                     </div>
@@ -129,13 +130,13 @@
             </div>
         </nav>
     </header>
-    <div>
+    <main class="min-h-screen pt-16 bg-white dark:bg-dark-mixed-100">
         <div class="container mt-24 md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
             <div class="px-6 xl:px-52 2xl:px-56 pt-16">
                 <Editor v-model="state.post.content" />
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
