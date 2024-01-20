@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
-            <div v-if="state.isLoaded" class="post px-6 xl:px-52 2xl:px-56">
+            <div v-if="!state.isLoading" class="post px-6 xl:px-52 2xl:px-56">
                 <section class="pt-16 md:pt-28 pb-12 md:pb-16 flex flex-col items-start justify-center">
                     <span class="text-gray-500 text-base font-body-regular mb-2 dark:text-gray-400">
                         {{ formatTimeDifference(state.post.created_at) }}
@@ -56,7 +56,9 @@
 </template>
 <script>
 import { reactive, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useTitle } from '@vueuse/core'
+import { useToast } from 'vue-toastification'
 import services from '@/services'
 import { formatTimeDifference } from '@/utils/date'
 import PostSkeleton from '@/components/Skeletons/PostSkeleton.vue'
@@ -77,24 +79,52 @@ export default {
 
     setup() {
         const route = useRoute()
+        const router = useRouter()
+        const toast = useToast()
         const state = reactive({
-            isLoaded: false,
+            isLoading: false,
             post: {},
             postUser: {},
             postUserPorfile: {}
         })
         const slugAndId = route.params.slugAndId.split('-')
         const postId = slugAndId.at(-1)
-
+        const usernameParam = route.params.username
+        const slugParam = slugAndId.slice(0, -1).join('-')
+        
         onMounted(() => getPost())
-
+        
         async function getPost() {
             try {
-                const { data } = await services.post.getPost(postId)
+                state.isLoading = true
+                const { data, errors } = await services.post.getPost(postId)
+                if (errors) {
+                    if (errors.status === 404) {
+                        state.isLoading = false
+                        router.push({ name: 'not-found' })
+                    }
+
+                    if (errors.status === 500) {
+                        state.isLoading = true
+                        toast.error('Ocorreu um erro ao tentar carregar o post. Por favor, tente novamente mais tarde.')
+                    }
+                }
+                
+                if (usernameParam !== data.profile.user.username || slugParam !== data.slug) {
+                    router.push({
+                        name: 'post',
+                        params: { 
+                            username: data.profile.user.username, 
+                            slugAndId: `${data.slug}-${data.public_id}`
+                        }
+                    })
+                }
                 state.post = data
                 state.postUser = data.profile.user
                 state.postUserPorfile = data.profile
-                state.isLoaded = true
+                state.isLoading = false
+                useTitle(state.post.title)
+
             } catch (err) {
                 console.log(err)
             }

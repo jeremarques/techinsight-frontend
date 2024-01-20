@@ -23,7 +23,7 @@
                         slugAndId: `${post.slug}-${post.public_id}`
                     }
                 }">
-                <h3 class="title tracking-tighter text-lg md:text-xl line-clamp-2 font-semibold">
+                <h3 class="title tracking-tighter text-lg line-clamp-2 font-semibold text-gray-800">
                     {{ post.title }}
                 </h3>
             </RouterLink>

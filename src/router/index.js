@@ -7,6 +7,7 @@ const BlogLayout = () => import('@/views/Blog/BlogLayout.vue')
 const HomeBlog = () => import('@/views/Blog/Home/index.vue')
 const Post = () => import('@/views/Blog/Post/index.vue')
 const NewPost = () => import('@/views/Blog/NewPost/index.vue')
+const NotFound = () => import('@/components/NotFoundPage.vue')
 
 const router = createRouter({
     history: createWebHistory('/'),
@@ -44,6 +45,7 @@ const router = createRouter({
                     name: 'home-blog',
                     component: HomeBlog,
                     meta: {
+                        title: 'FastInsight | Compartilhe seu conhecimento com todos',
                         layout: 'BlogLayout',
                     }
                 },
@@ -63,12 +65,22 @@ const router = createRouter({
                         layout: 'BlogLayout',
                     }
                 },
+                {
+                    path: '/not-found',
+                    name: 'not-found',
+                    component: NotFound,
+                    meta: {
+                        title: 'FastInsight | Oops... Esta página não existe',
+                        layout: 'BlogLayout'
+                    }
+                }
             ]
         },
         {
             path: '/:pathMatch(.*)*',
-            redirect: { name: 'home' }
+            redirect: { name: 'home-blog' }
         }
+
     ]
 })
 

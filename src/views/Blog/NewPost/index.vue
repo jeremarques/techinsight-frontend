@@ -139,11 +139,17 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { useField } from 'vee-validate'
+import { validateEmpty } from '@/utils/validators'
+import { useTitle } from '@vueuse/core'
 import Editor from '@/components/Editor/Editor.vue'
 import { Input } from '@/components/ui/input'
-import { Edit, Tag, X } from 'lucide-vue-next'
+import { Edit, Tag, X, ShoppingCart, CheckIcon } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
+import ComboboxSkeleton from '@/components/Skeletons/ComboboxSkeleton.vue'
 import {
     Tooltip,
     TooltipContent,
@@ -155,9 +161,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-import { Label } from '@/components/ui/label'
-import { ShoppingCart, CheckIcon } from 'lucide-vue-next'
-import { cn } from '@/lib/utils'
 import {
     Command,
     CommandEmpty,
@@ -166,10 +169,8 @@ import {
     CommandItem,
     CommandList,
 } from '@/components/ui/command'
-import ComboboxSkeleton from '@/components/Skeletons/ComboboxSkeleton.vue'
 import services from '@/services'
-import { useField } from 'vee-validate'
-import { validateEmpty } from '@/utils/validators'
+import { useRouter } from 'vue-router'
 
 export default {
     components: {
@@ -199,6 +200,8 @@ export default {
     },
     
     setup () {
+        const router = useRouter()
+
         const { 
             value: titleValue, 
             errorMessage: titleErrorMessage
@@ -213,11 +216,15 @@ export default {
                 tag: null,
                 content: '',
             },
-            updateTitleAutomatically: true,
             tags: [],
             isLoading: false,
             openTagCombobox: false
         })
+
+        const pageTitle = computed(() => {
+            return !state.post.title.value ? 'Novo Insight' : state.post.title.value
+        })
+        useTitle(pageTitle)
 
         async function getTags() {
             state.isLoading = true
@@ -228,12 +235,21 @@ export default {
 
         async function createPost() {
             state.isLoading = true
-            const { data } = await services.post.createPost({
+            const { data, errors } = await services.post.createPost({
                 title: state.post.title.value,
                 content: state.post.content,
                 tag_id: state.post.tag
             })
-            state.isLoading = false
+            if (!errors) {
+                state.isLoading = false
+                router.push({
+                    name: 'post',
+                    params: {
+                        username: data.profile.user.username, 
+                        slugAndId: `${data.slug}-${data.public_id}`
+                    }
+                })
+            }
 
         }
         const cnFunc = cn

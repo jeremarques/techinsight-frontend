@@ -7,8 +7,18 @@ export default httpClient => ({
     },
     getPost: async (postId) => {
         const response = await httpClient.get(`/posts/${postId}/`)
+        let errors = null
+
+        if (!response.data) {
+            errors = {
+                status: response.request.status,
+                statusText: response.request.statusText,
+                errorData: response.response?.data
+            }
+        }
         return {
-            data: response.data
+            data: response.data,
+            errors
         }
     },
     createPost: async ({ title, content, tag_id }) => {
@@ -17,9 +27,18 @@ export default httpClient => ({
             content,
             tag_id
         })
+        let errors = null
 
+        if (!response.data) {
+            errors = {
+                status: response.request.status,
+                statusText: response.request.statusText,
+                errorData: response.response?.data
+            }
+        }
         return {
-            data: response.data
+            data: response.data,
+            errors
         }
     }
 })

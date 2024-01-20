@@ -19,6 +19,7 @@ export default {
                 consoleWelcomeMessage()
             }
             handleThemePage()
+            window.document.title = to.meta?.title ?? 'FastInsight'
 
             const token = window.localStorage.getItem('access_token')
             const tokenExp = window.localStorage.getItem('access_token_exp')
@@ -42,7 +43,7 @@ export default {
                 const { data: userProfileData } = await services.users.getMeProfile()
                 userStore.setCurrentUserProfile(userProfileData)
                 next()
-
+                
             } else {
                 if (to.meta.hasAuth) {
                     next({ name: 'login' })

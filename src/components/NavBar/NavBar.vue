@@ -57,10 +57,10 @@
                     <span class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Início</span>
                 </RouterLink>
 
-                <div class="flex flex-col items-center justify-center text-gray-800 dark:text-gray-200 gap-0.5">
+                <RouterLink :to="{ name: 'new-insight' }" class="flex flex-col items-center justify-center text-gray-800 dark:text-gray-200 gap-0.5">
                     <PlusCircle :stroke-width="1.50" :size="20" />
                     <a href="#" class="font-regular text-xs transition-colors duration-300 transform mx-1.5">Publicar</a>
-                </div>
+                </RouterLink>
 
                 <div class="flex flex-col items-center justify-center text-gray-800 dark:text-gray-200 gap-0.5">
                     <MessageSquareText :stroke-width="1.50" :size="20" />

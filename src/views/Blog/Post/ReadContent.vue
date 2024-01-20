@@ -50,13 +50,13 @@ hljs.registerLanguage('kotlin', kotlin)
 const props = defineProps({
     content: {
         type: String,
-        required: true
+        required: true,
+        default: ''
     }
 })
 
 setTimeout(() => {
     Array.from(document.querySelectorAll('pre code')).forEach((block) => {
-        console.log('to aqui')
         hljs.highlightElement(block)
     })
     
