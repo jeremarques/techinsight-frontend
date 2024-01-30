@@ -1,36 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const Home = () => import('@/views/Home/index.vue')
-const Login = () => import('@/views/Login/index.vue')
-const Register = () => import('@/views/Register/index.vue')
-const BlogLayout = () => import('@/views/Blog/BlogLayout.vue')
-const HomeBlog = () => import('@/views/Blog/Home/index.vue')
-const Post = () => import('@/views/Blog/Post/index.vue')
-const NewPost = () => import('@/views/Blog/NewPost/index.vue')
-const NotFound = () => import('@/components/NotFoundPage.vue')
-
 const router = createRouter({
     history: createWebHistory('/'),
     routes: [
         {
             path: '/home',
             name: 'home',
-            component: Home
+            component: () => import('@/views/Home/index.vue')
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: () => import('@/views/Login/index.vue')
         },
         {
             path: '/register',
             name: 'register',
-            component: Register
+            component: () => import('@/views/Register/index.vue')
         },
         {
             path: '/new-insight',
             name: 'new-insight',
-            component: NewPost,
+            component: () => import('@/views/Blog/NewPost/index.vue'),
             meta: {
                 hasAuth: true,
                 layout: 'BlogLayout',
@@ -38,12 +29,12 @@ const router = createRouter({
         },
         {
             path: '/',
-            component: BlogLayout,
+            component: () => import('@/views/Blog/BlogLayout.vue'),
             children: [
                 {
                     path: '',
                     name: 'home-blog',
-                    component: HomeBlog,
+                    component: () => import('@/views/Blog/Home/index.vue'),
                     meta: {
                         title: 'FastInsight | Compartilhe seu conhecimento com todos',
                         layout: 'BlogLayout',
@@ -52,7 +43,7 @@ const router = createRouter({
                 {
                     path: '/:username/:slugAndId',
                     name: 'post',
-                    component: Post,
+                    component: () => import('@/views/Blog/Post/index.vue'),
                     meta: {
                         layout: 'BlogLayout',
                     }
@@ -60,7 +51,7 @@ const router = createRouter({
                 {
                     path: '/:slug/posts',
                     name: 'tag-posts',
-                    component: Login,
+                    component: () => import('@/views/Login/index.vue'),
                     meta: {
                         layout: 'BlogLayout',
                     }
@@ -68,7 +59,7 @@ const router = createRouter({
                 {
                     path: '/not-found',
                     name: 'not-found',
-                    component: NotFound,
+                    component: () => import('@/components/NotFoundPage.vue'),
                     meta: {
                         title: 'FastInsight | Oops... Esta página não existe',
                         layout: 'BlogLayout'

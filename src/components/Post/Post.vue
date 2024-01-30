@@ -52,14 +52,14 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
-import PostContent from '@/components/Post/PostContent.vue'
-import { formatTimeDifference } from '@/utils/date'
-import services from '@/services'
 import { useTitle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
+import { formatTimeDifference } from '@/utils/date'
+import PostContent from '@/components/Post/PostContent.vue'
+import services from '@/services'
 
 const props = defineProps({
     postId: {
@@ -80,7 +80,6 @@ const router = useRouter()
 const toast = useToast()
 
 const state = reactive({
-    isLoading: false,
     post: {},
     postUser: {},
     postUserPorfile: {}
@@ -88,16 +87,13 @@ const state = reactive({
 
 async function getPost() {
     try {
-        state.isLoading = true
         const { data, errors } = await services.post.getPost(props.postId)
         if (errors) {
             if (errors.status === 404) {
-                state.isLoading = false
                 router.push({ name: 'not-found' })
             }
 
             if (errors.status === 500) {
-                state.isLoading = true
                 toast.error('Ocorreu um erro ao tentar carregar o post. Por favor, tente novamente mais tarde.')
             }
         }
@@ -115,7 +111,6 @@ async function getPost() {
         state.post = data
         state.postUser = data.profile.user
         state.postUserPorfile = data.profile
-        state.isLoading = false
         useTitle(state.post.title)
 
     } catch (err) {
