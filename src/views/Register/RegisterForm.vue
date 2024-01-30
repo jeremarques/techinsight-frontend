@@ -1,62 +1,62 @@
 <template>
     <form @submit.prevent="handleSubmitRegister" class="w-full max-w-md">
         <div class="mb-4">
-            <BaseHiddenLabel forElement="full_name" text="Seu nome" />
+            <BaseHiddenLabel for-element="full_name" text="Seu nome" />
             <BaseInput 
                 id="full_name"
-                iconName="User"
+                icon-name="User"
                 placeholder="Seu nome"
                 v-model="state.name.value"
                 :error="state.name.errorMessage"
                 :autofocus="true"
                 :required="true"
             />
-            <BaseErrorMessageInput :errorMessage="state.name.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.name.errorMessage" />
         </div>
         <div class="mb-4">
-            <BaseHiddenLabel forElement="email" text="Seu e-mail" />
+            <BaseHiddenLabel for-element="email" text="Seu e-mail" />
             <BaseInput 
                 id="email"
                 type="email"
-                iconName="Mail"
+                icon-name="Mail"
                 placeholder="Seu e-mail"
                 v-model="state.email.value"
                 :error="state.email.errorMessage"
                 :required="true"
             />
-            <BaseErrorMessageInput :errorMessage="state.email.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.email.errorMessage" />
         </div>
         <div class="mb-4">
-            <BaseHiddenLabel forElement="username" text="Nome de usuário" />
+            <BaseHiddenLabel for-element="username" text="Nome de usuário" />
             <BaseInput 
                 id="username"
-                iconName="User"
+                icon-name="User"
                 placeholder="Nome de usuário"
                 v-model="state.username.value"
                 :error="state.username.errorMessage"
                 :required="true"
             />
-            <BaseErrorMessageInput :errorMessage="state.username.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.username.errorMessage" />
         </div>
         <div class="mb-4">
-            <BaseHiddenLabel forElement="password" text="Senha" />
+            <BaseHiddenLabel for-element="password" text="Senha" />
             <BasePasswordInput
                 id="password"
                 placeholder="Senha"
                 v-model="state.password.value"
                 :error="state.password.errorMessage"
             />
-            <BaseErrorMessageInput :errorMessage="state.password.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.password.errorMessage" />
         </div>
         <div class="mb-8">
-            <BaseHiddenLabel forElement="confirm_password" text="Confirmar Senha" />
+            <BaseHiddenLabel for-element="confirm_password" text="Confirmar Senha" />
             <BasePasswordInput
                 id="confirm_password"
                 placeholder="Confirmar Senha"
                 v-model="state.confirmPassword.value"
                 :error="state.confirmPassword.errorMessage"
             />
-            <BaseErrorMessageInput :errorMessage="state.confirmPassword.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.confirmPassword.errorMessage" />
         </div>
 
         <BaseAuthButton 

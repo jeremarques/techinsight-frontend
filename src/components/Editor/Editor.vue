@@ -9,7 +9,7 @@
         <div class="flex flex-col mt-28">
 
             <FloatingMenuButton 
-                iconName="Text" 
+                icon-name="Text" 
                 title="Texto" 
                 description="Escrever textos sem formatação" 
                 class="mt-2"
@@ -18,7 +18,7 @@
                 }"/>
 
             <FloatingMenuButton 
-                iconName="Code2" 
+                icon-name="Code2" 
                 title="Código" 
                 description="Escrever bloco de código" 
                 @click="() => {
@@ -26,7 +26,7 @@
                 }"/>
 
             <FloatingMenuButton 
-                iconName="Heading2" 
+                icon-name="Heading2" 
                 title="Título 2" 
                 description="Escrever título médio" 
                 @click="() => {
@@ -34,7 +34,7 @@
                 }"/>
 
             <FloatingMenuButton 
-                iconName="Heading3" 
+                icon-name="Heading3" 
                 title="Título 3" 
                 description="Escrever título pequeno"
                 @click="() => {
@@ -42,7 +42,7 @@
                 }"/>
 
             <FloatingMenuButton 
-                iconName="Heading4" 
+                icon-name="Heading4" 
                 title="Título 4" 
                 description="Escrever título muito pequeno" 
                 @click="() => {
@@ -50,7 +50,7 @@
                 }"/>
 
             <FloatingMenuButton 
-                iconName="Minus" 
+                icon-name="Minus" 
                 title="Linha horizontal" 
                 description="Inserir uma linha horizontal" 
                 @click="() => {
@@ -169,7 +169,6 @@
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
-        
     </BubbleMenu>
 
     <EditorContent :editor="editor" />

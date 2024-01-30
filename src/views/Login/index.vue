@@ -8,7 +8,7 @@
 
             <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/4">
                 <div class="flex-1">
-                    <div class="">
+                    <div>
                         <img class="w-auto h-12 mb-2" src="../../assets/images/logo-icon.svg" alt="">
                         <h1 class="text-black dark:text-white text-4xl font-bold mb-5">Entrar</h1>
                     </div>

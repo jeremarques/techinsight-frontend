@@ -10,32 +10,32 @@
                 <h2 class="font-medium text-lg text-gray-500 dark:text-white">Escreva sua mensagem</h2>
             </div>
             <div class="mb-6">
-                <BaseHiddenLabel forElement="name" text="Seu nome" />
+                <BaseHiddenLabel for-element="name" text="Seu nome" />
                 <BaseInput 
                     id="name"
-                    iconName="User"
+                    icon-name="User"
                     placeholder="Seu nome"
-                    :darkVariant="true"
+                    :dark-variant="true"
                     v-model="state.name.value"
                     :error="state.name.errorMessage"
                 />
-                <BaseErrorMessageInput :errorMessage="state.name.errorMessage" />
+                <BaseErrorMessageInput :error-message="state.name.errorMessage" />
             </div>
             <div class="mb-6">
-                <BaseHiddenLabel forElement="email" text="Seu e-mail" />
+                <BaseHiddenLabel for-element="email" text="Seu e-mail" />
                 <BaseInput 
                     id="email"
                     type="email"
-                    iconName="Mail"
+                    icon-name="Mail"
                     placeholder="Seu e-mail"
-                    :darkVariant="true"
+                    :dark-variant="true"
                     v-model="state.email.value"
                     :error="state.email.errorMessage"
                 />
-                <BaseErrorMessageInput :errorMessage="state.email.errorMessage" />
+                <BaseErrorMessageInput :error-message="state.email.errorMessage" />
             </div>
             <div class="mb-6">
-                <BaseHiddenLabel forElement="message" text="Sua mensagem" />
+                <BaseHiddenLabel for-element="message" text="Sua mensagem" />
                 <BaseTextArea
                     id="message"
                     placeholder="Mensagem"
@@ -43,7 +43,7 @@
                     v-model="state.message.value"
                     :error="state.message.errorMessage"
                 />
-                <BaseErrorMessageInput :errorMessage="state.message.errorMessage" />
+                <BaseErrorMessageInput :error-message="state.message.errorMessage" />
             </div>
             <div>
                 <Button

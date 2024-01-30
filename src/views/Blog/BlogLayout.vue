@@ -1,5 +1,5 @@
 <template>
-    <NavBar v-if="haveUserProfile" :userProfile="currentUserProfile" />
+    <NavBar v-if="haveUserProfile" :user-profile="currentUserProfile" />
     <NavBarVisitor v-else />
     <main class="min-h-screen pt-16 bg-white dark:bg-dark-mixed-100">
         <router-view />

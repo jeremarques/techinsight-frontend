@@ -1,7 +1,7 @@
 <template>
     <form class="w-full max-w-md" @submit.prevent="handleSubmitLogin">
         <div class="mb-6">
-            <BaseHiddenLabel forElement="username" text="Seu nome de usuário" />
+            <BaseHiddenLabel for-element="username" text="Seu nome de usuário" />
             <BaseInput 
                 id="username"
                 iconName="User"
@@ -11,17 +11,17 @@
                 :required="true"
                 :autofocus="true"
             />
-            <BaseErrorMessageInput :errorMessage="state.username.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.username.errorMessage" />
         </div>
         <div class="mb-8">
-            <BaseHiddenLabel forElement="password" text="Sua senha" />
+            <BaseHiddenLabel for-element="password" text="Sua senha" />
             <BasePasswordInput
                 id="password"
                 placeholder="Sua senha"
                 v-model="state.password.value"
                 :error="state.password.errorMessage" 
             />
-            <BaseErrorMessageInput :errorMessage="state.password.errorMessage" />
+            <BaseErrorMessageInput :error-message="state.password.errorMessage" />
         </div>
 
         <BaseAuthButton 

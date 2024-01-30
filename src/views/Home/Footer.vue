@@ -14,10 +14,10 @@
                                 <a href="#contact">Fale conosco</a>
                             </li>
                             <li class="text-gray-600 dark:text-gray-400 font-regular text-sm transition-all duration-300 hover:text-gray-800 dark:hover:text-white">
-                                <router-link :to="{ name: 'login' }">Entrar</router-link>
+                                <RouterLink :to="{ name: 'login' }">Entrar</RouterLink>
                             </li>
                             <li class="text-gray-600 dark:text-gray-400 font-regular text-sm transition-all duration-300 hover:text-gray-800 dark:hover:text-white">
-                                <router-link :to="{ name: 'register' }">Criar conta</router-link>
+                                <RouterLink :to="{ name: 'register' }">Criar conta</RouterLink>
                             </li>
                         </ul>
                     </div>
