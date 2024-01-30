@@ -36,8 +36,8 @@
     </form>
 </template>
 
-<script>
-import { reactive } from 'vue';
+<script setup>
+import { reactive } from 'vue'
 import { useField } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -48,90 +48,73 @@ import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
 import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
 import BasePasswordInput from '@/components/BasePasswordInput.vue'
 import BaseInput from '@/components/BaseInput.vue'
-import BaseAuthButton from '@/components/BaseAuthButton.vue';
+import BaseAuthButton from '@/components/BaseAuthButton.vue'
 
-export default {
-    components: {
-        BasePasswordInput,
-        BaseInput,
-        BaseHiddenLabel,
-        BaseErrorMessageInput,
-        BaseAuthButton
+const router = useRouter()
+const toast = useToast()
+
+const {
+    value: usernameValue,
+    errorMessage: usernameErrorMessage,
+} = useField('username', validateEmpty)
+
+const {
+    value: passwordValue,
+    errorMessage: passwordErrorMessage,
+} = useField('password', validateEmpty)
+
+const state = reactive({
+    hasErrors: false,
+    isLoading: false,
+    username: {
+        value: usernameValue,
+        errorMessage: usernameErrorMessage,
     },
-    
-    setup () {
-        const router = useRouter()
-        const toast = useToast()
+    password: {
+        value: passwordValue,
+        errorMessage: passwordErrorMessage,
+    }
+})
 
-        const {
-            value: usernameValue,
-            errorMessage: usernameErrorMessage,
-        } = useField('username', validateEmpty)
-
-        const {
-            value: passwordValue,
-            errorMessage: passwordErrorMessage,
-        } = useField('password', validateEmpty)
-
-        const state = reactive({
-            hasErrors: false,
-            isLoading: false,
-            username: {
-                value: usernameValue,
-                errorMessage: usernameErrorMessage,
-            },
-            password: {
-                value: passwordValue,
-                errorMessage: passwordErrorMessage,
-            }
+async function handleSubmitLogin() {
+    try {
+        toast.clear()
+        state.isLoading = true
+        const { data, errors } = await services.auth.login({
+            username: state.username.value,
+            password: state.password.value
         })
 
-        async function handleSubmitLogin() {
+        if (!errors) {
+            window.localStorage.setItem('access_token', data.access)
+            window.localStorage.setItem('refresh_token', data.refresh)
+
             try {
-                toast.clear()
-                state.isLoading = true
-                const { data, errors } = await services.auth.login({
-                    username: state.username.value,
-                    password: state.password.value
-                })
-
-                if (!errors) {
-                    window.localStorage.setItem('access_token', data.access)
-                    window.localStorage.setItem('refresh_token', data.refresh)
-
-                    try {
-                        const accessTokenObjectPayload = getTokenObjectPayload(data.access)
-                        window.localStorage.setItem('access_token_exp', accessTokenObjectPayload.exp)
-
-                    } catch (err) {
-                        console.error('Erro ao obter o tempo de expiração do token:', err)
-                    }
-
-                    router.push({ name: 'home-blog' })
-                    state.isLoading = false
-                    return
-                }
-
-                if (errors.status === 401) {
-                    toast.error('Nome de usuário ou senha inválidos. Por favor, tente novamente.')
-                }
-                if (errors.status === 400) {
-                    toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente.')
-                }
-
-                state.isLoading = false
+                const accessTokenObjectPayload = getTokenObjectPayload(data.access)
+                window.localStorage.setItem('access_token_exp', accessTokenObjectPayload.exp)
 
             } catch (err) {
-                state.isLoading = false
-                state.hasErrors = !!err
-                toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente mais tarde.')
+                console.error('Erro ao obter o tempo de expiração do token:', err)
             }
+
+            router.push({ name: 'home-blog' })
+            state.isLoading = false
+            return
         }
 
-        return {
-            state,
-            handleSubmitLogin
+        if (errors.status === 401) {
+            toast.error('Nome de usuário ou senha inválidos. Por favor, tente novamente.')
         }
+        if (errors.status === 400) {
+            toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente.')
+        }
+
+        state.isLoading = false
+
+    } catch (err) {
+        state.isLoading = false
+        state.hasErrors = !!err
+        toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente mais tarde.')
     }
 }
 </script>

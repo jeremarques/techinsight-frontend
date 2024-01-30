@@ -16,42 +16,26 @@
                     :key="n"
                 />
             </div>
-        </div>
+        </div>  
     </div>
 </div>
 </template>
 
-<script>
-import { onMounted, reactive } from 'vue'
-import services from '@/services'
+<script setup>
+import { reactive } from 'vue'
 import PostCard from '@/components/Post/PostCard.vue'
 import PostCardSkeleton from '@/components/Skeletons/PostCardSkeleton.vue'
+import services from '@/services'
 
-export default {
-    components: {
-        PostCard,
-        PostCardSkeleton
-    },
-    setup () {
-        const state = reactive({
-            posts: [],
-            isLoaded: false
-        })
+const state = reactive({
+    posts: [],
+    isLoaded: false
+})
 
-        onMounted(() => getPosts())
-
-        async function getPosts() {
-            const { data } = await services.post.getPosts()
-            state.posts = data
-            state.isLoaded = true
-        }
-        const logout = () => services.auth.logout()
-        
-
-        return {
-            state,
-            logout
-        }
-    }
+async function getPosts() {
+    const { data } = await services.post.getPosts()
+    state.posts = data
+    state.isLoaded = true
 }
+getPosts()
 </script>

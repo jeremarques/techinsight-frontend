@@ -13,9 +13,9 @@
                 {{ formatTimeDifference(post.created_at) }}
             </div>
         </div>
-        <div class="px-5 py-4">
+        <div>
             <RouterLink
-                class=" flex flex-col"
+                class="flex flex-col px-5 py-4"
                 :to="{ 
                     name: 'post',
                     params: { 

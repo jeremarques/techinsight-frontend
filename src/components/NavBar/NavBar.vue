@@ -77,7 +77,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import { Bell, Home, MessageSquareText, PlusCircle, Search } from 'lucide-vue-next'
 import NavBarMenuUser from '@/components/NavBar/NavBarMenuUser.vue'
 
@@ -86,10 +85,5 @@ const props = defineProps({
         type: Object,
         required: true
     }
-})
-
-const navState = reactive({
-    isActive: false,
-    isActive2: false
 })
 </script>

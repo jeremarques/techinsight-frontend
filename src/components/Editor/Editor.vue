@@ -137,17 +137,17 @@
                                     id="link-input"
                                     type="text"
                                     placeholder="Insira aqui o link"
-                                    :default-value="state.previousUrl"
+                                    :default-value="previousUrl"
                                     class="h-8 font-regular"
                                     />
                                 <div class="flex space-x-1">
                                     <Button class="h-8 flex-1" variant="secondary" @click="setLink(editor)" type="submit">
-                                        {{ state.previousUrl ? 'Alterar' : 'Adicionar' }}
+                                        {{ previousUrl ? 'Alterar' : 'Adicionar' }}
                                     </Button>
                                     <Tooltip>
                                         <TooltipTrigger>
                                             <Button 
-                                                v-if="state.previousUrl && editor.isActive('link')" 
+                                                v-if="previousUrl && editor.isActive('link')" 
                                                 class="h-8 text-red-400 border-red-400 hover:text-white hover:bg-red-400" variant="outline" size="icon"
                                                 @click="editor.chain().focus().unsetLink().run()" 
                                                 :disabled="!editor.isActive('link')"
@@ -174,17 +174,18 @@
 
     <EditorContent :editor="editor" />
 </template>
-<script>
-import { reactive } from 'vue'
+
+<script setup>
+import { ref } from 'vue'
 import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
-import { createLowlight } from 'lowlight'
-import { Toggle } from '@/components/ui/toggle'
-import { Bold, Code, FileText, Italic, Link2, Strikethrough, Trash2, UnderlineIcon } from 'lucide-vue-next'
+import Underline from '@tiptap/extension-underline'
+
+import { Bold, Code, Italic, Link2, Strikethrough, Trash2, UnderlineIcon } from 'lucide-vue-next'
 import BubbleButton from './BubbleButton.vue'
 import {
     Tooltip,
@@ -193,18 +194,17 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip'
 import FloatingMenuButton from '@/components/Editor/FloatingMenuButton.vue'
-import Underline from '@tiptap/extension-underline'
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Button } from '../ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
 
+import { createLowlight } from 'lowlight'
 import 'highlight.js/styles/github-dark.css'
-
 import javascript from 'highlight.js/lib/languages/javascript'
 import css from 'highlight.js/lib/languages/css'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -225,153 +225,113 @@ import swift from 'highlight.js/lib/languages/swift'
 import dart from 'highlight.js/lib/languages/dart'
 import kotlin from 'highlight.js/lib/languages/kotlin'
 
-export default {
-    components: {
-        EditorContent,
-        BubbleMenu,
-        FloatingMenu,
-        Toggle,
-        Italic,
-        Bold,
-        BubbleButton,
-        Code,
-        Strikethrough,
-        Tooltip,
-        TooltipContent,
-        TooltipProvider,
-        TooltipTrigger,
-        FileText,
-        FloatingMenuButton,
-        UnderlineIcon,
-        Popover,
-        PopoverContent,
-        PopoverTrigger,
-        Link2,
-        Input,
-        Label,
-        Button,
-        Trash2
+const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
     },
-    props: {
-        modelValue: {
-            type: String,
-            default: ''
-        },
-        editable: {
-            type: Boolean,
-            default: true
-        },
-        content: {
-            type: String,
-            default: ''
+    editable: {
+        type: Boolean,
+        default: true
+    },
+    content: {
+        type: String,
+        default: ''
+    }
+})
+const emits = defineEmits(['update:modelValue'])
+
+const lowlight = createLowlight({
+    javascript,
+    css,
+    typescript,
+    html,
+    py,
+    php,
+    bash,
+    shell,
+    go,
+    java,
+    rust,
+    ruby,
+    c,
+    csharp,
+    cpp,
+    json,
+    swift,
+    dart,
+    kotlin,
+})
+
+const editor = useEditor({
+    editable: props.editable,
+    editorProps: {
+        attributes: {
+            class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter"
         }
     },
-
-    emits: ['update:modelValue'],
-
-    setup (props, { emit }) {
-        const lowlight = createLowlight({
-            javascript,
-            css,
-            typescript,
-            html,
-            py,
-            php,
-            bash,
-            shell,
-            go,
-            java,
-            rust,
-            ruby,
-            c,
-            csharp,
-            cpp,
-            json,
-            swift,
-            dart,
-            kotlin,
-        })
-
-        const editor = useEditor({
-            editable: props.editable,
-            editorProps: {
-                attributes: {
-                    class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter"
+    content: props.content,
+    extensions: [
+        StarterKit,
+        Underline,
+        Placeholder.configure({
+            placeholder: ({ node }) => {
+                if (node.type.name === 'heading') {
+                    return 'Título...'
+                } else if (node.type.name === 'codeBlock') {
+                    return 'Código...'
                 }
+                
+                return 'Pressione "/" para mais opções...'
             },
-            content: props.content,
-            extensions: [
-                StarterKit,
-                Underline,
-                Placeholder.configure({
-                    placeholder: ({ node }) => {
-                        if (node.type.name === 'heading') {
-                            return 'Título...'
-                        } else if (node.type.name === 'codeBlock') {
-                            return 'Código...'
-                        }
-                        
-                        return 'Pressione "/" para mais opções...'
-                    },
-                    emptyNodeClass: 'before:content-[attr(data-placeholder)] before:text-gray-300 before:h-0 before:float-left before-pointer-events-none',
-                }),
-                Link.configure({
-                    HTMLAttributes: {
-                        class: 'text-blue-600 cursor-pointer'
-                    },
-                    openOnClick: false,
-                }),
-                CodeBlockLowlight.configure({
-                    lowlight,
-                }),
-                HorizontalRule
-            ],
-            onUpdate: ({ editor }) => {
-                let content = editor.getHTML()
-                emit('update:modelValue', content)
+            emptyNodeClass: 'before:content-[attr(data-placeholder)] before:text-gray-300 before:h-0 before:float-left before-pointer-events-none',
+        }),
+        Link.configure({
+            HTMLAttributes: {
+                class: 'text-blue-600 cursor-pointer'
             },
-        })
+            openOnClick: false,
+        }),
+        CodeBlockLowlight.configure({
+            lowlight,
+        }),
+        HorizontalRule
+    ],
+    onUpdate: ({ editor }) => {
+        let content = editor.getHTML()
+        emit('update:modelValue', content)
+    },
+})
 
-        const state = reactive({
-            previousUrl: ''
-        })
-        
-        function loadPreviousLink(editorObject) {
-            const previousUrl = editorObject.getAttributes('link').href
-            if (previousUrl) {
-                state.previousUrl = previousUrl
-            } else {
-                state.previousUrl = ''
-            }
-        }
-
-        function setLink(editorObject) {
-            const linkInput = document.getElementById('link-input')
-            if (!linkInput.value) {
-                editorObject
-                    .chain()
-                    .focus()
-                    .extendMarkRange('link')
-                    .unsetLink()
-                    .run()
-
-                return
-            }
-
-            editorObject
-                .chain()
-                .focus()
-                .extendMarkRange('link')
-                .setLink({ href: linkInput.value, target: '_blank' })
-                .run()
-        }
-
-        return {
-            editor,
-            state,
-            loadPreviousLink,
-            setLink
-        }
+const previousUrl = ref('')
+function loadPreviousLink(editorObject) {
+    const inEditorPreviousUrl = editorObject.getAttributes('link').href
+    if (inEditorPreviousUrl) {
+        previousUrl.value = previousUrl
+    } else {
+        previousUrl.value = ''
     }
 }
+
+function setLink(editorObject) {
+    const linkInput = document.getElementById('link-input')
+    if (!linkInput.value) {
+        editorObject
+            .chain()
+            .focus()
+            .extendMarkRange('link')
+            .unsetLink()
+            .run()
+
+        return
+    }
+
+    editorObject
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: linkInput.value, target: '_blank' })
+        .run()
+}
+
 </script>

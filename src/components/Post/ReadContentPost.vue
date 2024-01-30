@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import hljs from 'highlight.js/lib/core'
 import 'highlight.js/styles/github-dark.css'
 import '@/assets/css/content-insight-codes.css'
@@ -55,10 +56,9 @@ const props = defineProps({
     }
 })
 
-setTimeout(() => {
+onMounted(() => {
     Array.from(document.querySelectorAll('pre code')).forEach((block) => {
         hljs.highlightElement(block)
     })
-    
-}, 0);
+})
 </script>

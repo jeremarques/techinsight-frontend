@@ -23,5 +23,5 @@
 </template>
 
 <script setup>
-import LoginForm from './LoginForm.vue';
+import LoginForm from './LoginForm.vue'
 </script>

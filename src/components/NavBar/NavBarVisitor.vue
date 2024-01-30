@@ -24,15 +24,15 @@
                         <!-- Mobile menu button -->
                         <div class="flex space-x-3 md:hidden lg:hidden">
                             <ThemeSwitcher />
-                            <button @click="navState.isActive = !navState.isActive" type="button" class="text-gray-700 dark:text-gray-100 focus:outline-none focus:text-gray-700 dark:focus:text-gray-200" aria-label="toggle menu">
-                                <Menu v-if="!navState.isActive" :stroke-width="1.70" />
+                            <button @click="showNav = !showNav" type="button" class="text-gray-700 dark:text-gray-100 focus:outline-none focus:text-gray-700 dark:focus:text-gray-200" aria-label="toggle menu">
+                                <Menu v-if="!showNav" :stroke-width="1.70" />
                                 <X v-else :stroke-width="1.70" />
                             </button>
                         </div>
                     </div>
 
                     <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-                    <div :class="[navState.isActive ? 'translate-x-0 opacity-100 shadow-sm md:shadow-none backdrop-blur-md bg-white/90 dark:bg-dark-mixed-100/80' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out md:flex-1 md:flex md:justify-end md:mt-0 mt-4 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:items-center">
+                    <div :class="[showNav ? 'translate-x-0 opacity-100 shadow-sm md:shadow-none backdrop-blur-md bg-white/90 dark:bg-dark-mixed-100/80' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out md:flex-1 md:flex md:justify-end md:mt-0 mt-4 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:items-center">
                         <div class="md:flex md:items-center">
                             <div class="flex gap-x-1 md:flex-row">
                                 <LoginButton />
@@ -58,13 +58,11 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { ref } from 'vue'
 import LoginButton from '@/views/Home/LoginButton.vue'
 import RegisterButton from '@/views/Home/RegisterButton.vue'
-import { Home, Menu, Search, X } from 'lucide-vue-next';
 import ThemeSwitcher from '@/components/ThemeSwitcher.vue'
+import { Home, Menu, Search, X } from 'lucide-vue-next'
 
-const navState = reactive({
-    isActive: false
-})
+const showNav = ref(false)
 </script>

@@ -54,86 +54,68 @@
         </div>
     </div>
 </template>
-<script>
-import { reactive, onMounted } from 'vue'
+<script setup>
+import { reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTitle } from '@vueuse/core'
 import { useToast } from 'vue-toastification'
-import services from '@/services'
-import { formatTimeDifference } from '@/utils/date'
-import PostSkeleton from '@/components/Skeletons/PostSkeleton.vue'
-import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import ReadContent from './ReadContent.vue'
+import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
+import PostSkeleton from '@/components/Skeletons/PostSkeleton.vue'
+import services from '@/services'
+import ReadContent from '@/components/Post/ReadContentPost.vue'
+import { formatTimeDifference } from '@/utils/date'
 
-export default {
-    components: {
-        PostSkeleton,
-        ThumbsUp,
-        MessageSquare,
-        Avatar,
-        AvatarImage,
-        AvatarFallback,
-        ReadContent
-    },
+const route = useRoute()
+const router = useRouter()
+const toast = useToast()
+const state = reactive({
+    isLoading: false,
+    post: {},
+    postUser: {},
+    postUserPorfile: {}
+})
+// Get id of post and your slug
+const slugAndId = route.params.slugAndId.split('-')
+const postId = slugAndId.at(-1)
+const usernameParam = route.params.username
+const slugParam = slugAndId.slice(0, -1).join('-')
 
-    setup() {
-        const route = useRoute()
-        const router = useRouter()
-        const toast = useToast()
-        const state = reactive({
-            isLoading: false,
-            post: {},
-            postUser: {},
-            postUserPorfile: {}
-        })
-        const slugAndId = route.params.slugAndId.split('-')
-        const postId = slugAndId.at(-1)
-        const usernameParam = route.params.username
-        const slugParam = slugAndId.slice(0, -1).join('-')
-        
-        onMounted(() => getPost())
-        
-        async function getPost() {
-            try {
-                state.isLoading = true
-                const { data, errors } = await services.post.getPost(postId)
-                if (errors) {
-                    if (errors.status === 404) {
-                        state.isLoading = false
-                        router.push({ name: 'not-found' })
-                    }
-
-                    if (errors.status === 500) {
-                        state.isLoading = true
-                        toast.error('Ocorreu um erro ao tentar carregar o post. Por favor, tente novamente mais tarde.')
-                    }
-                }
-                
-                if (usernameParam !== data.profile.user.username || slugParam !== data.slug) {
-                    router.push({
-                        name: 'post',
-                        params: { 
-                            username: data.profile.user.username, 
-                            slugAndId: `${data.slug}-${data.public_id}`
-                        }
-                    })
-                }
-                state.post = data
-                state.postUser = data.profile.user
-                state.postUserPorfile = data.profile
+async function getPost() {
+    try {
+        state.isLoading = true
+        const { data, errors } = await services.post.getPost(postId)
+        if (errors) {
+            if (errors.status === 404) {
                 state.isLoading = false
-                useTitle(state.post.title)
+                router.push({ name: 'not-found' })
+            }
 
-            } catch (err) {
-                console.log(err)
+            if (errors.status === 500) {
+                state.isLoading = true
+                toast.error('Ocorreu um erro ao tentar carregar o post. Por favor, tente novamente mais tarde.')
             }
         }
-
-        return {
-            state,
-            formatTimeDifference
+        // If the slug or username isn't from the post, correct the url with the correct infos
+        if (usernameParam !== data.profile.user.username || slugParam !== data.slug) {
+            router.push({
+                name: 'post',
+                params: { 
+                    username: data.profile.user.username, 
+                    slugAndId: `${data.slug}-${data.public_id}`
+                }
+            })
         }
+
+        state.post = data
+        state.postUser = data.profile.user
+        state.postUserPorfile = data.profile
+        state.isLoading = false
+        useTitle(state.post.title)
+
+    } catch (err) {
+        console.log(err)
     }
 }
+getPost()
 </script>

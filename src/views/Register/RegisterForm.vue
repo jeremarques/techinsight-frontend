@@ -70,10 +70,11 @@
         </div>
     </form>
 </template>
-<script>
-import { watch, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { useField } from 'vee-validate';
+
+<script setup>
+import { watch, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useField } from 'vee-validate'
 import {
     validateEmpty,
     validateUsername,
@@ -87,205 +88,187 @@ import BasePasswordInput from '@/components/BasePasswordInput.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
 import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
-import BaseAuthButton from '@/components/BaseAuthButton.vue';
+import BaseAuthButton from '@/components/BaseAuthButton.vue'
 
-export default {
-    components: {
-        BasePasswordInput,
-        BaseInput,
-        BaseHiddenLabel,
-        BaseErrorMessageInput,
-        BaseAuthButton
+const router = useRouter()
+const toast = useToast()
+
+const {
+    value: nameValue,
+    errorMessage: nameErrorMessage
+} = useField('full_name', validateEmpty)
+
+const {
+    value: emailValue,
+    errorMessage: emailErrorMessage,
+    setErrors: setErrorsEmail
+} = useField('email', validateEmail)
+
+const {
+    value: usernameValue,
+    errorMessage: usernameErrorMessage,
+    setErrors: setErrorsUsername
+} = useField('username', validateUsername)
+
+const {
+    value: passwordValue,
+    errorMessage: passwordErrorMessage
+} = useField('password', validatePassword)
+
+const state = reactive({
+    isLoading: false,
+    hasErrors: false,
+    name: {
+        value: nameValue,
+        errorMessage: nameErrorMessage
     },
+    email: {
+        value: emailValue,
+        errorMessage: emailErrorMessage
+    },
+    username: {
+        value: usernameValue,
+        errorMessage: usernameErrorMessage
+    },
+    password: {
+        value: passwordValue,
+        errorMessage: passwordErrorMessage,
+    },
+    confirmPassword: {
+        value: '',
+        errorMessage: '',
+    },
+})
 
-    setup () {
+function validatePasswordConfirmation() {
+    if (!state.password.value)
+        return state.confirmPassword.errorMessage = ''
 
-        const router = useRouter()
-        const toast = useToast()
+    if (state.password.value) {
+        if (!state.confirmPassword.value)
+            return state.confirmPassword.errorMessage = 'Este campo é obrigatório'
 
-        const {
-            value: nameValue,
-            errorMessage: nameErrorMessage
-        } = useField('full_name', validateEmpty)
+        if (state.confirmPassword.value !== state.password.value)
+            return state.confirmPassword.errorMessage = 'As senhas devem ser iguais'
+        else
+            return state.confirmPassword.errorMessage = ''
+    }
+}
 
-        const {
-            value: emailValue,
-            errorMessage: emailErrorMessage,
-            setErrors: setErrorsEmail
-        } = useField('email', validateEmail)
+watch(() => state.confirmPassword.value, validatePasswordConfirmation)
 
-        const {
-            value: usernameValue,
-            errorMessage: usernameErrorMessage,
-            setErrors: setErrorsUsername
-        } = useField('username', validateUsername)
+async function login({ username, password }) {
 
-        const {
-            value: passwordValue,
-            errorMessage: passwordErrorMessage
-        } = useField('password', validatePassword)
+    const { data, errors } = await services.auth.login({
+        username,
+        password
+    })
 
-        const state = reactive({
-            isLoading: false,
-            hasErrors: false,
-            name: {
-                value: nameValue,
-                errorMessage: nameErrorMessage
-            },
-            email: {
-                value: emailValue,
-                errorMessage: emailErrorMessage
-            },
-            username: {
-                value: usernameValue,
-                errorMessage: usernameErrorMessage
-            },
-            password: {
-                value: passwordValue,
-                errorMessage: passwordErrorMessage,
-            },
-            confirmPassword: {
-                value: '',
-                errorMessage: '',
-            },
+    if (!errors) {
+        window.localStorage.setItem('access_token', data.access)
+        window.localStorage.setItem('refresh_token', data.refresh)
+
+        try {
+            const accessTokenObjectPayload = getTokenObjectPayload(data.access)
+            window.localStorage.setItem('access_token_exp', accessTokenObjectPayload.exp)
+
+        } catch (err) {
+            console.error('Erro ao obter o tempo de expiração do token:', err)
+        }
+
+        router.push({ name: 'home-blog' })
+        return
+    }
+
+    if (errors.status === 401) {
+        toast.error('Nome de usuário ou senha inválidos. Por favor, tente novamente.')
+    }
+    if (errors.status === 400) {
+        toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente.')
+    }
+}
+
+async function handleSubmitRegister() {
+    try {
+        if (
+            !!state.name.errorMessage ||
+            !!state.email.errorMessage ||
+            !!state.username.errorMessage ||
+            !!state.password.errorMessage ||
+            !!state.confirmPassword.errorMessage
+        ) {
+            toast.clear()
+            toast.error('Por favor, insira dados válidos para continuar.')
+            return
+        }
+
+        state.isLoading = true
+        toast.clear()
+
+        const { errors } = await services.auth.register({
+            full_name: state.name.value,
+            email: state.email.value,
+            username: state.username.value,
+            password: state.password.value,
+            confirm_password: state.confirmPassword.value
         })
 
-        function validatePasswordConfirmation() {
-            if (!state.password.value)
-                return state.confirmPassword.errorMessage = ''
-
-            if (state.password.value) {
-                if (!state.confirmPassword.value)
-                    return state.confirmPassword.errorMessage = 'Este campo é obrigatório'
-
-                if (state.confirmPassword.value !== state.password.value)
-                    return state.confirmPassword.errorMessage = 'As senhas devem ser iguais'
-                else
-                    return state.confirmPassword.errorMessage = ''
-            }
-        }
-
-        watch(() => state.confirmPassword.value, validatePasswordConfirmation)
-
-        async function login({ username, password }) {
-
-            const { data, errors } = await services.auth.login({
-                username,
-                password
-            })
-
-            if (!errors) {
-                window.localStorage.setItem('access_token', data.access)
-                window.localStorage.setItem('refresh_token', data.refresh)
-
-                try {
-                    const accessTokenObjectPayload = getTokenObjectPayload(data.access)
-                    window.localStorage.setItem('access_token_exp', accessTokenObjectPayload.exp)
-
-                } catch (err) {
-                    console.error('Erro ao obter o tempo de expiração do token:', err)
-                }
-
-                router.push({ name: 'home-blog' })
-                return
-            }
-
-            if (errors.status === 401) {
-                toast.error('Nome de usuário ou senha inválidos. Por favor, tente novamente.')
-            }
-            if (errors.status === 400) {
-                toast.error('Ocorreu um erro ao tentar fazer o login. Por favor, tente novamente.')
-            }
-        }
-
-        async function handleSubmitRegister() {
+        if (!errors) {
             try {
-                if (
-                    !!state.name.errorMessage ||
-                    !!state.email.errorMessage ||
-                    !!state.username.errorMessage ||
-                    !!state.password.errorMessage ||
-                    !!state.confirmPassword.errorMessage
-                ) {
-                    toast.clear()
-                    toast.error('Por favor, insira dados válidos para continuar.')
-                    return
-                }
-
-                state.isLoading = true
-                toast.clear()
-
-                const { errors } = await services.auth.register({
-                    full_name: state.name.value,
-                    email: state.email.value,
+                await login({
                     username: state.username.value,
-                    password: state.password.value,
-                    confirm_password: state.confirmPassword.value
+                    password: state.password.value
                 })
 
-                if (!errors) {
-                    try {
-                        await login({
-                            username: state.username.value,
-                            password: state.password.value
-                        })
-
-                    } catch (err) {
-                        toast.error('Ops! A conta foi criada porém não foi possível fazer o login. Tente novamente.')
-                    }
-                    state.isLoading = false
-                    return
-                }
-
-                if (errors.usernameError && errors.emailError) {
-                    state.isLoading = false
-                    toast.error('Ops! O nome de usuário e o email já existem.')
-                    setErrorsUsername('O nome de usuário já existe.')
-                    if (errors.emailError !== 'Esse campo deve ser  único.') {
-                        setErrorsEmail(errors.emailError)
-                    } else {
-                        setErrorsEmail('O email já existe.')
-                    }
-                    return
-                }
-
-                if (errors.usernameError) {
-                    state.isLoading = false
-                    toast.error('Ops! Esse nome de usuário já existe.')
-                    setErrorsUsername('O nome de usuário já existe.')
-                    return
-                }
-
-                if (errors.emailError) {
-                    state.isLoading = false
-                    if (errors.emailError !== 'Esse campo deve ser  único.') {
-                        setErrorsEmail(errors.emailError)
-                        toast.error(errors.emailError)
-                    } else {
-                        setErrorsEmail('O email já existe')
-                        toast.error('Ops! Já existe uma conta registrada com este email.')
-                    }
-                    return
-                }
-
-                if (errors.status === 400) {
-                    state.isLoading = false
-                    toast.error('Ocorreu um erro ao criar a conta. Por favor, tente novamente.')
-                    return
-                }
-
             } catch (err) {
-                state.isLoading = false
-                state.hasErrors = !!err
-                toast.error('Ocorreu um erro ao criar a conta. Por favor, tente novamente mais tarde.')
-                console.log(err)
+                toast.error('Ops! A conta foi criada porém não foi possível fazer o login. Tente novamente.')
             }
+            state.isLoading = false
+            return
         }
 
-        return {
-            state,
-            handleSubmitRegister
+        if (errors.usernameError && errors.emailError) {
+            state.isLoading = false
+            toast.error('Ops! O nome de usuário e o email já existem.')
+            setErrorsUsername('O nome de usuário já existe.')
+            if (errors.emailError !== 'Esse campo deve ser  único.') {
+                setErrorsEmail(errors.emailError)
+            } else {
+                setErrorsEmail('O email já existe.')
+            }
+            return
         }
+
+        if (errors.usernameError) {
+            state.isLoading = false
+            toast.error('Ops! Esse nome de usuário já existe.')
+            setErrorsUsername('O nome de usuário já existe.')
+            return
+        }
+
+        if (errors.emailError) {
+            state.isLoading = false
+            if (errors.emailError !== 'Esse campo deve ser  único.') {
+                setErrorsEmail(errors.emailError)
+                toast.error(errors.emailError)
+            } else {
+                setErrorsEmail('O email já existe')
+                toast.error('Ops! Já existe uma conta registrada com este email.')
+            }
+            return
+        }
+
+        if (errors.status === 400) {
+            state.isLoading = false
+            toast.error('Ocorreu um erro ao criar a conta. Por favor, tente novamente.')
+            return
+        }
+
+    } catch (err) {
+        state.isLoading = false
+        state.hasErrors = !!err
+        toast.error('Ocorreu um erro ao criar a conta. Por favor, tente novamente mais tarde.')
+        console.log(err)
     }
 }
 </script>

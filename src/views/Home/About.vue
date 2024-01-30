@@ -654,7 +654,6 @@
             </div>
         </div>
     </section>
-    <!-- ====== About Section End -->
 </template>
 
 <script setup>

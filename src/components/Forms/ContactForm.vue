@@ -61,10 +61,10 @@
 import { reactive } from 'vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseHiddenLabel from '@/components/BaseHiddenLabel.vue'
-import BaseTextArea from '@/components/BaseTextArea.vue';
+import BaseTextArea from '@/components/BaseTextArea.vue'
 import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
-import { SendHorizonal } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
+import { SendHorizonal } from 'lucide-vue-next'
 
 const state = reactive({
     name: {

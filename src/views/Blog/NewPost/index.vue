@@ -131,26 +131,25 @@
         </nav>
     </header>
     <main class="min-h-screen pt-16 bg-white dark:bg-dark-mixed-100">
-        <div class="container mt-24 md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
-            <div class="px-6 xl:px-52 2xl:px-56 pt-16">
+        <div class="container md:px-6 lg:px-20 mx-auto pb-16 md:mb-0">
+            <div class="px-6 xl:px-52 2xl:px-56 mt-20">
                 <Editor v-model="state.post.content" />
             </div>
         </div>
     </main>
 </template>
 
-<script>
+<script setup>
 import { reactive, computed } from 'vue'
 import { useField } from 'vee-validate'
+import { useRouter } from 'vue-router'
 import { validateEmpty } from '@/utils/validators'
 import { useTitle } from '@vueuse/core'
 import Editor from '@/components/Editor/Editor.vue'
+import { Edit, Tag, X, CheckIcon } from 'lucide-vue-next'
 import { Input } from '@/components/ui/input'
-import { Edit, Tag, X, ShoppingCart, CheckIcon } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils'
-import ComboboxSkeleton from '@/components/Skeletons/ComboboxSkeleton.vue'
 import {
     Tooltip,
     TooltipContent,
@@ -170,98 +169,61 @@ import {
     CommandItem,
     CommandList,
 } from '@/components/ui/command'
+import ComboboxSkeleton from '@/components/Skeletons/ComboboxSkeleton.vue'
+
 import services from '@/services'
-import { useRouter } from 'vue-router'
-
-export default {
-    components: {
-        Editor,
-        Input,
-        Edit,
-        Button,
-        X,
-        Tooltip,
-        TooltipContent,
-        TooltipProvider,
-        TooltipTrigger,
-        Popover,
-        PopoverContent,
-        PopoverTrigger,
-        Label,
-        Command,
-        CommandEmpty,
-        CommandGroup,
-        CommandInput,
-        CommandItem,
-        CommandList,
-        CheckIcon,
-        ShoppingCart,
-        Tag,
-        ComboboxSkeleton
-    },
+import { cn } from '@/lib/utils'
     
-    setup () {
-        const router = useRouter()
+const router = useRouter()
 
-        const { 
-            value: titleValue, 
+const { 
+    value: titleValue, 
+    errorMessage: titleErrorMessage
+} = useField('title', validateEmpty);
+
+const state = reactive({
+    post: {
+        title: {
+            value: titleValue,
             errorMessage: titleErrorMessage
-        } = useField('title', validateEmpty);
+        },
+        tag: null,
+        content: '',
+    },
+    tags: [],
+    isLoading: false,
+    openTagCombobox: false
+})
 
-        const state = reactive({
-            post: {
-                title: {
-                    value: titleValue,
-                    errorMessage: titleErrorMessage
-                },
-                tag: null,
-                content: '',
-            },
-            tags: [],
-            isLoading: false,
-            openTagCombobox: false
-        })
+const pageTitle = computed(() => {
+    return !state.post.title.value ? 'Novo Insight' : state.post.title.value
+})
+useTitle(pageTitle)
 
-        const pageTitle = computed(() => {
-            return !state.post.title.value ? 'Novo Insight' : state.post.title.value
-        })
-        useTitle(pageTitle)
+async function getTags() {
+    state.isLoading = true
+    const { data } = await services.tags.getTags()
+    state.tags = data
+    state.isLoading = false
+}
 
-        async function getTags() {
-            state.isLoading = true
-            const { data } = await services.tags.getTags()
-            state.tags = data
-            state.isLoading = false
-        }
-
-        async function createPost() {
-            state.isLoading = true
-            const { data, errors } = await services.post.createPost({
-                title: state.post.title.value,
-                content: state.post.content,
-                tag_id: state.post.tag
-            })
-            if (!errors) {
-                state.isLoading = false
-                router.push({
-                    name: 'post',
-                    params: {
-                        username: data.profile.user.username, 
-                        slugAndId: `${data.slug}-${data.public_id}`
-                    }
-                })
+async function createPost() {
+    state.isLoading = true
+    const { data, errors } = await services.post.createPost({
+        title: state.post.title.value,
+        content: state.post.content,
+        tag_id: state.post.tag
+    })
+    if (!errors) {
+        state.isLoading = false
+        router.push({
+            name: 'post',
+            params: {
+                username: data.profile.user.username, 
+                slugAndId: `${data.slug}-${data.public_id}`
             }
-
-        }
-        const cnFunc = cn
-
-        return {
-            state,
-            createPost,
-            cnFunc,
-            getTags
-        }
-
+        })
     }
 }
+const cnFunc = cn
 </script>

@@ -23,5 +23,5 @@
 </template>
 
 <script setup>
-import RegisterForm from './RegisterForm.vue';
+import RegisterForm from './RegisterForm.vue'
 </script>
