@@ -1,10 +1,10 @@
 <template>
     <div class="post px-6 xl:px-52 2xl:px-56">
         <section class="pt-16 md:pt-28 pb-12 md:pb-16 flex flex-col items-start justify-center">
-            <span class="text-gray-500 text-base font-body-regular mb-2 dark:text-gray-400">
+            <span class="created-at text-gray-500 text-base font-body-regular mb-2 dark:text-gray-400">
                 {{ formatTimeDifference(state.post.created_at) }}
             </span>
-            <h1 class="text-gray-900 font-bold text-4xl md:text-5xl dark:text-gray-50 tracking-tighter">
+            <h1 class="title text-gray-900 font-bold text-4xl md:text-5xl dark:text-gray-50 tracking-tighter">
                 {{ state.post.title }}    
             </h1>
         </section>

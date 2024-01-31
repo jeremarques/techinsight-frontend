@@ -10,6 +10,7 @@
         </div>
         <div>
             <RouterLink
+                class="insight-link"
                 :to="{ 
                     name: 'post',
                     params: { 

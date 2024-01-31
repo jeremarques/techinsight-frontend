@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, Suspense } from 'vue'
 
 const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout
 

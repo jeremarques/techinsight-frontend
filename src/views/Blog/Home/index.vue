@@ -16,7 +16,7 @@
                     </div>
                 </template>
             </Suspense>
-            <div class="md:col-span-1">
+            <div class="hidden md:block md:col-span-1">
                 <div class="w-full border border-gray-200/80 rounded-lg dark:border-dark-mixed-300 p-6">
                     <h2 class="flex gap-1 items-center font-medium text-base mb-1">
                         Top Insights

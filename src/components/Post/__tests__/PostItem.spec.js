@@ -1,11 +1,10 @@
 import { expect, it, describe } from "vitest"
-import { mount } from "@vue/test-utils"
-import Post from '@/components/Post/Post.vue'
-import { flushPromises, wrapInSuspense } from "@/helpers/wrappWithSuspense"
+import { RouterLinkStub, mount } from "@vue/test-utils"
+import PostItem from '@/components/Post/PostItem.vue'
 
-describe('Post.vue', () => {
-    it('should render post', async () => {
-        expect(Post).toBeTruthy()
+describe('PostItem.vue', () => {
+    it('should render component', async () => {
+        expect(PostItem).toBeTruthy()
 
         const payload = {
             id: "2625664b-90dd-4151-9c3c-6264ac2ff64e",
@@ -39,15 +38,21 @@ describe('Post.vue', () => {
             created_at: "2023-12-06 22:46:26",
             updated_at: "2024-01-09 10:52:46"
         }
-        
-        const wrapper = mount(wrapInSuspense(Post, {
+
+        const wrapper = mount(PostItem, {
             props: {
-                postId: payload.id,
-                usernameParam: payload.profile.user.username,
-                slugParam: payload.slug
+                post: payload
+            },
+            global: {
+                stubs: {
+                    RouterLink: RouterLinkStub
+                } 
             }
-        }))
-        await flushPromises()
-        expect(wrapper.get('.title').text()).toBe('jeremias')
+        })
+
+        expect(wrapper.get('.username').text()).toBe('jeremias')
+        expect(wrapper.get('.title').text()).toBe('Teste post jeremias marques')
+        expect(wrapper.findComponent(RouterLinkStub).props().to.params.username).toBe('jeremias')
+        expect(wrapper.findComponent(RouterLinkStub).props().to.params.slugAndId).toBe('teste-post-jeremias-marques-4728408a784740')
     })
 })
