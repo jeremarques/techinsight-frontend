@@ -14,7 +14,7 @@
                     <div class="user flex items-center space-x-3 cursor-pointer">
                         <Avatar class="border border-gray-400 dark:border-gray-500 w-11 h-11">
                             <AvatarImage v-if="!!state.postUserPorfile.profile_photo" :src="state.postUserPorfile.profile_photo" alt="imagem do usuário"/>
-                            <AvatarImage v-else src="../assets/images/user-profile.png" alt="imagem do usuário"/>
+                            <AvatarImage v-else src="@/assets/images/user-profile.png" alt="imagem do usuário"/>
                             <AvatarFallback>{{ state.postUser.username }}</AvatarFallback>
                         </Avatar>
                         <div class="flex flex-col items-start">

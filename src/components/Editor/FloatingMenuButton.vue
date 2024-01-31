@@ -4,10 +4,10 @@
             <component :is="icons[iconName]" :stroke-width="1.35" size="20" />
         </div>
         <div class="flex flex-col items-start">
-            <span href="#" class="text-base text-gray-900 dark:text-white">
+            <span href="#" class="title text-base text-gray-900 dark:text-white">
                 {{ title }}
             </span>
-            <p class="text-xs text-gray-500 dark:text-gray-200">{{ description }}</p>
+            <p class="description text-xs text-gray-500 dark:text-gray-200">{{ description }}</p>
         </div>
     </button>
 </template>

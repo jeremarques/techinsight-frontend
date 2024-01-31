@@ -1,10 +1,12 @@
-import { mount } from '@vue/test-utils'
-import { expect, describe, it } from 'vitest'
-import PostCardItem from '@/components/PostCardItem.vue'
+import { expect, it, describe } from "vitest"
+import { mount, shallowMount } from "@vue/test-utils"
+import Post from '@/components/Post/Post.vue'
+import { flushPromises, wrapInSuspense } from "@/helpers/wrapperWithSuspense"
 
-describe('PostCardItem.vue', () => {
-    it('should render component', () => {
-        expect(PostCardItem).toBeTruthy()
+describe('Post.vue', () => {
+    it('should render post', async () => {
+        expect(Post).toBeTruthy()
+
         const payload = {
             id: "2625664b-90dd-4151-9c3c-6264ac2ff64e",
             public_id: "4728408a784740",
@@ -37,20 +39,18 @@ describe('PostCardItem.vue', () => {
             created_at: "2023-12-06 22:46:26",
             updated_at: "2024-01-09 10:52:46"
         }
-
-        const wrapper = mount(PostCardItem, {
+        
+        const wrapper = wrapInSuspense(Post, {
             props: {
-                post: payload
+                postId: payload.id,
+                usernameParam: payload.profile.user.username,
+                slugParam: payload.slug
             }
         })
+        await flushPromises()
 
-        expect(wrapper.get('.username').text()).toBe('jeremias')
-        expect(wrapper.get('.avatar').element.src).toBe('https://images.unsplash.com/photo-1615109398623-88346a601842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbnxlbnwwfHwwfHx8MA%3D%3D')
-        expect(wrapper.get('.publi-date').text()).toBe('06/12/2023')
-        expect(wrapper.get('.title').text()).toBe('Teste post jeremias marques')
-        expect(wrapper.get('.content').text()).toBe('Teste de post qualquer e aqui eu coloco qualquer coisa.')
-        expect(wrapper.get('.likes-counter').text()).toBe('1')
-        expect(wrapper.find('.comments-counter').exists()).toBe(false)
-        expect(wrapper.get('.tag').text()).toBe("Web Development")
+        console.log(wrapper)
+
+        expect(wrapper.getByText('text in component')).toBeVisible()
     })
 })

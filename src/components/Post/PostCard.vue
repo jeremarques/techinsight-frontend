@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-transparent dark:bg-dark-mixed-150 border border-gray-200/80 rounded-lg dark:border-dark-mixed-300  shadow-none">
-        <div class="flex items-center justify-start px-5 pt-5  space-x-4 space-y-0">
+    <div class="bg-transparent dark:bg-dark-mixed-150 border border-gray-200/80 rounded-lg dark:border-dark-mixed-300 shadow-none">
+        <div class="flex items-center justify-start px-5 pt-5 space-x-4 space-y-0">
             <div class="user flex items-center gap-2.5 cursor-pointer">
-                <Avatar class="border border-gray-400 dark:border-gray-500 w-7 h-7">
+                <Avatar class="avatar-image border border-gray-400 dark:border-gray-500 w-7 h-7">
                     <AvatarImage v-if="!!post.profile.profile_photo" :src="post.profile.profile_photo" alt="imagem do usuário"/>
                     <AvatarImage v-else src="../assets/images/user-profile.png" alt="imagem do usuário"/>
                     <AvatarFallback>{{ post.profile.user.username }}</AvatarFallback>
