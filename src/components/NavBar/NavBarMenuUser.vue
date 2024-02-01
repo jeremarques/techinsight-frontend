@@ -9,7 +9,7 @@
                 </Avatar>
             </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="mt-1 mr-4 xl:mr-8 2xl:mr-20 w-[220px]">
+        <DropdownMenuContent class="mt-1 mr-4 2xl:mr-20 w-[250px]">
             <DropdownMenuLabel class="flex flex-col">
                 <span class="font-medium text-sm">Jeremias Marques</span>
                 <small class="text-gray-500 font-regular">jeremarques</small>
@@ -59,18 +59,11 @@
 
 <script setup>
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
-    CircleUserRound,
     FileText,
     Settings,
     HelpCircle,
-    UserRound,
     User,
     LogOut
 } from 'lucide-vue-next'

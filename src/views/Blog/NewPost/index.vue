@@ -39,7 +39,7 @@
                                     Publicar
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent>
+                            <PopoverContent class="mr-2">
                                 <form @submit.prevent="createPost">
                                     <div class="flex flex-col p-1 space-y-4">
                                         <div>
@@ -120,8 +120,8 @@
                                 </form>
                             </PopoverContent>
                         </Popover>
-                        <Button variant="ghost" as-child>
-                            <RouterLink class="px-2" :to="{ name: 'home-blog' }">
+                        <Button variant="ghost" size="sm" as-child>
+                            <RouterLink class="pr-0 pl-1 md:px-2 hover:bg-transparent" :to="{ name: 'home-blog' }">
                                 <X class="text-gray-800 dark:text-gray-100" />
                             </RouterLink>
                         </Button>
