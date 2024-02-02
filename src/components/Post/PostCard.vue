@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-transparent dark:bg-dark-mixed-150 border border-gray-200/80 rounded-lg dark:border-dark-mixed-300 shadow-none">
+    <div class="bg-neutral-50/30 dark:bg-dark-mixed-150 border border-slate-400/15 rounded-lg dark:border-dark-mixed-300 shadow-none">
         <div class="flex items-center justify-start px-5 pt-5 space-x-4 space-y-0">
             <div class="user flex items-center gap-2.5 cursor-pointer">
                 <Avatar class="avatar-image border border-gray-400 dark:border-gray-500 w-7 h-7">

@@ -1,9 +1,12 @@
 <template>
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-5">
+    <div class="grid grid-cols-1 md:gap-12 md:grid-cols-5 relative">
         <div class="md:col-span-2 md:p-6 bg-white mt-4 md:mt-8">
-            <div class="user w-full flex flex-col items-center gap-6">
+            <div class="user w-full flex flex-col items-center gap-6 relative">
+                <Button variant="outline" size="sm" class="absolute top-0 left-0 gap-2">
+                    <Edit class="size-4" />Editar
+                </Button>
                 <Avatar class="size-32 md:size-24">
-                    <AvatarImage src="https://images.unsplash.com/photo-1620403724159-40363e84a155?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNyZWF0b3JzfGVufDB8fDB8fHww" />
+                    <AvatarImage src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg" />
                     <AvatarFallback>Jeremias</AvatarFallback>
                 </Avatar>
                 <div class="user-names flex flex-col gap-1 items-center">
@@ -55,34 +58,31 @@
         </div>
         <div class="md:col-span-3">
             <Tabs default-value="insights" class="w-full">
-            <TabsList class="bg-transparent">
-                <TabsTrigger value="insights" class="group data-[state=active]:relative data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none">
+            <TabsList class="bg-transparent p-0.5 gap-4">
+                <TabsTrigger value="insights" class="group data-[state=active]:relative data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none p-0">
                     Insights
-                    <span className="absolute -bottom-px h-[2.5px] bg-brand-blue-600 dark:bg-brand-blue-400 transition-all w-4/5 rounded-lg"></span>
                 </TabsTrigger>
-                <TabsTrigger value="about" class="group data-[state=active]:relative data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none">
-                    Sobre
-                    <span className="absolute -bottom-px h-[2.5px] bg-brand-blue-600 dark:bg-brand-blue-400 transition-all w-4/5 rounded-lg"></span>
+                <TabsTrigger value="about" class="group off data-[state=active]:relative data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none  p-0">
+                    Sobre mim
                 </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="insights" class="mt-6">
-                <div className="grid auto-rows-[170px] grid-cols-3 gap-4">
-                    <div
-                        v-for="i in Array(7).keys()"
-                        :key="i"
-                        :class="[i === 3 || i === 6 ? 'col-span-2' : '', 'row-span-1 rounded-xl border border-slate-400/10 bg-neutral-50/70 p-4 dark:bg-neutral-900']"
-                    >   
-                        <div class="user flex items-center gap-2.5 cursor-pointer mb-2">
-                            <Avatar class="border border-gray-400 dark:border-gray-500 w-5 h-5">
-                                <AvatarImage src="https://images.unsplash.com/photo-1620403724159-40363e84a155?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNyZWF0b3JzfGVufDB8fDB8fHww" alt="imagem do usuário"/>
-                                <AvatarFallback>jeremarques</AvatarFallback>
-                            </Avatar>
-                            <span class="username font-medium text-xs text-gray-600 dark:text-gray-200">jeremarques</span>
+            <TabsContent value="insights" class="mt-3">
+                <Suspense>
+                    <template #default>
+                        <div class="flex flex-col gap-4">
+                            <ListPosts />
                         </div>
-                        <h3 class="font-bold tracking-tighter text-base text-gray-700 md:line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-                    </div>
-                </div>
+                    </template>
+                    <template #fallback>
+                        <div>
+                            <PostItemSkeleton
+                                v-for="n in Array(4).keys()"
+                                :key="n"
+                            />
+                        </div>
+                    </template>
+                </Suspense>
             </TabsContent>
             <TabsContent value="about">
                 <p class="font-body-regular">
@@ -97,8 +97,10 @@
 import { ref } from 'vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { MessageSquareText, UserPlus } from 'lucide-vue-next'
+import { Edit, MessageSquareText, UserPlus } from 'lucide-vue-next'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import ListPosts from '@/views/Blog/Home/ListPosts.vue'
+import PostItemSkeleton from '../Skeletons/PostItemSkeleton.vue'
 
 const isOpen = ref(false)
 </script>

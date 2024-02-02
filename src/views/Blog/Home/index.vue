@@ -17,7 +17,7 @@
                 </template>
             </Suspense>
             <div class="hidden md:block md:col-span-1">
-                <div class="w-full border border-gray-200/80 rounded-lg dark:border-dark-mixed-300 px-6 py-5">
+                <div class="w-full bg-neutral-50/30 border border-slate-400/15 rounded-lg dark:border-dark-mixed-300 px-6 py-5">
                     <h2 class="flex gap-1 items-center font-medium text-base mb-1">
                         Top Insights
                         <img class="size-4" src="@/assets/images/logo-icon.svg" alt="">
