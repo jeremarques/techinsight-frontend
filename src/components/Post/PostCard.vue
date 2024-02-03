@@ -1,14 +1,21 @@
 <template>
     <div class="bg-neutral-50/30 dark:bg-dark-mixed-150 border border-slate-400/15 rounded-lg dark:border-dark-mixed-300 shadow-none">
         <div class="flex items-center justify-start px-5 pt-5 space-x-4 space-y-0">
-            <div class="user flex items-center gap-2.5 cursor-pointer">
+            <RouterLink
+                class="user flex items-center gap-2.5 cursor-pointer"
+                :to="{ 
+                    name: 'user-profile',
+                    params: { 
+                        username: post.profile.user.username
+                    }
+                }">
                 <Avatar class="avatar-image border border-gray-400 dark:border-gray-500 w-7 h-7">
                     <AvatarImage v-if="!!post.profile.profile_photo" :src="post.profile.profile_photo" alt="imagem do usuário"/>
                     <AvatarImage v-else src="../assets/images/user-profile.png" alt="imagem do usuário"/>
                     <AvatarFallback>{{ post.profile.user.username }}</AvatarFallback>
                 </Avatar>
                 <span class="username font-medium text-sm text-gray-600 dark:text-gray-200">{{ post.profile.user.username }}</span>
-            </div>
+            </RouterLink>
             <div class="publi-date font-regular text-xs text-gray-500 dark:text-gray-400">
                 {{ formatTimeDifference(post.created_at) }}
             </div>

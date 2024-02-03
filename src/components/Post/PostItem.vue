@@ -1,13 +1,20 @@
 <template>
     <div class="flex flex-col py-2">
-        <div class="user flex items-center gap-2.5 cursor-pointer mt-3">
+        <RouterLink 
+            class="user flex items-center gap-2.5 cursor-pointer mt-3"
+            :to="{
+                name: 'user-profile',
+                params: {
+                    username: post.profile.user.username
+                }
+            }">
             <Avatar class="border border-gray-400 dark:border-gray-500 w-5 h-5">
                 <AvatarImage v-if="post.profile.profile_photo" :src="post.profile.profile_photo" alt="imagem do usuário"/>
                 <AvatarImage v-else src="@/assets/images/user-profile.png" alt="imagem do usuário"/>
                 <AvatarFallback>{{ post.profile.user.username }}</AvatarFallback>
             </Avatar>
             <span class="username font-medium text-xs text-gray-600 dark:text-gray-200">{{ post.profile.user.username }}</span>
-        </div>
+        </RouterLink>
         <div>
             <RouterLink
                 class="insight-link"

@@ -11,14 +11,31 @@
         <section class="mb-10">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="user flex items-center space-x-3 cursor-pointer">
-                        <Avatar class="border border-gray-400 dark:border-gray-500 w-11 h-11">
-                            <AvatarImage v-if="!!state.postUserPorfile.profile_photo" :src="state.postUserPorfile.profile_photo" alt="imagem do usuário"/>
-                            <AvatarImage v-else src="@/assets/images/user-profile.png" alt="imagem do usuário"/>
-                            <AvatarFallback>{{ state.postUser.username }}</AvatarFallback>
-                        </Avatar>
-                        <div class="flex flex-col items-start">
-                            <span class="username font-medium text-sm mb-1 text-gray-600 dark:text-gray-200">{{ state.postUser.username }}</span>
+                    <div class="user flex items-center space-x-3">
+                        <RouterLink
+                            class="flex items-center"
+                            :to="{ 
+                                name: 'user-profile',
+                                params: { 
+                                    username: state.postUser.username
+                                }
+                            }">
+                            <Avatar class="border border-gray-400 dark:border-gray-500 w-11 h-11">
+                                <AvatarImage v-if="!!state.postUserPorfile.profile_photo" :src="state.postUserPorfile.profile_photo" alt="imagem do usuário"/>
+                                <AvatarImage v-else src="@/assets/images/user-profile.png" alt="imagem do usuário"/>
+                                <AvatarFallback>{{ state.postUser.username }}</AvatarFallback>
+                            </Avatar>
+                        </RouterLink>
+                        <div class="flex flex-col items-start mt-0">
+                            <RouterLink
+                                :to="{ 
+                                    name: 'user-profile',
+                                    params: { 
+                                        username: state.postUser.username
+                                    }
+                                }">
+                                <span class="username font-medium text-sm mb-1 text-gray-600 dark:text-gray-200">{{ state.postUser.username }}</span>
+                            </RouterLink>
                             <button class="font-medium text-sm text-gray-900 dark:text-white">Seguir</button>
                         </div>
                     </div>

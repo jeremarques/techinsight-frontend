@@ -42,7 +42,7 @@ const router = createRouter({
                 },
                 {
                     path: '/:username',
-                    name: 'view-profile',
+                    name: 'user-profile',
                     component: () => import('@/views/Blog/Profile/index.vue'),
                     meta: {
                         layout: 'BlogLayout',
