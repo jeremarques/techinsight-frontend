@@ -6,16 +6,17 @@
                     <Edit class="size-4" />Editar
                 </Button>
                 <Avatar class="size-32 md:size-24">
-                    <AvatarImage src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg" />
-                    <AvatarFallback>Jeremias</AvatarFallback>
+                    <AvatarImage v-if="profile.profile_photo" :src="profile.profile_photo" />
+                    <AvatarImage v-else src="@/assets/images/user-profile.png" />                    
+                    <AvatarFallback>{{ profile.user.username }}</AvatarFallback>
                 </Avatar>
                 <div class="user-names flex flex-col gap-1 items-center">
-                    <h2 class="name font-bold text-xl tracking-tighter text-gray-800">Jeremias Marques 🇧🇷</h2>
-                    <h2 class="username font-medium text-base text-gray-500 tracking-tighter">jeremarques</h2>
+                    <h2 class="name font-bold text-xl tracking-tighter text-gray-800">{{ profile.user.full_name }} 🇧🇷</h2>
+                    <h2 class="username font-medium text-base text-gray-500 tracking-tighter">{{ profile.user.username }}</h2>
                 </div>
                 <div class="bio flex flex-col items-end px-2">
                     <p class="bio font-body-regular text-sm line-clamp-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut lacinia dolor. Sed libero mi, tempus non aliquam vitae, feugiat a arcu.
+                        {{ profile.bio }}
                     </p>
                     <Button variant="link" size="sm" class="p-0 h-6 font-body-medium text-xs">Ler mais...</Button>
                 </div>
@@ -47,11 +48,11 @@
             <div class="user-informations flex flex-col gap-2 mt-6">
                 <div class="website flex flex-col gap-1 font-body-medium text-sm text-gray-800">
                     <span class="text-gray-600">Website:</span>
-                    <span>https://jeremiasmarques.vercel.app</span>
+                    <span>{{ profile.website_url }}</span>
                 </div>
                 <div class="member-at flex flex-col gap-1 font-body-medium text-sm text-gray-800">
                     <span class="text-gray-600">Membro desde:</span>
-                    <span>20 Jan, 2024</span>
+                    <span>{{ profile.user.created_at }}</span>
                 </div>
             </div>
 
@@ -75,8 +76,8 @@
                         </div>
                     </template>
                     <template #fallback>
-                        <div>
-                            <PostItemSkeleton
+                        <div class="flex flex-col gap-4">
+                            <PostCardSkeleton
                                 v-for="n in Array(4).keys()"
                                 :key="n"
                             />
@@ -86,21 +87,26 @@
             </TabsContent>
             <TabsContent value="about">
                 <p class="font-body-regular">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris vitae ultricies leo integer. Facilisi morbi tempus iaculis urna id volutpat lacus laoreet non. Elementum tempus egestas sed sed risus pretium quam vulputate dignissim. Sit amet consectetur adipiscing elit duis tristique. Lectus quam id leo in vitae turpis massa. Imperdiet proin fermentum leo vel orci. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Imperdiet nulla malesuada pellentesque elit eget gravida. Sit amet mattis vulputate enim nulla. Ut sem viverra aliquet eget sit amet tellus. Scelerisque purus semper eget duis at tellus at urna. At urna condimentum mattis pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Nibh tortor id aliquet lectus proin nibh nisl. Justo eget magna fermentum iaculis eu. Turpis in eu mi bibendum neque egestas congue. Erat nam at lectus urna duis convallis. Feugiat pretium nibh ipsum consequat nisl vel pretium lectus quam. Congue quisque egestas diam in arcu cursus. Amet aliquam id diam maecenas ultricies mi eget mauris pharetra. Tempus quam pellentesque nec nam aliquam sem et tortor consequat. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Sem et tortor consequat id porta nibh. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Congue eu consequat ac felis donec et odio pellentesque diam. Mauris a diam maecenas sed enim ut sem viverra. Urna id volutpat lacus laoreet non curabitur. Feugiat pretium nibh ipsum consequat. Commodo ullamcorper a lacus vestibulum sed arcu.
+                    {{ props.about }}
                 </p>
             </TabsContent>
         </Tabs>
         </div>
     </div>
 </template>
+
 <script setup>
-import { ref } from 'vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Edit, MessageSquareText, UserPlus } from 'lucide-vue-next'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ListPosts from '@/views/Blog/Home/ListPosts.vue'
-import PostItemSkeleton from '../Skeletons/PostItemSkeleton.vue'
+import PostCardSkeleton from '../Skeletons/PostCardSkeleton.vue'
 
-const isOpen = ref(false)
+const props = defineProps({
+    profile: {
+        type: Object,
+        required: true
+    }
+})
 </script>

@@ -3,6 +3,7 @@ import AuthService from './auth'
 import UsersServices from './users'
 import PostsServices from './post'
 import TagsServices from './tags'
+import PorfileServices from './profile'
 import router from '../router'
 
 const httpClient = axios.create({
@@ -37,5 +38,6 @@ export default {
     auth: AuthService(httpClient),
     users: UsersServices(httpClient),
     post: PostsServices(httpClient),
-    tags: TagsServices(httpClient)
+    tags: TagsServices(httpClient),
+    profile: PorfileServices(httpClient)
 }
