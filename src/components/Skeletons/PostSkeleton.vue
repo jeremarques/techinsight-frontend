@@ -40,6 +40,11 @@
         <Skeleton class="h-4 w-full" />
         <Skeleton class="h-4 w-10/12" />
         <Skeleton class="h-4 w-8/12" />
+        <Skeleton class="h-4 w-11/12" />
+        <Skeleton class="h-4 w-full" />
+        <Skeleton class="h-4 w-10/12" />
+        <Skeleton class="h-4 w-11/12" />
+        <Skeleton class="h-4 w-full" />
     </section>
 </template>
 <script setup>

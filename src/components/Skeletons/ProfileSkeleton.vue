@@ -16,15 +16,15 @@
             </div>
             <div class="user-stats grid grid-cols-3 my-6">
                 <div class="col-span-1 flex flex-col items-center gap-2">
-                    <Skeleton class="h-8 w-14" />
+                    <Skeleton class="h-8 w-14 rounded-2xl" />
                     <Skeleton class="h-4 w-20" />
                 </div>
                 <div class="col-span-1 flex flex-col items-center gap-2">
-                    <Skeleton class="h-8 w-14" />
+                    <Skeleton class="h-8 w-14 rounded-2xl" />
                     <Skeleton class="h-4 w-20" />
                 </div>
                 <div class="col-span-1 flex flex-col items-center gap-2">
-                    <Skeleton class="h-8 w-14" />
+                    <Skeleton class="h-8 w-14 rounded-2xl" />
                     <Skeleton class="h-4 w-20" />
                 </div>
             </div>
