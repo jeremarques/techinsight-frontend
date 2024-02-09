@@ -6,8 +6,6 @@ export default httpClient => ({
         if (!response.data) {
             errors = {
                 status: response.request.status,
-                statusText: response.request.statusText,
-                errorData: response.response?.data
             }
         }
 
@@ -25,8 +23,6 @@ export default httpClient => ({
         if (!response.data) {
             errors = {
                 status: response.request.status,
-                statusText: response.request.statusText,
-                errorData: response.response?.data
             }
         }
 
