@@ -1,7 +1,8 @@
 <script setup>
 import { computed } from "vue";
-import { DialogDescription, useForwardProps } from "radix-vue";
+import { AlertDialogAction } from "radix-vue";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 const props = defineProps({
   asChild: { type: Boolean, required: false },
@@ -14,15 +15,13 @@ const delegatedProps = computed(() => {
 
   return delegated;
 });
-
-const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-  <DialogDescription
-    v-bind="forwardedProps"
-    :class="cn('text-sm text-muted-foreground', props.class)"
+  <AlertDialogAction
+    v-bind="delegatedProps"
+    :class="cn(buttonVariants(), props.class)"
   >
     <slot />
-  </DialogDescription>
+  </AlertDialogAction>
 </template>

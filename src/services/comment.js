@@ -30,5 +30,29 @@ export default httpClient => ({
             data: response.data,
             errors
         }
+    },
+    editComment: async ({ commentId, content }) => {
+        const response = await httpClient.put(`/posts/comments/${commentId}/`, {
+            content
+        })
+
+        let errors = null
+
+        if (!response.data) {
+            errors = {
+                status: response.request.status,
+            }
+        }
+
+        return {
+            data: response.data,
+            errors
+        }
+    },
+    deleteComment: async (commentId) => {
+        const response = await httpClient.delete(`/posts/comments/${commentId}/`)
+        const status = response.request.status
+
+        return status
     }
 })
