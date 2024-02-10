@@ -40,15 +40,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="likes flex items-center gap-2">
-                        <button type="button">
-                            <ThumbsUp v-if="!state.post.is_liked" :stroke-width="1.50" size="22" />
-                            <ThumbsUp v-else size="24" class="fill-blue-500 " :stroke-width="0" />
-                        </button>
-                        <span v-if="!!state.post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
-                            {{ state.post.likes }}
-                        </span>
+                <div class="flex items-center gap-2">
+                    <div class="likes">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger :class="{ 'cursor-default': loggedUserIsThePostAuthor }">
+                                    <Button 
+                                        :disabled="loggedUserIsThePostAuthor || isLoading" 
+                                        variant="ghost" 
+                                        size="sm" 
+                                        class="hover:bg-transparent flex items-center gap-2"
+                                        @click="handleLike"
+                                    >
+                                        <Loader2 v-if="isLoading" class="animate-spin size-5" />
+                                        <ThumbsUp v-else-if="!state.post.is_liked" :stroke-width="1.50" size="22" />
+                                        <ThumbsUp v-else size="24" class="fill-blue-500 " :stroke-width="0" />
+                                        <span v-if="!!state.post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
+                                            {{ state.post.likes }}
+                                        </span>
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p v-if="state.post.is_liked">Remover like</p>
+                                    <p v-else-if="!loggedUserIsThePostAuthor">Marcar como "gostei"</p>
+                                    <p v-else>Você não pode dar like no seu próprio post</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
                     </div>
                     <div class="comments flex items-center gap-2">
                         <button type="button">
@@ -68,15 +86,23 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useTitle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
+import { useUserStore } from '@/stores/user'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
+import { Loader2, MessageSquare, ThumbsUp } from 'lucide-vue-next'
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger
+} from '@/components/ui/tooltip'
 import { formatTimeDifference } from '@/utils/date'
 import PostContent from '@/components/Post/PostContent.vue'
 import services from '@/services'
+import { Button } from '../ui/button'
 
 const props = defineProps({
     postId: {
@@ -95,12 +121,17 @@ const props = defineProps({
 
 const router = useRouter()
 const toast = useToast()
+const userStore = useUserStore()
+const user = userStore.currentUser
+const isLoading = ref(false)
 
 const state = reactive({
     post: {},
     postUser: {},
     postUserPorfile: {}
 })
+
+const loggedUserIsThePostAuthor = computed(() => user?.id === state.postUser.id)
 
 async function getPost() {
     try {
@@ -135,4 +166,56 @@ async function getPost() {
     }
 }
 await getPost()
+
+async function handleLike() {
+    if (state.post.is_liked) {
+        try {
+            isLoading.value = true
+            const { data, status } = await services.like.removeLike(state.post.public_id)
+    
+            if (status === 204) {
+                state.post.is_liked = false
+                state.post.likes -= 1
+                isLoading.value = false
+                return
+            }
+    
+            if (errors.status === 500) {
+                toast.error('Ocorreu um erro ao remover o like do post. Por favor, tente novamente mais tarde.')
+            }
+    
+            isLoading.value = false
+        } catch (err) {
+            isLoading.value = false
+            toast.error('Ocorreu um erro ao remover o like do post. Por favor, tente novamente mais tarde.')
+        }
+        
+    } else {
+        try {
+            isLoading.value = true
+            const { data, errors } = await services.like.addLike(state.post.public_id)
+
+            if (!errors) {
+                state.post.is_liked = true
+                state.post.likes += 1
+                isLoading.value = false
+                return
+            }
+            
+            if (errors.status === 403) {
+                toast.error('Oops... Você não pode dar like no seu próprio post.')
+            }
+
+            if (errors.status === 500) {
+                toast.error('Ocorreu um erro ao dar like no post. Por favor, tente novamente mais tarde.')
+            }
+
+            isLoading.value = false
+
+        } catch (err) {
+            isLoading.value = false
+            toast.error('Ocorreu um erro ao dar like no post. Por favor, tente novamente mais tarde.')
+        }
+    }
+}
 </script>

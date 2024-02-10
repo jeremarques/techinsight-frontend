@@ -37,19 +37,15 @@
         </div>
         <div class="flex items-center justify-between px-5 pb-5 gap-8">
             <div class="left flex items-center gap-4">
-                <div class="likes flex items-center gap-2">
-                    <button type="button">
-                        <ThumbsUp v-if="!post.is_liked" :stroke-width="1.50" size="20" />
-                        <ThumbsUp v-else size="22" class="fill-blue-500 " :stroke-width="0" />
-                    </button>
+                <div class="likes flex items-center gap-2 cursor-default">
+                    <ThumbsUp v-if="!post.is_liked" :stroke-width="1.50" size="20" />
+                    <ThumbsUp v-else size="22" class="fill-blue-500 " :stroke-width="0" />
                     <span v-if="!!post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
                         {{ post.likes }}
                     </span>
                 </div>
-                <div class="comments flex items-center gap-2">
-                    <button type="button">
-                        <MessageSquare :stroke-width="1.50" size="20" />
-                    </button>
+                <div class="comments flex items-center gap-2 cursor-default">
+                    <MessageSquare :stroke-width="1.50" size="20" />
                     <span v-if="!!post.comments" class="comments-counter font-regular text-sm text-gray-800 dark:text-gray-200">
                         {{ post.comments }}
                     </span>

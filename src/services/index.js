@@ -5,6 +5,7 @@ import PostsServices from './post'
 import TagsServices from './tags'
 import PorfileServices from './profile'
 import CommentServices from './comment'
+import LikeServices from './like'
 import router from '../router'
 
 const httpClient = axios.create({
@@ -41,5 +42,6 @@ export default {
     post: PostsServices(httpClient),
     tags: TagsServices(httpClient),
     profile: PorfileServices(httpClient),
-    comment: CommentServices(httpClient)
+    comment: CommentServices(httpClient),
+    like: LikeServices(httpClient)
 }

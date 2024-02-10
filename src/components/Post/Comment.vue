@@ -18,7 +18,7 @@
                     <span class="username font-regular text-sm text-gray-600 dark:text-gray-200">{{ comment.profile.user.username }}</span>
                 </RouterLink>
                 <div class="publi-date font-regular text-xs text-gray-500 dark:text-gray-400">
-                    {{ formatTimeDifference(comment.created_at) }}
+                    {{ createdAtFormatted }}
                 </div>
                 <span v-if="comment.updated_at" class="edited font-regular text-xs text-gray-500">(Editado)</span>
             </div>
@@ -86,34 +86,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="flex items-center justify-between px-5 pb-5 gap-8">
-            <div class="left flex items-center gap-4">
-                <div class="likes flex items-center gap-2">
-                    <button type="button">
-                        <ThumbsUp v-if="!post.is_liked" :stroke-width="1.50" size="20" />
-                        <ThumbsUp v-else size="22" class="fill-blue-500 " :stroke-width="0" />
-                        <ThumbsUp :stroke-width="1.50" size="20" />
-                    </button>
-                    <span v-if="!!post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
-                        {{ post.likes }}
-                    </span>
-                    <span class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
-                        123
-                    </span>
-                </div>
-                <div class="comments flex items-center gap-2">
-                    <button type="button">
-                        <MessageSquare :stroke-width="1.50" size="20" />
-                    </button>
-                    <span v-if="!!post.comments" class="comments-counter font-regular text-sm text-gray-800 dark:text-gray-200">
-                        {{ post.comments }}
-                    </span>
-                    <span class="comments-counter font-regular text-sm text-gray-800 dark:text-gray-200">
-                        20
-                    </span>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -136,8 +108,8 @@ import {
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { formatTimeDifference } from '@/utils/date'
 import { Edit2, Loader2, MoreVertical, Trash2 } from 'lucide-vue-next'
+import { formatTimeDifference } from '@/utils/date'
 import { useUserStore } from '@/stores/user'
 import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
@@ -154,9 +126,11 @@ const isLoading = ref(false)
 const openEditComment = ref(false)
 const newCommentContent = ref(props.comment.content)
 const showDeleteDialog = ref(false)
-const user = useUserStore().currentUser
+const userStore = useUserStore()
+const user = userStore.currentUser
 const toast = useToast()
 const emit = defineEmits(['deleteComment'])
+const createdAtFormatted = formatTimeDifference(props.comment.created_at)
 
 async function editComment() {
     try {

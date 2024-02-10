@@ -35,7 +35,6 @@ export default httpClient => ({
         const response = await httpClient.put(`/posts/comments/${commentId}/`, {
             content
         })
-
         let errors = null
 
         if (!response.data) {
