@@ -36,7 +36,18 @@
                                 }">
                                 <span class="username font-medium text-sm mb-1 text-gray-600 dark:text-gray-200">{{ state.postUser.username }}</span>
                             </RouterLink>
-                            <button class="font-medium text-sm text-gray-900 dark:text-white">Seguir</button>
+
+                            <button 
+                                v-if="!loggedUserIsThePostAuthor"
+                                class="font-medium text-sm text-gray-900 dark:text-white disabled:text-gray-400"
+                                @click="handleFollow"
+                                :disabled="isLoadingFollow"
+                            >
+                                {{ state.postUser.is_follower ? 'Seguindo' : 'Seguir' }}
+                            </button>
+                            <button v-else class="font-medium text-sm text-gray-900 dark:text-white">
+                                Ver perfil
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -46,13 +57,13 @@
                             <Tooltip>
                                 <TooltipTrigger :class="{ 'cursor-default': loggedUserIsThePostAuthor }">
                                     <Button 
-                                        :disabled="loggedUserIsThePostAuthor || isLoading" 
+                                        :disabled="loggedUserIsThePostAuthor || isLoadingLike" 
                                         variant="ghost" 
                                         size="sm" 
                                         class="hover:bg-transparent flex items-center gap-2"
                                         @click="handleLike"
                                     >
-                                        <Loader2 v-if="isLoading" class="animate-spin size-5" />
+                                        <Loader2 v-if="isLoadingLike" class="animate-spin size-5" />
                                         <ThumbsUp v-else-if="!state.post.is_liked" :stroke-width="1.50" size="22" />
                                         <ThumbsUp v-else size="24" class="fill-blue-500 " :stroke-width="0" />
                                         <span v-if="!!state.post.likes" class="likes-counter font-regular text-sm text-gray-800 dark:text-gray-200">
@@ -123,7 +134,8 @@ const router = useRouter()
 const toast = useToast()
 const userStore = useUserStore()
 const user = userStore.currentUser
-const isLoading = ref(false)
+const isLoadingLike = ref(false)
+const isLoadingFollow = ref(false)
 
 const state = reactive({
     post: {},
@@ -170,51 +182,90 @@ await getPost()
 async function handleLike() {
     if (state.post.is_liked) {
         try {
-            isLoading.value = true
+            isLoadingLike.value = true
             const { data, status } = await services.like.removeLike(state.post.public_id)
     
             if (status === 204) {
                 state.post.is_liked = false
                 state.post.likes -= 1
-                isLoading.value = false
+                isLoadingLike.value = false
                 return
             }
-    
             if (errors.status === 500) {
                 toast.error('Ocorreu um erro ao remover o like do post. Por favor, tente novamente mais tarde.')
             }
-    
-            isLoading.value = false
+            isLoadingLike.value = false
+
         } catch (err) {
-            isLoading.value = false
+            isLoadingLike.value = false
             toast.error('Ocorreu um erro ao remover o like do post. Por favor, tente novamente mais tarde.')
         }
         
     } else {
         try {
-            isLoading.value = true
+            isLoadingLike.value = true
             const { data, errors } = await services.like.addLike(state.post.public_id)
 
             if (!errors) {
                 state.post.is_liked = true
                 state.post.likes += 1
-                isLoading.value = false
+                isLoadingLike.value = false
                 return
             }
-            
             if (errors.status === 403) {
                 toast.error('Oops... Você não pode dar like no seu próprio post.')
             }
-
             if (errors.status === 500) {
                 toast.error('Ocorreu um erro ao dar like no post. Por favor, tente novamente mais tarde.')
             }
-
-            isLoading.value = false
+            isLoadingLike.value = false
 
         } catch (err) {
-            isLoading.value = false
+            isLoadingLike.value = false
             toast.error('Ocorreu um erro ao dar like no post. Por favor, tente novamente mais tarde.')
+        }
+    }
+}
+
+async function handleFollow() {
+    if (state.postUser.is_follower) {
+        try {
+            isLoadingFollow.value = true
+            const { data, status } = await services.follow.removeFollow(state.postUser.id)
+    
+            if (status === 204) {
+                state.postUser.is_follower = false
+                isLoadingFollow.value = false
+                return
+            }
+            if (errors.status === 500) {
+                toast.error('Ocorreu um erro ao deixar de seguir o usuário. Por favor, tente novamente mais tarde.')
+            }
+            isLoadingFollow.value = false
+
+        } catch (err) {
+            isLoadingFollow.value = false
+            toast.error('Ocorreu um erro ao deixar de seguir o usuário. Por favor, tente novamente mais tarde.')
+        }
+
+    } else {
+        try {
+            isLoadingFollow.value = true
+            const { data, errors } = services.follow.addFollow(state.postUser.id)
+    
+            if (!errors) {
+                state.postUser.is_follower = true
+                isLoadingFollow.value = false
+                return
+            }
+            if (errors.status === 500) {
+                toast.error('Ocorreu um erro ao seguir o usuário. Por favor, tente novamente mais tarde.')
+            }
+            isLoadingFollow.value = false
+
+        } catch (err) {
+            isLoadingFollow.value = false
+            toast.error('Ocorreu um erro ao seguir o usuário. Por favor, tente novamente mais tarde.')
         }
     }
 }

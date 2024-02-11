@@ -4,7 +4,7 @@
         :tippy-options="{ duration: 100 }" 
         :should-show="(editor) => editor.state.selection.$from.nodeBefore?.textContent === '/'"
         v-if="editor"
-        class="drop-shadow-md max-h-64 mt-24 flex items-center p-1 bg-background rounded-md overflow-scroll dark:bg-gray-700 divide-slate-50"
+        class="drop-shadow-md max-h-64 mt-24 flex items-center p-1 bg-background rounded-md overflow-y-scroll dark:bg-gray-700 divide-slate-50"
     >
         <div class="flex flex-col mt-28">
 
