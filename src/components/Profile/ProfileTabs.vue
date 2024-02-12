@@ -14,7 +14,7 @@
                 <Suspense>
                     <template #default>
                         <div class="flex flex-col gap-4">
-                            <ListPosts />
+                            <ListProfilePosts :profile-id="profile.id" />
                         </div>
                     </template>
                     <template #fallback>
@@ -29,7 +29,7 @@
             </TabsContent>
             <TabsContent value="about">
                 <p class="font-body-regular">
-                    {{ props.about }}
+                    {{ profile.about }}
                 </p>
             </TabsContent>
         </Tabs>
@@ -37,8 +37,8 @@
 </template>
 
 <script setup>
+import ListProfilePosts from './ListProfilePosts.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import ListPosts from '@/views/Blog/Home/ListPosts.vue'
 import PostCardSkeleton from '../Skeletons/PostCardSkeleton.vue'
 
 const props = defineProps({

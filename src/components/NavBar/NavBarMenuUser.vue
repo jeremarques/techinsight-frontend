@@ -10,22 +10,26 @@
             </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent class="mt-1 mr-4 2xl:mr-20 w-[250px]">
-            <DropdownMenuLabel class="flex flex-col">
-                <span class="font-medium text-sm">{{ userData.user.full_name }}</span>
-                <small class="text-gray-500 font-regular">{{ userData.user.username }}</small>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuLabel>
                 <RouterLink 
-                    class="w-full flex items-center gap-3 font-regular text-gray-900 dark:text-white"
+                    class="flex flex-col"
                     :to="{
                         name: 'user-profile',
                         params: {
                                 username: userData.user.username
                         }
                     }">
-                    <User :stroke-width="1.50" class="size-6" />
-                    Perfil
+                    <span class="font-medium text-sm">{{ userData.user.full_name }}</span>
+                    <small class="text-gray-500 font-regular">{{ userData.user.username }}</small>
+                </RouterLink>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+                <RouterLink 
+                    class="w-full flex items-center gap-3 font-regular text-gray-900 dark:text-white"
+                    :to="{ name: 'edit-user-profile' }">
+                    <Settings :stroke-width="1.50" class="size-6" />
+                    Editar Perfil
                 </RouterLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -33,14 +37,6 @@
                     <FileText :stroke-width="1.30" class="size-6" />
                     <a href="#" class="font-regular text-gray-900 dark:text-white">
                         Seus Insights
-                    </a>
-                </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-                <div class="flex items-center gap-3">
-                    <Settings :stroke-width="1.40" class="size-6" />
-                    <a href="#" class="font-regular text-gray-900 dark:text-white">
-                        Configurações
                     </a>
                 </div>
             </DropdownMenuItem>

@@ -1,10 +1,7 @@
 <template>
     <div class="profile-user-informations">
         <div class="user w-full flex flex-col items-center gap-6 relative">
-            <Button variant="outline" size="sm" class="absolute top-0 left-0 gap-2">
-                <Edit class="size-4" />Editar
-            </Button>
-            <Avatar class="size-32 md:size-24">
+            <Avatar class="size-32 md:size-28">
                 <AvatarImage v-if="profile.profile_photo" :src="profile.profile_photo" />
                 <AvatarImage v-else src="@/assets/images/user-profile.png" />                    
                 <AvatarFallback>{{ profile.user.username }}</AvatarFallback>
@@ -34,21 +31,29 @@
                 <span class="font-medium text-sm text-gray-500">Seguindo</span>
             </div>
         </div>
-        <div class="user-actions grid grid-flow-col auto-cols-auto gap-2">
-            <Button 
-                variant="outline" 
-                class="gap-2" 
-                :disabled="isLoading"
-                @click="handleFollow"
-            >
-                <UserPlus v-if="!profile.user.is_follower" :stroke-width="1.80" class="size-5" />
-                <UserCheck v-else :stroke-width="1.80" class="size-5" />
-                {{ !profile.user.is_follower ? 'Seguir' : 'Seguindo' }}
-            </Button>
-            <Button variant="outline" class="gap-2">
-                <MessageSquareText :stroke-width="1.60" class="size-5" />
-                Mensagem
-            </Button>
+        <div class="user-actions">
+            <div v-if="profile.user.id !== user?.id" class="grid grid-flow-col auto-cols-auto gap-2">
+                <Button 
+                    variant="outline" 
+                    class="gap-2" 
+                    :disabled="isLoading"
+                    @click="handleFollow"
+                >
+                    <UserPlus v-if="!profile.user.is_follower" :stroke-width="1.80" class="size-5" />
+                    <UserCheck v-else :stroke-width="1.80" class="size-5" />
+                    {{ !profile.user.is_follower ? 'Seguir' : 'Seguindo' }}
+                </Button>
+                <Button variant="outline" class="gap-2">
+                    <MessageSquareText :stroke-width="1.60" class="size-5" />
+                    Mensagem
+                </Button>
+            </div>
+            <div v-else>
+                <Button variant="outline" class="w-full gap-2">
+                    <UserCog :stroke-width="1.60" class="size-5" />
+                    Editar perfil
+                </Button>
+            </div>
         </div>
         <div class="user-informations flex flex-col gap-2 mt-6">
             <div class="website flex flex-col gap-1 font-body-medium text-sm text-gray-800">
@@ -69,7 +74,7 @@ import { useToast } from 'vue-toastification'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { useUserStore } from '@/stores/user';
-import { Edit, MessageSquareText, UserCheck, UserPlus } from 'lucide-vue-next'
+import { Edit, MessageSquareText, UserCheck, UserCog, UserPlus } from 'lucide-vue-next'
 import { formatBigNumbers } from '@/utils/number'
 import services from '@/services'
 

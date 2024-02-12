@@ -49,6 +49,16 @@ const router = createRouter({
                     }
                 },
                 {
+                    path: '/me/profile',
+                    name: 'edit-user-profile',
+                    component: () => import('@/views/Blog/Home/index.vue'),
+                    meta: {
+                        hasAuth: true,
+                        title: 'Editar perfil',
+                        layout: 'BlogLayout',
+                    }
+                },
+                {
                     path: '/:username/:slugAndId',
                     name: 'post',
                     component: () => import('@/views/Blog/Post/index.vue'),
