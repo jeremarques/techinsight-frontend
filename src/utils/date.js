@@ -1,4 +1,3 @@
-
 export function formatTimeDifference(date) {
     const now = new Date()
     const timestamp = new Date(date)
