@@ -49,9 +49,11 @@
                 </Button>
             </div>
             <div v-else>
-                <Button variant="outline" class="w-full gap-2">
-                    <UserCog :stroke-width="1.60" class="size-5" />
-                    Editar perfil
+                <Button variant="outline" class="w-full gap-2" as-child>
+                    <RouterLink :to="{ name: 'edit-user-profile' }">
+                        <UserCog :stroke-width="1.60" class="size-5" />
+                        Editar perfil
+                    </RouterLink>
                 </Button>
             </div>
         </div>
