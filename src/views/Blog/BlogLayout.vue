@@ -9,7 +9,7 @@
 <script setup>
 import NavBar from '@/components/NavBar/NavBar.vue'
 import NavBarVisitor from '@/components/NavBar/NavBarVisitor.vue'
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 const currentUserProfile = userStore.currentUserProfile

@@ -4,11 +4,18 @@
         <form class="mt-8 space-y-6" @submit.prevent="updateProfile">
             <div class="grid grid-cols-1 md:gap-12 md:grid-cols-3 relative">
                 <div class="md:col-span-2 flex flex-col gap-4">
-                    <FormField v-slot="{ componentField }" name="name">
+                    <FormField v-slot="{ componentField }" name="full_name">
                         <FormItem v-auto-animate>
                             <FormLabel>Nome</FormLabel>
                             <FormControl>
-                            <Input class="font-regular" type="text" placeholder="Seu nome" v-bind="componentField" maxlength="80" />
+                                <Input 
+                                    class="font-regular" 
+                                    type="text" 
+                                    placeholder="Seu nome" 
+                                    v-bind="componentField" 
+                                    v-model="state.user.full_name"
+                                    maxlength="80" 
+                                />
                             </FormControl>
                             <FormDescription class="font-body-regular">
                                 Todos que acessarem seu perfil poderão ver seu nome. Você pode alterar a qualquer momento.
@@ -21,7 +28,14 @@
                         <FormItem v-auto-animate>
                             <FormLabel>Nome de usuário</FormLabel>
                             <FormControl>
-                                <Input class="font-regular" type="text" placeholder="Usuário" v-bind="componentField" maxlength="20" />
+                                <Input 
+                                    class="font-regular" 
+                                    type="text" 
+                                    placeholder="Usuário" 
+                                    v-bind="componentField" 
+                                    v-model="state.user.username"
+                                    maxlength="20" 
+                                />
                             </FormControl>
                             <FormDescription class="font-body-regular">
                                 Esse nome é visto por todos os usuários. Você pode alterar a qualquer momento.
@@ -34,7 +48,13 @@
                         <FormItem v-auto-animate>
                             <FormLabel>Bio</FormLabel>
                             <FormControl>
-                                <Textarea class="font-regular" type="text" placeholder="Dê uma breve descrição sobre você" v-bind="componentField" />
+                                <Textarea 
+                                    class="font-regular" 
+                                    type="text" 
+                                    placeholder="Dê uma breve descrição sobre você" 
+                                    v-bind="componentField" 
+                                    v-model="state.profile.bio"
+                                />
                             </FormControl>
                             <FormDescription class="font-body-regular">
                                 Dê uma rápida descrição sobre você às pessoas.
@@ -47,7 +67,13 @@
                         <FormItem v-auto-animate>
                             <FormLabel>Sobre mim</FormLabel>
                             <FormControl>
-                            <Textarea class="font-regular" type="text" placeholder="Fale um pouco mais sobre você" v-bind="componentField" />
+                            <Textarea 
+                                class="font-regular" 
+                                type="text" 
+                                placeholder="Fale um pouco mais sobre você" 
+                                v-bind="componentField" 
+                                v-model="state.profile.about"
+                            />
                             </FormControl>
                             <FormDescription class="font-body-regular">
                                 Descreva sobre você para que as pessoas possam lhe conhecer melhor.
@@ -60,10 +86,17 @@
                         <FormItem v-auto-animate>
                             <FormLabel>Seu website</FormLabel>
                             <FormControl>
-                                <Input class="font-regular" type="text" placeholder="Ex. https://meuwebsite.com.br" v-bind="componentField" maxlength="100"/>
+                                <Input 
+                                    class="font-regular" 
+                                    type="text" 
+                                    placeholder="Ex. https://meuwebsite.com.br" 
+                                    v-bind="componentField"
+                                    v-model="state.profile.website_url"
+                                    maxlength="100"
+                                />
                             </FormControl>
                             <FormDescription class="font-body-regular">
-                                Se você tiver um site pessoal, deixe ele aqui.
+                                Se você tiver um site pessoal, deixe-o aqui.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -84,12 +117,16 @@
                     </div>
                 </div>
             </div>
-            <Button type="submit">Salvar</Button>
+            <Button type="submit" class="gap-1" :disabled="isLoading">
+                Salvar
+                <Loader2 v-if="isLoading" class="size-4 animate-spin" />
+            </Button>
         </form>
     </div>
 </template>
 
 <script setup>
+import { reactive, ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -103,12 +140,26 @@ import {
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Edit } from 'lucide-vue-next'
+import { Edit, Loader2 } from 'lucide-vue-next'
+import { useToast } from 'vue-toastification'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import { useUserStore } from '@/stores/user'
+import services from '@/services'
+
+const userStore = useUserStore()
+const user = userStore.currentUser
+const userProfile = userStore.currentUserProfile
+
+const toast = useToast()
+const isLoading = ref(false)
+const state = reactive({
+    profile: userProfile,
+    user: user,
+})
 
 const formSchema = toTypedSchema(z.object({
-    name: z.string().min(2, { message: 'O nome deve ter no mínimo 2 caracteres' }).max(80, { message: 'O nome deve ter no máximo 80 caracteres' }),
+    full_name: z.string().min(2, { message: 'O nome deve ter no mínimo 2 caracteres' }).max(80, { message: 'O nome deve ter no máximo 80 caracteres' }),
     username: z.string().min(4, { message: 'O nome de usuário deve ter no mínimo 4 caracteres' }).max(20, { message: 'Deve ter no máximo 20 caracteres' }),
     bio: z.string().optional(),
     about: z.string().optional(),
@@ -116,11 +167,75 @@ const formSchema = toTypedSchema(z.object({
 }))
 
 const { handleSubmit } = useForm({
-  validationSchema: formSchema,
+    validationSchema: formSchema,
+    initialValues: {
+        username: state.user.username,
+        full_name: state.user.full_name,
+        bio: state.profile.bio,
+        about: state.profile.about,
+        website_url: state.profile.website_url
+    }
 })
 
-const updateProfile = handleSubmit((values) => {
-    console.log('deu certo')
+const updateProfile = handleSubmit(async (values) => {
+    try {
+        isLoading.value = true
+        const { 
+            data: userData,
+            errors: userErrors
+        } = await services.users.updateMe({
+            username: state.user.username,
+            email: state.user.email,
+            full_name: state.user.full_name
+        })
 
+        const { 
+            data: profileData,
+            errors: profileErrors
+        } = await services.profile.updateProfile({
+            bio: state.profile.bio,
+            about: state.profile.about,
+            profile_photo: state.profile.profile_photo,
+            website_url: state.profile.website_url,
+        })
+
+        if (!profileErrors && !userErrors) {
+            isLoading.value = false
+            state.profile = profileData
+            toast.success('Seu perfil foi atualizado com sucesso!')
+            return
+        }
+
+        if (userErrors.usernameError && userErrors.emailError) {
+            toast.error('Este nome de usuário e e-mail já existem.')
+            return
+        }
+
+        if (userErrors.usernameError) {
+            toast.error(userErrors.usernameError)
+            return
+        }
+
+        if (userErrors.emailError) {
+            toast.error(userErrors.emailError)
+            return
+        }
+
+        if (userData.status === 500) {
+            toast.error('Ocorreu um erro ao atualizar seu perfil. Por favor, tente novamente mais tarde.')
+            return
+        }
+
+        if (profileErrors.status === 500) {
+            toast.error('Ocorreu um erro ao atualizar seu perfil. Por favor, tente novamente mais tarde.')
+            return
+        }
+
+        isLoading.value = false
+
+    } catch (err) {
+        isLoading.value = false
+        toast.error('Ocorreu um erro ao publicar o comentário. Por favor, tente novamente mais tarde.')
+    }
 })
 </script>

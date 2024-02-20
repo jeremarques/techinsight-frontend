@@ -29,7 +29,6 @@ const state = reactive({
 async function getProfile() {
     const username = route.params.username
     const { data, errors } = await services.profile.getProfile(username)
-    console.log(data)
     state.profile = data
     state.isLoaded = true
 }
