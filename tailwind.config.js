@@ -175,7 +175,7 @@ module.exports = {
           to: { height: 0 },
         },
         'infinite-scroll': {
-          from: { transform: 'translateX(100%)' },
+          from: { transform: 'translateX(80%)' },
           to: { transform: 'translateX(-100%)' },
         },
       },

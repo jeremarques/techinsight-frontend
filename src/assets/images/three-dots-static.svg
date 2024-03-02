@@ -1,0 +1,9 @@
+<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+<svg width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <circle cx="15" cy="12" r="12">
+    </circle>
+    <circle cx="60" cy="12" r="12">
+    </circle>
+    <circle cx="105" cy="12" r="12">
+    </circle>
+</svg>
