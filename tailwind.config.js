@@ -174,8 +174,13 @@ module.exports = {
           from: { height: 'var(--radix-collapsible-content-height)' },
           to: { height: 0 },
         },
+        'infinite-scroll': {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(-100%)' },
+        },
       },
       animation: {
+        'infinite-scroll': 'infinite-scroll 10s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "collapsible-down": "collapsible-down 0.2s ease-in-out",

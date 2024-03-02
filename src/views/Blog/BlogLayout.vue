@@ -4,11 +4,13 @@
     <main class="min-h-screen pt-16 bg-white dark:bg-dark-mixed-100">
         <router-view />
     </main>
+    <Player/>
 </template>
 
 <script setup>
 import NavBar from '@/components/NavBar/NavBar.vue'
 import NavBarVisitor from '@/components/NavBar/NavBarVisitor.vue'
+import Player from '@/components/Player.vue'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
