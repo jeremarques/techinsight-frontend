@@ -48,6 +48,9 @@
                     </a>
                 </div>
             </DropdownMenuItem>
+            <div class="w-full px-2 py-2">
+                <ThemeSwitcherMenu />
+            </div>
             <div class="px-2 py-2">
                 <Button variant="destructiveOutilined" size="sm" class="gap-2 w-full">
                     <span>Sair</span>
@@ -65,10 +68,8 @@ import {
     FileText,
     Settings,
     HelpCircle,
-    User,
     LogOut
 } from 'lucide-vue-next'
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -77,6 +78,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import ThemeSwitcherMenu from '@/components/ThemeSwitcherMenu.vue'
 
 const props = defineProps({
     userData: {

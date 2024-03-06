@@ -18,35 +18,39 @@
                         </div>
                     </div>
                 </HoverCardTrigger>
-                <HoverCardContent class="absolute flex flex-col items-center bg-gray-50 border rounded-lg p-4 -right-6 top-2">
-                    <div class="flex items-center h-8">
+                <HoverCardContent 
+                    class="absolute flex flex-col items-center bg-cover bg-center border border-gray-300 rounded-lg p-4 -right-6 top-2"
+                    :class="videoThumbnailClass"
+                >
+                    <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden rounded-lg bg-gradient-to-b from-gray-100/30 via-gray-800/75 to-black opacity-80 -z-10"></div>
+                    <div class="flex items-center h-8 z-35">
                         <img v-if="!play" src="@/assets/images/three-dots-static.svg" class="w-8 mb-2" alt="">
                         <img v-else-if="loadingVideo" src="@/assets/images/three-dots-animated.svg" class="w-8 mb-2" alt="">
-                        <WaveLoader v-else class="size-8 mb-2" />
+                        <WaveLoader v-else class="size-8 mb-2 text-white" />
                     </div>
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
                                 <div class="moving-title overflow-hidden w-[250px] mb-4 [mask-image:_linear-gradient(to_right,transparent_0,_black_20px,_black_calc(100%-30px),transparent_100%)]">
                                     <a :href="currentSong.link" target="_blank">
-                                        <p class="inline-block text-black whitespace-nowrap animate-infinite-scroll text-xs font-medium">{{ currentSong.title }}</p>
+                                        <p class="inline-block text-white whitespace-nowrap animate-infinite-scroll text-xs font-medium">{{ currentSong.title }}</p>
                                     </a>
                                 </div>
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span class="text-xs">
-                                    Abrir vídeo
+                                    Abrir vídeo no YouTube
                                 </span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-                    <div class="flex w-full gap-2">
-                        <div class="player-actions flex items-center gap-1">
+                    <div class="flex w-full gap-4">
+                        <div class="player-actions flex items-center gap-2">
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger as-child>
-                                        <Button variant="ghost" size="sm" class="rounded-full p-2 ml-2">
-                                            <SkipBack @click="prevSong" class="size-5" />
+                                        <Button variant="ghost" size="sm" class="rounded-full p-2 h-8 text-white hover:bg-white/90">
+                                            <SkipBack @click="prevSong" class="size-4" />
                                         </Button>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -57,7 +61,7 @@
                                 </Tooltip>
                                 <Tooltip>
                                     <TooltipTrigger as-child>
-                                        <Button @click="handlePlay" variant="ghost" size="sm" class="p-2 rounded-full">
+                                        <Button @click="handlePlay" variant="ghost" size="sm" class="p-1.5 rounded-full text-white hover:bg-white/90">
                                             <PauseCircle v-if="play" class="size-6" :stroke-width="1.50" />
                                             <PlayCircle v-else class="size-6" :stroke-width="1.50" />
                                         </Button>
@@ -70,8 +74,8 @@
                                 </Tooltip>
                                 <Tooltip>
                                     <TooltipTrigger as-child>
-                                        <Button variant="ghost" size="sm" class="rounded-full p-2 mr-2">
-                                            <SkipForward @click="nextSong" class="size-5" />
+                                        <Button variant="ghost" size="sm" class="rounded-full p-2 h-8 text-white hover:bg-white/90">
+                                            <SkipForward @click="nextSong" class="size-4" />
                                         </Button>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -90,10 +94,10 @@
                             :step="5"
                         >
                             <SliderTrack class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-                                <SliderRange class="absolute h-full bg-primary" />
+                                <SliderRange class="absolute h-full bg-brand-main-400" />
                             </SliderTrack>
                             <SliderThumb
-                                class="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer"
+                                class="block h-5 w-5 rounded-full border-2 border-brand-main-700 bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer"
                                 aria-label="Volume"
                             />  
                         </SliderRoot>
@@ -105,9 +109,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { usePlayer, PlayerState } from '@vue-youtube/core'
-import { PauseCircle, PlayCircle, SkipBack, SkipForward, ExternalLink } from 'lucide-vue-next'
+import { PauseCircle, PlayCircle, SkipBack, SkipForward } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from 'radix-vue'
 import {
@@ -129,6 +133,7 @@ const currentSongIndex = ref(0)
 const maxSongs = songs.length
 const videoIframe = ref()
 const loadingVideo = ref(false)
+const videoThumbnailClass = computed(() => `bg-[url('https://img.youtube.com/vi/${currentSong.value.id}/0.jpg')]`)
 const play = ref(false)
 const volumeValue = ref([50])
 const { togglePlay, onStateChange, instance } = usePlayer(currentSong.value.id, videoIframe)
