@@ -107,7 +107,7 @@
                         <Avatar class="size-32 md:size-48">
                             <!-- <AvatarImage v-if="profile.profile_photo" :src="profile.profile_photo" />
                             <AvatarImage v-else src="@/assets/images/user-profile.png" /> -->
-                            <AvatarImage src="https://images.unsplash.com/photo-1615109398623-88346a601842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hbnxlbnwwfHwwfHx8MA%3D%3D" />
+                            <AvatarImage :src="state.profile.profile_photo" />
                             <AvatarFallback>jeremias</AvatarFallback>
                         </Avatar>
                         <Button variant="outline" size="sm" class="absolute bottom-0 left-0 gap-2">
@@ -235,7 +235,7 @@ const updateProfile = handleSubmit(async (values) => {
 
     } catch (err) {
         isLoading.value = false
-        toast.error('Ocorreu um erro ao publicar o comentário. Por favor, tente novamente mais tarde.')
+        toast.error('Ocorreu um erro ao atualizar seu perfil. Por favor, tente novamente mais tarde.    ')
     }
 })
 </script>

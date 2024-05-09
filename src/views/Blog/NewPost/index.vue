@@ -209,6 +209,7 @@ async function getTags() {
 
 async function createPost() {
     state.isLoading = true
+    console.log(state.post.content)
     const { data, errors } = await services.post.createPost({
         title: state.post.title.value,
         content: state.post.content,

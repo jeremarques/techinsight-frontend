@@ -238,7 +238,7 @@ const props = defineProps({
         default: ''
     }
 })
-const emits = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const lowlight = createLowlight({
     javascript,
