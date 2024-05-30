@@ -1,0 +1,1 @@
+export const getKeyLength = (x) => Object.keys(x).length;

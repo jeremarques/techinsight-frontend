@@ -1,3 +1,4 @@
+import { getKeyLength } from '@/helpers/getKeyLength'
 import router from '../router'
 import getTokenObjectPayload from '../utils/auth'
 
@@ -15,11 +16,21 @@ export default httpClient => ({
 
         if (!response.data) {
             const dataErrors = response.response?.data
-            errors = {
-                status: response.request.status,
-                statusText: response.request.statusText,
-                emailError: dataErrors.email?.[0],
-                usernameError: dataErrors.username?.[0]
+            const keyLength = getKeyLength(dataErrors)
+            if (keyLength > 1) {
+                errors = {
+                    status: response.request.status,
+                    statusText: response.request.statusText,
+                    emailError: dataErrors.email?.[0],
+                    usernameError: dataErrors.username?.[0]
+                }
+            } else {
+                errors = {
+                    status: response.request.status,
+                    statusText: response.request.statusText,
+                    emailError: dataErrors?.email,
+                    usernameError: dataErrors?.username
+                }
             }
         }
 
