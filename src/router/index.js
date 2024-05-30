@@ -36,7 +36,7 @@ const router = createRouter({
                     name: 'home-blog',
                     component: () => import('@/views/Blog/Home/index.vue'),
                     meta: {
-                        title: 'FastInsight | Compartilhe seu conhecimento com todos',
+                        title: 'TechInsight | Compartilhe seu conhecimento com todos',
                         layout: 'BlogLayout',
                     }
                 },
@@ -79,7 +79,7 @@ const router = createRouter({
                     name: 'not-found',
                     component: () => import('@/components/NotFoundPage.vue'),
                     meta: {
-                        title: 'FastInsight | Oops... Esta página não existe',
+                        title: 'TechInsight | Oops... Esta página não existe',
                         layout: 'BlogLayout'
                     }
                 }

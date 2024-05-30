@@ -5,12 +5,12 @@
 		        <div class="flex items-center justify-between">
 		            <a href="javascript:void(0)">
 		              <img
-		                src="../../assets/images/fast-insight-logo-light.svg"
+		                src="../../assets/images/logo-light.svg"
 		                alt="logo"
 		                class="dark:hidden w-auto h-8 lg:h-10"
 		              />
                       <img
-                        src="../../assets/images/fast-insight-logo-dark.svg"
+                        src="../../assets/images/logo-dark.svg"
                         alt="logo"
                         class="hidden dark:block w-auto h-8 lg:h-10"
                       />
@@ -29,13 +29,13 @@
 				<!-- Mobile Menu open: "block", Menu closed: "hidden" -->
 		        <div :class="[showNav ? 'translate-x-0 opacity-100 shadow-sm md:shadow-none backdrop-blur-md bg-white/90 dark:bg-dark-mixed-100/80' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out md:flex-1 md:flex md:justify-between md:mt-0 mt-4 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:items-center">
 		            <div class="flex flex-col md:flex-row md:ml-16">
-		            	<a class="relative group mb-6 font-medium text-black dark:text-gray-200 hover:text-brand-blue-600 dark:hover:text-white md:mx-4 md:my-0" href="#about">
+		            	<a class="relative group mb-6 font-medium text-black dark:text-gray-200 hover:text-brand-main-600 dark:hover:text-white md:mx-4 md:my-0" href="#about">
 		                	<span>Sobre</span>
-		                	<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-blue-600 dark:bg-brand-blue-400 transition-all group-hover:w-full"></span>
+		                	<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-main-600 dark:bg-brand-main-400 transition-all group-hover:w-full"></span>
 		            	</a>
-		                <a class="relative group mb-2 font-medium text-black dark:text-gray-200 hover:text-brand-blue-600 dark:hover:text-white md:mx-4 md:my-0" href="#contact">
+		                <a class="relative group mb-2 font-medium text-black dark:text-gray-200 hover:text-brand-main-600 dark:hover:text-white md:mx-4 md:my-0" href="#contact">
 		                	<span>Fale conosco</span>
-		                	<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-blue-600 dark:bg-brand-blue-400 transition-all group-hover:w-full"></span>
+		                	<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-main-600 dark:bg-brand-main-400 transition-all group-hover:w-full"></span>
 		            	</a>
 		            </div>
 

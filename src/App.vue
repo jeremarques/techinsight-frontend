@@ -19,7 +19,7 @@ export default {
                 consoleWelcomeMessage()
             }
             handleThemePage()
-            window.document.title = to.meta?.title ?? 'FastInsight'
+            window.document.title = to.meta?.title ?? 'TechInsight'
 
             const token = window.localStorage.getItem('access_token')
             const tokenExp = window.localStorage.getItem('access_token_exp')

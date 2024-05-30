@@ -12,22 +12,22 @@
                         data-aos-easing="ease-out"
                         data-aos-duration="800"
                     >
-                        <span class="mb-4 block text-base font-semibold text-brand-blue-700 dark:text-brand-blue-400">
+                        <span class="mb-4 block text-lg font-medium text-brand-main-800 dark:text-brand-main-300">
                             Fale conosco
                         </span>
-                        <h2 class="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                        <h2 class="mb-4 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px] tracking-tighter">
                             ENTRE EM CONTATO CONOSCO
                         </h2>
                         <p class="mb-9 font-regular text-base leading-relaxed text-body-color dark:text-gray-300">
                             Estamos aqui para ouvir você! Seja para compartilhar feedback,
                             esclarecer dúvidas ou iniciar uma parceria, o Fale Conosco é a
                             sua porta de entrada para se conectar diretamente com a equipe
-                            Fast Insight.
+                            da TechInsight.
                         </p>
 
                         <div class="mb-8 flex w-full max-w-[370px]">
                             <div
-                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-gray-900 dark:text-brand-blue-300 sm:h-[70px] sm:max-w-[70px]"
+                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-brand-main-900 dark:text-brand-main-300 sm:h-[70px] sm:max-w-[70px]"
                             >
                                 <Home size="28" :stroke-width="1.70"/>
                             </div>
@@ -43,7 +43,7 @@
 
                         <div class="mb-8 flex w-full max-w-[370px]">
                             <div
-                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-brand-blue-900 dark:text-brand-blue-300 sm:h-[70px] sm:max-w-[70px]"
+                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-brand-main-900 dark:text-brand-main-300 sm:h-[70px] sm:max-w-[70px]"
                             >
                                 <PhoneOutgoing size="28" :stroke-width="1.70"/>
                             </div>
@@ -59,7 +59,7 @@
 
                         <div class="mb-8 flex w-full max-w-[370px]">
                             <div
-                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-brand-blue-900 dark:text-brand-blue-300 sm:h-[70px] sm:max-w-[70px]"
+                                class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-lg bg-primary/5 text-brand-main-900 dark:text-brand-main-300 sm:h-[70px] sm:max-w-[70px]"
                             >
                                 <Mail size="28" :stroke-width="1.70"/>
                             </div>
@@ -78,7 +78,7 @@
                     <ContactForm />
                     <div>
                         <span
-                            class="absolute -right-8 -top-12 z-[-1]"
+                            class="absolute -right-6 -top-4 z-[-1]"
                             data-aos="fade-left"
                             data-aos-delay="100"
                             data-aos-easing="ease-out"

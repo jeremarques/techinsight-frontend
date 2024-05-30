@@ -1,8 +1,8 @@
 <template>
     <Button
         type="submit"
-        class="w-full transition-color duration-200 bg-brand-blue-500 py-5 text-sm text-white disabled:text-white disabled:bg-blue-500"
-        :class="{ 'hover:bg-brand-blue-500 md:hover:bg-brand-blue-600': !loading, extraClasses }"
+        class="w-full transition-color duration-200 bg-brand-main-700 py-5 text-sm text-white disabled:text-white disabled:bg-main-700"
+        :class="{ 'hover:bg-brand-main-700 md:hover:bg-brand-main-600': !loading, extraClasses }"
         :disabled="loading"
     >
         <Loader2 v-if="loading" class="animate-spin mr-2" size="20" />

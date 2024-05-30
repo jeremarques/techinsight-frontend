@@ -10,7 +10,7 @@
                         data-aos-duration="1000"
                     >
                         <h1
-                            class="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl"
+                            class="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl tracking-tighter"
                         >
                             Contribua com seu <br class="hidden md:block" />
                             Tech Insight <br />

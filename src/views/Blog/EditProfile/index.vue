@@ -117,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <Button type="submit" class="gap-1" :disabled="isLoading">
+            <Button type="submit" class="gap-1 bg-brand-main-800" :disabled="isLoading">
                 Salvar
                 <Loader2 v-if="isLoading" class="size-4 animate-spin" />
             </Button>

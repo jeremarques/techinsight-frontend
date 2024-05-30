@@ -25,7 +25,7 @@
             <div v-if="comment.profile.user.id == user?.id" class="comment-user-actions">
                 <DropdownMenu>
                     <DropdownMenuTrigger>
-                        <MoreVertical class="size-5 text-gray-700" />
+                        <MoreVertical class="size-5 text-gray-700 dark:text-gray-400" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="mr-4">
                         <DropdownMenuItem class="flex items-center gap-2" @click="openEditComment = !openEditComment">
@@ -79,7 +79,7 @@
                 <p v-if="!!!newCommentContent.length" class="text-red-400 font-regular text-sm mt-1">Este campo é obrigatório</p>
                 <div class="flex items-center justify-end mt-3 gap-2">
                     <Button @click="openEditComment = !openEditComment, newCommentContent = comment.content" size="sm" variant="ghost">Cancelar</Button>
-                    <Button @click="editComment" size="sm" :disabled="isLoading || !!!newCommentContent" class="gap-2">
+                    <Button @click="editComment" size="sm" :disabled="isLoading || !!!newCommentContent" class="gap-2 bg-brand-main-800">
                         Confirmar
                         <Loader2 v-if="isLoading" class="animate-spin size-4" />
                     </Button>

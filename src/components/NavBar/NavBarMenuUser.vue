@@ -9,7 +9,7 @@
                 </Avatar>
             </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="mt-1 mr-4 2xl:mr-20 w-[250px]">
+        <DropdownMenuContent class="mt-1 mr-4 2xl:mr-20 w-[250px] dark:bg-dark-mixed-100 dark:border-dark-mixed-300/60">
             <DropdownMenuLabel>
                 <RouterLink 
                     class="flex flex-col"
@@ -23,7 +23,7 @@
                     <small class="text-gray-500 font-regular">{{ userData.user.username }}</small>
                 </RouterLink>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator class="dark:bg-dark-mixed-300/60" />
             <DropdownMenuItem>
                 <RouterLink 
                     class="w-full flex items-center gap-3 font-regular text-gray-900 dark:text-white"
@@ -52,7 +52,12 @@
                 <ThemeSwitcherMenu />
             </div>
             <div class="px-2 py-2">
-                <Button variant="destructiveOutilined" size="sm" class="gap-2 w-full">
+                <Button 
+                    variant="destructiveOutilined" 
+                    size="sm" 
+                    class="gap-2 w-full dark:border-dark-mixed-300/60 dark:bg-dark-mixed-100"
+                    @click="logout()"
+                >
                     <span>Sair</span>
                     <LogOut :stroke-width="2" class="size-4" />
                 </Button>
@@ -79,6 +84,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import ThemeSwitcherMenu from '@/components/ThemeSwitcherMenu.vue'
+import services from '@/services'
 
 const props = defineProps({
     userData: {
@@ -86,4 +92,12 @@ const props = defineProps({
         required: true
     }
 })
+
+function logout() {
+    try {
+        return services.auth.logout()
+    } catch (error) {
+        console.log(error)
+    }
+}
 </script>

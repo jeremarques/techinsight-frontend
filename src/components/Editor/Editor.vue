@@ -266,7 +266,7 @@ const editor = useEditor({
     editable: props.editable,
     editorProps: {
         attributes: {
-            class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter"
+            class: "prose prose-gray dark:prose-invert prose-lg m-2 max-w-none focus:outline-none prose-headings:font-body-bold prose-p:font-body-regular prose-code:font-code prose-h1:text-gray-900 prose-h1:font-bold prose-h1:dark:text-gray-50 prose-h1:tracking-tighter dark:prose-placeholder:text-dark-mixed-100"
         }
     },
     content: props.content,
@@ -283,7 +283,7 @@ const editor = useEditor({
                 
                 return 'Pressione "/" para mais opções...'
             },
-            emptyNodeClass: 'before:content-[attr(data-placeholder)] before:text-gray-300 before:h-0 before:float-left before-pointer-events-none',
+            emptyNodeClass: 'before:content-[attr(data-placeholder)] before:text-gray-400 dark:before:text-gray-500 before:h-0 before:float-left before-pointer-events-none',
         }),
         Link.configure({
             HTMLAttributes: {

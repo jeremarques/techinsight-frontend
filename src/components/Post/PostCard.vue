@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-neutral-50/30 dark:bg-dark-mixed-150 border border-slate-400/15 rounded-lg dark:border-dark-mixed-300 shadow-none">
+    <div class="bg-neutral-50/70 dark:bg-dark-mixed-150/60 border border-slate-400/20 rounded-lg dark:border-dark-mixed-300/60 shadow-none">
         <div class="flex items-center justify-start px-5 pt-5 space-x-4 space-y-0">
             <RouterLink
                 class="user flex items-center gap-2.5 cursor-pointer"

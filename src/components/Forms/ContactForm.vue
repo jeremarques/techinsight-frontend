@@ -48,7 +48,7 @@
             <div>
                 <Button
                     type="submit"
-                    class="transition duration-200 w-full gap-x-2 items-center h-11 text-white bg-gradient-to-br from-brand-blue-400 via-brand-blue-500 to-brand-blue-600 hover:opacity-90">
+                    class="transition duration-200 w-full gap-x-2 items-center h-11 text-white bg-gradient-to-br from-brand-main-500 via-brand-main-700 to-brand-main-800 hover:opacity-90">
                     Enviar mensagem
                     <SendHorizonal :stroke-width="1.70" size="20" />
                 </Button>

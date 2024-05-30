@@ -3,7 +3,7 @@
         <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-dark-mixed-100">
             <div class="container px-6 md:px-6 lg:px-8 py-4 mx-auto">
                 <div class="flex gap-4 md:gap-0 items-center">
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-6">
                         <RouterLink :to="{ name: 'home-blog' }">
                             <img
                             src="@/assets/images/logo-icon.svg"
@@ -18,7 +18,7 @@
                                         <Input 
                                             v-model="state.post.title.value" 
                                             id="title"
-                                            class="border-none p-0 h-5 rounded-sm text-[16px] font-body-medium focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-default" 
+                                            class="border-none p-0 h-5 rounded-sm text-[16px] font-body-medium focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-default dark:bg-transparent" 
                                             placeholder="Título do insight..." 
                                         />
                                     </TooltipTrigger>
@@ -26,7 +26,7 @@
                                         <p class="text-xs font-regular">Digite aqui o título que você deseja dar<br /> ao seu insight.</p>
                                     </TooltipContent>
                                 </Tooltip>
-                                <Edit class="text-gray-500 h-5 w-5" />
+                                <!-- <Edit class="text-gray-500 h-2 w-2" /> -->
                             </TooltipProvider>
                         </div>
                     </div>
@@ -35,11 +35,11 @@
 
                         <Popover>
                             <PopoverTrigger as-child>
-                                <Button class="font-medium">
+                                <Button class="font-medium bg-brand-main-800">
                                     Publicar
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent class="mr-2">
+                            <PopoverContent class="mr-2 dark:bg-dark-mixed-100 dark:border-dark-mixed-300/60">
                                 <form @submit.prevent="createPost">
                                     <div class="flex flex-col p-1 space-y-4">
                                         <div>
@@ -47,7 +47,7 @@
                                             <p class="text-xs font-regular text-gray-500">Confirme as informações para publicar</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
-                                            <Label for="title-confirmation">Título</Label>
+                                            <!-- <Label for="title-confirmation">Título</Label>
                                             <Input 
                                                 v-model="state.post.title.value"
                                                 class="dark:bg-dark-mixed-100"
@@ -56,7 +56,17 @@
                                                 placeholder="Título..."
                                                 :focus="false"
                                             />
-                                            <span>{{ state.post.title.errorMessage }}</span>
+                                            <span>{{ state.post.title.errorMessage }}</span> -->
+                                            <BaseInput 
+                                                icon-name=""
+                                                id="title-confirmation"
+                                                placeholder="Título..."
+                                                v-model="state.post.title.value"
+                                                :error="state.post.title.errorMessage"
+                                                :required="true"
+                                                :autofocus="false"
+                                            />
+                                            <BaseErrorMessageInput :error-message="state.post.title.errorMessage" />
                                         </div>
                                         
                                         <div class="flex flex-col space-y-1">
@@ -115,7 +125,7 @@
                                                 </PopoverContent>
                                             </Popover>
                                         </div>
-                                        <Button type="submit">Publicar agora</Button>
+                                        <Button type="submit" class="bg-brand-main-800">Publicar agora</Button>
                                     </div>
                                 </form>
                             </PopoverContent>
@@ -173,6 +183,8 @@ import ComboboxSkeleton from '@/components/Skeletons/ComboboxSkeleton.vue'
 
 import services from '@/services'
 import { cn } from '@/lib/utils'
+import BaseInput from '@/components/BaseInput.vue'
+import BaseErrorMessageInput from '@/components/BaseErrorMessageInput.vue'
     
 const router = useRouter()
 

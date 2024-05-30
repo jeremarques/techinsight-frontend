@@ -1,7 +1,7 @@
 <template>
     <div class="comments-head flex items-center justify-between">
-        <h2 class="font-regular text-lg text-gray-800">{{ state.comments.length > 0 ? state.comments.length : '' }} Comentários</h2>
-        <Button @click="openWriteComment = !openWriteComment">Comentar</Button>
+        <h2 class="font-regular text-lg text-gray-800 dark:text-gray-200">{{ state.comments.length > 0 ? state.comments.length : '' }} Comentários</h2>
+        <Button @click="openWriteComment = !openWriteComment" class="bg-brand-main-800">Comentar</Button>
     </div>
     <div v-if="openWriteComment" class="bg-neutral-50/30 dark:bg-dark-mixed-150 border border-slate-400/15 rounded-lg dark:border-dark-mixed-300 shadow-none py-3 px-4">
         <Label class="font-regular mb-2" for="comment">Escreva um comentário</Label>
@@ -16,7 +16,7 @@
         <span class="text-red-400 font-regular text-sm">{{ state.comment.errorMessage }}</span>
         <div class="write-comment-actions flex items-center justify-end gap-2 mt-3 mb-1">
             <Button @click="openWriteComment = !openWriteComment" size="sm" variant="ghost">Cancelar</Button>
-            <Button @click="createComment" size="sm" :disabled="isLoading || !!!state.comment.value" class="gap-2">
+            <Button @click="createComment" size="sm" :disabled="isLoading || !!!state.comment.value" class="gap-2 bg-brand-main-800">
                 Confirmar
                 <Loader2 v-if="isLoading" class="animate-spin size-4" />
             </Button>

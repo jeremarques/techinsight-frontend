@@ -1,10 +1,10 @@
 <template>
-    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-gray-800">
-        <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-gray-950">
+    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-dark-200">
+        <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-dark-mixed-100">
             <div class="container px-6 md:px-6 lg:px-8 py-4 mx-auto">
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="flex justify-between gap-4 md:gap-0 items-center">
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-6">
                             <RouterLink :to="{ name: 'home-blog' }">
                               <img
                                 src="../../assets/images/logo-icon.svg"
@@ -17,7 +17,7 @@
                                     <Search :stroke-width="1.50" size="20" />
                                 </span>
 
-                                <input type="text" class="w-full py-2 pl-10 pr-4 text-sm font-regular text-gray-700 bg-white border rounded-full dark:bg-dark-mixed-200/50 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Search">
+                                <input type="text" class="w-full py-2 pl-10 pr-4 text-sm font-regular text-gray-700 bg-white border rounded-full dark:bg-dark-mixed-200/50 dark:text-gray-300 dark:border-dark-mixed-300/60 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Pesquisar">
                             </div>
                         </div>
 

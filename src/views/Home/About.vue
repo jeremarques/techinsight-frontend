@@ -623,16 +623,16 @@
                         data-aos-easing="ease-in-out"
                         data-aos-duration="800"
                     >
-                        <span class="mb-4 block text-lg font-semibold text-brand-blue-700 dark:text-brand-blue-400">
+                        <span class="mb-4 block text-lg font-medium text-brand-main-800 dark:text-brand-main-300">
                             Sobre nós
                         </span>
                         <h2
-                        class="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]"
+                        class="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px] tracking-tighter"
                         >
                             Nossa Jornada Rumo ao Conhecimento Ilimitado
                         </h2>
                         <p class="mb-5 font-regular text-base text-body-color dark:text-gray-300">
-                            Bem-vindo ao Fast Insight, o epicentro de descobertas tecnológicas e
+                            Bem-vindo ao TechInsight, o epicentro de descobertas tecnológicas e
                             insights que impulsionam o futuro. Somos uma comunidade apaixonada,
                             composta por uma mescla de mentes criativas, desde entusiastas da
                             tecnologia até experts do setor.
@@ -643,7 +643,7 @@
                             pontes para um futuro mais inteligente e colaborativo.
                         </p>
                         <router-link :to="{ name: 'register'}"
-                            class="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-brand-blue-400 via-brand-blue-500 to-brand-blue-600 px-7 py-3 text-center text-base font-medium text-white transition-all duration-300 hover:ml-2 hover:shadow-[0px_0px_3px_0px_#287acf]">
+                            class="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-brand-main-500 via-brand-main-700 to-brand-main-800 px-7 py-3 text-center text-base font-medium text-white transition-all duration-300 hover:ml-2 hover:shadow-[0px_0px_3px_0px_#287acf]">
                             Junte-se a nós
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
