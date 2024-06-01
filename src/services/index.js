@@ -25,13 +25,19 @@ httpClient.interceptors.request.use((config) => {
 
 httpClient.interceptors.response.use((response) => response, (error) => {
     const canThrowAnError = error.request.status === 0 || error.request.status === 500
+    const token = window.localStorage.getItem('access_token')
 
     if (canThrowAnError) {
         throw new Error(error.message)
     }
 
     if (error.request.status === 401) {
-        router.push({ name: 'login' })
+        if (token) {
+            AuthService(httpClient).logout()
+            router.push({ name: 'login' })
+        } else {
+            router.push({ name: 'login' })            
+        }
     }
 
     return error

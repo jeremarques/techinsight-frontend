@@ -9,8 +9,19 @@ export default httpClient => ({
     getMeProfile: async () => {
         const response = await httpClient.get('/me/profile/')
 
+        let errors = null
+
+        if (!response.data) {
+            errors = {
+                status: response.request.status,
+                statusText: response.request.statusText,
+                errorData: response.response?.data
+            }
+        }
+
         return {
             data: response.data,
+            errors
         }
     },
     updateMe: async ({ username, email, full_name }) => {
