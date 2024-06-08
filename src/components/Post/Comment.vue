@@ -7,7 +7,7 @@
                     :to="{ 
                         name: 'user-profile',
                         params: { 
-                            username: 'jeremarques'
+                            username: comment.profile.user.username
                         }
                     }">
                     <Avatar class="avatar-image border border-gray-400 dark:border-gray-500 size-6">

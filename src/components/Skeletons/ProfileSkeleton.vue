@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-1 md:gap-12 md:grid-cols-5 relative">
-        <div class="md:col-span-2 md:p-6 bg-white mt-4 md:mt-8">
+        <div class="md:col-span-2 md:p-6 bg-white mt-4 md:mt-8 dark:bg-dark-mixed-100">
             <div class="w-full flex flex-col items-center gap-6 relative">
                 <Skeleton class="size-32 md:size-24 rounded-full" />
                 <div class="flex flex-col gap-2 items-center">

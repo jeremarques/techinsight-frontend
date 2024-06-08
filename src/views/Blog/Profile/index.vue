@@ -1,7 +1,7 @@
 <template>
     <div class="container px-6 md:px-6 lg:px-20 xl:px-20 mx-auto pt-8">
         <div v-if="state.isLoaded" class="grid grid-cols-1 md:gap-12 md:grid-cols-5 relative">
-            <div class="md:col-span-2 md:p-6 bg-white mt-4 md:mt-8">
+            <div class="md:col-span-2 md:p-6 bg-white mt-4 md:mt-8 dark:bg-dark-mixed-100">
                 <ProfileUserInformation :profile="state.profile" />
             </div>
             <div class="md:col-span-3">
