@@ -33,12 +33,17 @@
                 </RouterLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-                <div class="flex items-center gap-3">
+                <RouterLink 
+                    class="w-full flex items-center gap-3 font-regular text-gray-900 dark:text-white"
+                    :to="{
+                        name: 'user-profile',
+                        params: {
+                                username: userData.user.username
+                        }
+                    }">
                     <FileText :stroke-width="1.30" class="size-6" />
-                    <a href="#" class="font-regular text-gray-900 dark:text-white">
-                        Seus Insights
-                    </a>
-                </div>
+                    Seus Insights
+                </RouterLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
                 <div class="flex items-center gap-3">

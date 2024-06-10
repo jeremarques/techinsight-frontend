@@ -7,15 +7,17 @@
                 <AvatarFallback>{{ profile.user.username }}</AvatarFallback>
             </Avatar>
             <div class="user-names flex flex-col gap-1 items-center">
-                <h2 class="name font-bold text-xl tracking-tighter text-gray-800 dark:text-gray-100">{{ profile.user.full_name }} 🇧🇷</h2>
+                <h2 class="name font-bold text-xl tracking-tighter text-gray-800 dark:text-gray-100">{{ profile.user.full_name }}</h2>
                 <h2 class="username font-medium text-base text-gray-500 dark:text-gray-400 tracking-tighter">{{ profile.user.username }}</h2>
             </div>
-            <div class="bio flex flex-col items-end px-2">
-                <p class="bio font-body-regular text-sm line-clamp-2">
-                    {{ profile.bio }}
-                </p>
-                <Button variant="link" size="sm" class="p-0 h-6 font-body-medium text-xs">Ler mais...</Button>
+            <div v-if="profile.bio" class="w-full text-gray-600 dark:text-gray-200">
+                <ReadMoreText
+                    id="bio"
+                    :text="profile.bio"
+                    :amount-of-words="14"
+                />
             </div>
+                <!-- <Button variant="link" size="sm" class="p-0 h-6 font-body-medium text-xs">Ler mais...</Button> -->
         </div>
         <div class="user-stats grid grid-cols-3 my-6">
             <div class="insights col-span-1 flex flex-col items-center">
@@ -76,8 +78,9 @@ import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { useUserStore } from '@/stores/user';
-import { Edit, MessageSquareText, UserCheck, UserCog, UserPlus } from 'lucide-vue-next'
+import ReadMoreText from '@/components/ReadMoreText.vue'
+import { useUserStore } from '@/stores/user'
+import { MessageSquareText, UserCheck, UserCog, UserPlus } from 'lucide-vue-next'
 import { formatBigNumbers } from '@/utils/number'
 import services from '@/services'
 

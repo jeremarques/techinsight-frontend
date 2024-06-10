@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-dark-200">
+    <header class="fixed w-full top-0 z-50 dark:border-b dark:border-dark-mixed-300/60">
         <nav class="w-full shadow-sm backdrop-blur-lg bg-white/80 dark:bg-dark-mixed-100">
             <div class="container px-6 md:px-6 lg:px-8 py-4 mx-auto">
                 <div class="md:flex md:items-center md:justify-between">
