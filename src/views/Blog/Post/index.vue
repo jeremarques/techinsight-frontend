@@ -14,7 +14,7 @@
                 </template>
             </Suspense>
             <div class="comments space-y-4 px-6 xl:px-52 2xl:px-56">
-                <hr class="mt-12 mb-12">
+                <hr class="mt-12 mb-12 dark:border-dark-mixed-300">
                 <Suspense>
                     <template #default>
                         <Comments :post-id="postId"/>

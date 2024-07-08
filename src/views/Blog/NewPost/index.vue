@@ -50,7 +50,7 @@
                                             <!-- <Label for="title-confirmation">Título</Label>
                                             <Input 
                                                 v-model="state.post.title.value"
-                                                class="dark:bg-dark-mixed-100"
+                                                class="dark:bg-dark-mixed-50 dark:border-dark-mixed-300"
                                                 id="title-confirmation"
                                                 type="text"
                                                 placeholder="Título..."
@@ -77,7 +77,7 @@
                                                         variant="outline"
                                                         role="combobox"
                                                         :aria-expanded="state.openTagCombobox"
-                                                        class="w-full justify-between"
+                                                        class="w-full justify-between dark:bg-dark-mixed-50 dark:border-dark-mixed-300 dark:hover:bg-dark-mixed-150"
                                                         @click="getTags"
                                                     >
                                                         {{ 
@@ -89,7 +89,7 @@
                                                     </Button>
                                                 </PopoverTrigger>
                                                 <PopoverContent class="w-full p-0">
-                                                    <Command>
+                                                    <Command class="dark:bg-dark-mixed-50">
                                                         <CommandInput class="h-9" placeholder="Buscar tópico..." />
                                                         <CommandEmpty>Nenhum tópico encontrada.</CommandEmpty>
                                                         <CommandList>

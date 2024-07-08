@@ -17,7 +17,6 @@
                     :amount-of-words="14"
                 />
             </div>
-                <!-- <Button variant="link" size="sm" class="p-0 h-6 font-body-medium text-xs">Ler mais...</Button> -->
         </div>
         <div class="user-stats grid grid-cols-3 my-6">
             <div class="insights col-span-1 flex flex-col items-center">
@@ -52,7 +51,7 @@
                 </Button>
             </div>
             <div v-else>
-                <Button variant="outline" class="w-full gap-2 dark:bg-dark-mixed-50" as-child>
+                <Button variant="outline" class="w-full gap-2 dark:bg-dark-mixed-100 dark:border-dark-mixed-300 dark:hover:bg-dark-mixed-150" as-child>
                     <RouterLink :to="{ name: 'edit-user-profile' }">
                         <UserCog :stroke-width="1.60" class="size-5" />
                         Editar perfil

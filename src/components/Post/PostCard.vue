@@ -56,7 +56,7 @@
                     :to="{
                         name: 'tag-posts',
                         params: {
-                            slug: post.tag.slug
+                            tagSlug: post.tag.slug
                         }
                     }">
                     <Badge class="tag font-medium text-[10px] dark:border-gray-600" variant="secondary">{{ post.tag.name }}</Badge>

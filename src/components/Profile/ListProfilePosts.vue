@@ -4,6 +4,12 @@
         :key="post.id"
         :post="post"
     />
+    <div v-if="!posts.length" class="flex flex-col items-center pt-14">
+        <img class="size-32 hidden dark:block" src="../../assets/images/no-result-dark.svg" alt="">
+        <img class="size-32 dark:hidden" src="../../assets/images/no-result-light.svg" alt="">
+        <h3 class="font-medium text-lg tracking-tight pt-4 pb-1 text-gray-700 dark:text-gray-200">Nada aqui</h3>
+        <p class="font-regular text-sm text-gray-500 dark:text-gray-400">Até agora o usuário não compartilhou insights</p>
+    </div>
 </template>
 
 <script setup>

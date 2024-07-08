@@ -67,9 +67,9 @@ const router = createRouter({
                     }
                 },
                 {
-                    path: '/:slug/posts',
+                    path: '/tags/:tagSlug/posts',
                     name: 'tag-posts',
-                    component: () => import('@/views/Login/index.vue'),
+                    component: () => import('@/views/Blog/Tags/index.vue'),
                     meta: {
                         layout: 'BlogLayout',
                     }

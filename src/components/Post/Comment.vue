@@ -73,7 +73,7 @@
             >
                 <Textarea 
                     v-model="newCommentContent"
-                    class="font-regular resize-none"
+                    class="font-regular resize-none dark:bg-dark-mixed-100 dark:border-dark-mixed-300"
                     :class="{ 'border-red-400': !!!newCommentContent.length }"
                 />
                 <p v-if="!!!newCommentContent.length" class="text-red-400 font-regular text-sm mt-1">Este campo é obrigatório</p>

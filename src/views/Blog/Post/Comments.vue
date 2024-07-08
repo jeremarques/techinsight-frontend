@@ -8,7 +8,7 @@
         <Textarea 
             v-model="state.comment.value" 
             placeholder="Digite seu comentário aqui" 
-            class="font-regular resize-none"
+            class="font-regular resize-none dark:bg-dark-mixed-100 dark:border-dark-mixed-300"
             :class="{ 'border-red-400': !!state.comment.errorMessage }"
             id="comment" 
             name="comment" 
