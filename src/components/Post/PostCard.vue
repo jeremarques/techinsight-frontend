@@ -1,5 +1,14 @@
 <template>
-    <div class="bg-neutral-50/70 dark:bg-dark-mixed-150/60 border border-slate-400/20 rounded-lg dark:border-dark-mixed-300/60 shadow-none">
+    <RouterLink
+        class="bg-neutral-50/70 dark:bg-dark-mixed-150/60 border border-slate-400/20 rounded-lg dark:border-dark-mixed-300/60 shadow-none"
+        :to="{
+            name: 'post',
+            params: { 
+                username: post.profile.user.username, 
+                slugAndId: `${post.slug}-${post.public_id}`
+            }
+        }"
+    >
         <div class="flex items-center justify-start px-5 pt-5 space-x-4 space-y-0">
             <RouterLink
                 class="user flex items-center gap-2.5 cursor-pointer"
@@ -20,20 +29,10 @@
                 {{ formatTimeDifference(post.created_at) }}
             </div>
         </div>
-        <div>
-            <RouterLink
-                class="flex flex-col px-5 py-4"
-                :to="{ 
-                    name: 'post',
-                    params: { 
-                        username: post.profile.user.username, 
-                        slugAndId: `${post.slug}-${post.public_id}`
-                    }
-                }">
-                <h3 class="title tracking-tighter text-lg line-clamp-2 font-semibold text-gray-800 dark:text-gray-200">
-                    {{ post.title }}
-                </h3>
-            </RouterLink>
+        <div class="flex flex-col px-5 py-4">
+            <h3 class="title tracking-tighter text-lg line-clamp-2 font-semibold text-gray-800 dark:text-gray-200">
+                {{ post.title }}
+            </h3>
         </div>
         <div class="flex items-center justify-between px-5 pb-5 gap-8">
             <div class="left flex items-center gap-4">
@@ -63,11 +62,11 @@
                 </RouterLink>
             </div>
         </div>
-    </div>
+    </RouterLink>
 </template>
+
 <script setup>
 import { formatTimeDifference } from '@/utils/date'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { MessageSquare, ThumbsUp } from 'lucide-vue-next'
