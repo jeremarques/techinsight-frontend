@@ -1,6 +1,6 @@
 <template>
     <PostItem
-        v-for="post in posts"
+        v-for="post in posts.slice(0, 4)"
         :key="post.id"
         :post="post"
     />
