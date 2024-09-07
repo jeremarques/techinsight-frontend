@@ -36,7 +36,7 @@
                                     Nossa localização
                                 </h4>
                                 <p class="font-regular text-base text-body-color dark:text-gray-300">
-                                    Rua Nilo Peçanha, Lourival Parente, Teresina - PI
+                                    Rua Exemplo, Bairro Exemplo, Cidade - UF
                                 </p>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                     Endereço de e-mail
                                 </h4>
                                 <p class="font-regular text-base text-body-color dark:text-gray-300">
-                                    info@fastinsight.com
+                                    info@techinsight.com
                                 </p>
                             </div>
                         </div>

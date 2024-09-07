@@ -26,7 +26,7 @@
                             <RegisterButton />
                             <LoginButton />
                         </div>
-                        <div class="clients pt-16">
+                        <!--<div class="clients pt-16">
                             <h6
                                 class="mb-6 flex items-center text-xs font-regular text-body-color dark:text-gray-300">
                                 Conheça nossos parceiros
@@ -43,7 +43,7 @@
                                     <img src="../../assets/images/oracle.svg" alt="logitech" class="-mb-1.5" />
                                 </a>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="hidden px-4 lg:block lg:w-1/12"></div>
